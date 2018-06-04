@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 
 namespace OBTM.DataAccess
 {
-    public class TicketDataAccess : GenericDataAccess<Ticket>, ITicketRepository
+   public class TicketDataAccess : GenericDataAccess<Ticket>, ITicketRepository
     {
         public TicketDataAccess(OBTMDbContext context) : base(context)
         {
-
         }
     }
 }
