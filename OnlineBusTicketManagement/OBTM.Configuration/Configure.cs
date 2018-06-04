@@ -20,7 +20,11 @@ namespace OBTM.Configuration
             
             container.RegisterType<IBusOpertaorRepository, BusOpertaorDataAccess>();
             container.RegisterType<IGenericRepository<BusOperator>, GenericDataAccess<BusOperator>>();
-            
+            container.RegisterType<IRouteRepository, RouteDataAccess>();
+            container.RegisterType<IGenericRepository<Route>, GenericDataAccess<Route>>();
+            container.RegisterType<IRoutePointRepository, RoutePointDataAccess>();
+            container.RegisterType<IGenericRepository<RoutePoint>, GenericDataAccess<RoutePoint>>();
+
         }
 
         public static T GetInstance<T>()
