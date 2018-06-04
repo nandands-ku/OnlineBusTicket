@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OBTM.Core.Interfaces
 {
-    public interface ITicketRepository : IGenericRepository<Ticket>
+   public interface ITicketRepository : IGenericRepository<Ticket>
     {
 
     }
