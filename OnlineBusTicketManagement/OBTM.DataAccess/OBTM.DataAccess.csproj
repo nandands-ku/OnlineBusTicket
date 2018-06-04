@@ -73,8 +73,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BookingTicketDataAccess.cs" />
     <Compile Include="BusOpertaorDataAccess.cs" />
+    <Compile Include="DateWiseTripDataAccess.cs" />
     <Compile Include="GenericDataAccess.cs" />
+    <Compile Include="IntermediateRouteDataAccess.cs" />
     <Compile Include="OBTMDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RouteDataAccess.cs" />
