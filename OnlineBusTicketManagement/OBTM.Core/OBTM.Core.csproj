@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="Interfaces\IBusOpertaorRepository.cs" />
     <Compile Include="Interfaces\IGenericRepository.cs" />
+    <Compile Include="Interfaces\IRoutePointRepository.cs" />
+    <Compile Include="Interfaces\IRouteRepository.cs" />
     <Compile Include="Models\BookingTicket.cs" />
     <Compile Include="Models\BusOperator.cs" />
     <Compile Include="Models\DateWiseTrip.cs" />

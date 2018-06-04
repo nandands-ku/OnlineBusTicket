@@ -25,3 +25,34 @@ E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBT
 E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\EntityFramework.xml
 E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Configuration\obj\Debug\OBTM.Configuration.dll
 E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Configuration\obj\Debug\OBTM.Configuration.pdb
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\OBTM.Configuration.dll
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\OBTM.Configuration.pdb
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\CommonServiceLocator.dll
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\OBTM.Core.dll
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\OBTM.DataAccess.dll
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\Unity.Abstractions.dll
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\Unity.Configuration.dll
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\Unity.Container.dll
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\Unity.Interception.Configuration.dll
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\Unity.Interception.dll
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\Unity.RegistrationByConvention.dll
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\Unity.ServiceLocation.dll
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\EntityFramework.dll
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\OBTM.Core.pdb
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\OBTM.Core.dll.config
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\OBTM.DataAccess.pdb
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\OBTM.DataAccess.dll.config
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\CommonServiceLocator.pdb
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\Unity.Abstractions.pdb
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\Unity.Configuration.pdb
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\Unity.Container.pdb
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\Unity.Interception.pdb
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\Unity.Interception.Configuration.pdb
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\Unity.RegistrationByConvention.pdb
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\Unity.ServiceLocation.pdb
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\bin\Debug\EntityFramework.xml
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\obj\Debug\OBTM.Configuration.csprojAssemblyReference.cache
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\obj\Debug\OBTM.Configuration.csproj.CoreCompileInputs.cache
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\obj\Debug\OBTM.Configuration.csproj.CopyComplete
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\obj\Debug\OBTM.Configuration.dll
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.Configuration\obj\Debug\OBTM.Configuration.pdb

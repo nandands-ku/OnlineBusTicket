@@ -10,3 +10,18 @@ E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBT
 E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.DataAccess\obj\Debug\OBTM.DataAccess.csprojResolveAssemblyReference.cache
 E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.DataAccess\obj\Debug\OBTM.DataAccess.dll
 E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.DataAccess\obj\Debug\OBTM.DataAccess.pdb
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.DataAccess\bin\Debug\OBTM.DataAccess.dll.config
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.DataAccess\bin\Debug\OBTM.DataAccess.dll
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.DataAccess\bin\Debug\OBTM.DataAccess.pdb
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.DataAccess\bin\Debug\EntityFramework.dll
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.DataAccess\bin\Debug\OBTM.Core.dll
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.DataAccess\bin\Debug\OBTM.Core.pdb
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.DataAccess\bin\Debug\OBTM.Core.dll.config
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.DataAccess\bin\Debug\EntityFramework.xml
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.DataAccess\obj\Debug\OBTM.DataAccess.csprojAssemblyReference.cache
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.DataAccess\obj\Debug\OBTM.DataAccess.csproj.CoreCompileInputs.cache
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.DataAccess\obj\Debug\OBTM.DataAccess.csproj.CopyComplete
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.DataAccess\obj\Debug\OBTM.DataAccess.dll
+E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OBTM.DataAccess\obj\Debug\OBTM.DataAccess.pdb
