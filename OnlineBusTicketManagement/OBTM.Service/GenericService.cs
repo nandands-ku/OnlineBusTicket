@@ -19,12 +19,6 @@ namespace OBTM.Service
             return repository;
         }
 
-        public Response<int> Insert(TEntity entity)
-        {
-            var repository = GetInstance<IGenericRepository<TEntity>>();
-            var result = SafeExecute(() => repository.Insert(entity));
-            return result;
-        }
         public Response<int> Update(TEntity entity)
         {
             var repository = GetInstance<IGenericRepository<TEntity>>();

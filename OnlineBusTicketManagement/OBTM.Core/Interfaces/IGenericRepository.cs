@@ -4,7 +4,7 @@ namespace OBTM.Core.Interfaces
 {
     public interface IGenericRepository <TEntity> where TEntity : class
     {
-        int Insert(TEntity entity);
+       
         int Update(TEntity entity);
         int Save(TEntity entity);
         TEntity GetById(object id);

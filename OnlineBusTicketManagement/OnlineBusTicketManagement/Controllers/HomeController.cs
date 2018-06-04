@@ -21,7 +21,7 @@ namespace OnlineBusTicketManagement.Controllers
                 Email = "greenLine@gmail.com"
                 
             };
-            busService.Insert(bo);
+            busService.Save(bo);
             return View();
         }
 

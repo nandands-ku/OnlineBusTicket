@@ -13,8 +13,6 @@ namespace OBTM.DataAccess
         internal OBTMDbContext OBTMDbContext;
         internal DbSet<TEntity> OBTMDbSet;
 
-        internal bool IgnoreTenant;
-
         public GenericDataAccess(OBTMDbContext context)
         {
             this.OBTMDbContext = context;
@@ -23,7 +21,9 @@ namespace OBTM.DataAccess
 
         public int Delete(object id)
         {
-            throw new NotImplementedException();
+            var obj= OBTMDbSet.Find(id);
+            OBTMDbSet.Remove(obj);
+            return OBTMDbContext.SaveChanges();
         }
 
         public List<TEntity> GetAll()
@@ -36,16 +36,10 @@ namespace OBTM.DataAccess
             return OBTMDbSet.Find(id);
         }
 
-        public int Insert(TEntity entity)
-        {
-
-            OBTMDbSet.Add(entity);
-            return OBTMDbContext.SaveChanges();
-        }
-
         public int Save(TEntity entity)
         {
-            throw new NotImplementedException();
+            OBTMDbSet.Add(entity);
+            return OBTMDbContext.SaveChanges();
         }
 
         public int Update(TEntity entity)

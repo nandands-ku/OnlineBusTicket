@@ -18,6 +18,8 @@ namespace OBTM.Configuration
             container.RegisterType<ITicketRepository, TicketDataAccess>();
             container.RegisterType<ISeatBaseRepository, SeatBaseDataAccess>();
 
+            container.RegisterType<IUserRepository, UserDataAccess>();
+            container.RegisterType<IGenericRepository<User>, GenericDataAccess<User>>();
             
             container.RegisterType<IRouteRepository, RouteDataAccess>();
             container.RegisterType<IGenericRepository<Route>, GenericDataAccess<Route>>();
