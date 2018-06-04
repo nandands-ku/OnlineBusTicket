@@ -65,8 +65,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseService.cs" />
+    <Compile Include="BookingTicketService.cs" />
     <Compile Include="BusOperatorService.cs" />
+    <Compile Include="DateWiseTripService.cs" />
     <Compile Include="GenericService.cs" />
+    <Compile Include="IntermediateRouteService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoutePointService.cs" />
     <Compile Include="RouteService.cs" />
