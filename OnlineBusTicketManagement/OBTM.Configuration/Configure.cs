@@ -1,11 +1,6 @@
 ﻿using OBTM.Core.Interfaces;
 using OBTM.Core.Models;
 using OBTM.DataAccess;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Unity;
 
 namespace OBTM.Configuration
@@ -20,6 +15,11 @@ namespace OBTM.Configuration
             
             container.RegisterType<IBusOpertaorRepository, BusOpertaorDataAccess>();
             container.RegisterType<IGenericRepository<BusOperator>, GenericDataAccess<BusOperator>>();
+
+            container.RegisterType<IBookingTicketRepository, BookingTicketDataAccess>();
+            container.RegisterType<IDateWiseTripRepository, DateWiseTripDataAccess>();
+            container.RegisterType<IIntermediateRouteRepository, IntermediateRouteDataAccess>();
+
             container.RegisterType<IRouteRepository, RouteDataAccess>();
             container.RegisterType<IGenericRepository<Route>, GenericDataAccess<Route>>();
             container.RegisterType<IRoutePointRepository, RoutePointDataAccess>();
