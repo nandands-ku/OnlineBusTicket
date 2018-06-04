@@ -49,8 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IBookingTicketRepository.cs" />
     <Compile Include="Interfaces\IBusOpertaorRepository.cs" />
+    <Compile Include="Interfaces\IDateWiseTripRepository.cs" />
     <Compile Include="Interfaces\IGenericRepository.cs" />
+    <Compile Include="Interfaces\IIntermediateRouteRepository.cs" />
     <Compile Include="Interfaces\IRoutePointRepository.cs" />
     <Compile Include="Interfaces\IRouteRepository.cs" />
     <Compile Include="Models\BookingTicket.cs" />
