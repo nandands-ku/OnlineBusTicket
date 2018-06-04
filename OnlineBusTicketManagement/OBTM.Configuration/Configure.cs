@@ -15,11 +15,10 @@ namespace OBTM.Configuration
             
             container.RegisterType<IBusOpertaorRepository, BusOpertaorDataAccess>();
             container.RegisterType<IGenericRepository<BusOperator>, GenericDataAccess<BusOperator>>();
+            container.RegisterType<ITicketRepository, TicketDataAccess>();
+            container.RegisterType<ISeatBaseRepository, SeatBaseDataAccess>();
 
-            container.RegisterType<IBookingTicketRepository, BookingTicketDataAccess>();
-            container.RegisterType<IDateWiseTripRepository, DateWiseTripDataAccess>();
-            container.RegisterType<IIntermediateRouteRepository, IntermediateRouteDataAccess>();
-
+            
             container.RegisterType<IRouteRepository, RouteDataAccess>();
             container.RegisterType<IGenericRepository<Route>, GenericDataAccess<Route>>();
             container.RegisterType<IRoutePointRepository, RoutePointDataAccess>();
