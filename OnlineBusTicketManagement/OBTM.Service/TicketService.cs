@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OBTM.Service
 {
-    public class TicketService : GenericService<Ticket>
+   public class TicketService : GenericService<Ticket>
     {
     }
 }
