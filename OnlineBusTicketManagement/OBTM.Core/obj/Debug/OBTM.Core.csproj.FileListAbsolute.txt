@@ -1,0 +1,9 @@
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Core\bin\Debug\OBTM.Core.dll.config
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Core\bin\Debug\OBTM.Core.dll
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Core\bin\Debug\OBTM.Core.pdb
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Core\bin\Debug\EntityFramework.dll
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Core\bin\Debug\EntityFramework.SqlServer.dll
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Core\bin\Debug\EntityFramework.xml
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Core\bin\Debug\EntityFramework.SqlServer.xml
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Core\obj\Debug\OBTM.Core.dll
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Core\obj\Debug\OBTM.Core.pdb

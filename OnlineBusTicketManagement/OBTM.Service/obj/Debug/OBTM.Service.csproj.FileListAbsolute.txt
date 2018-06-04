@@ -1,0 +1,15 @@
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Service\bin\Debug\OBTM.Service.dll
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Service\bin\Debug\OBTM.Service.pdb
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Service\bin\Debug\OBTM.Configuration.dll
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Service\bin\Debug\OBTM.Core.dll
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Service\bin\Debug\Unity.Abstractions.dll
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Service\bin\Debug\OBTM.DataAccess.dll
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Service\bin\Debug\EntityFramework.dll
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Service\bin\Debug\OBTM.Configuration.pdb
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Service\bin\Debug\OBTM.Core.pdb
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Service\bin\Debug\Unity.Abstractions.pdb
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Service\bin\Debug\OBTM.DataAccess.pdb
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Service\bin\Debug\EntityFramework.xml
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Service\obj\Debug\OBTM.Service.csprojResolveAssemblyReference.cache
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Service\obj\Debug\OBTM.Service.dll
+E:\Dev Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Service\obj\Debug\OBTM.Service.pdb

@@ -1,0 +1,52 @@
+namespace OBTM.Core.Models
+{
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
+    [Table("Ticket")]
+    public partial class Ticket
+    {
+        public int Id { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string Name { get; set; }
+
+        [Required]
+        [StringLength(11)]
+        public string CellNo { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string TotalFare { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string Seats { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string TicketPIN { get; set; }
+
+        public bool? IsActive { get; set; }
+
+        public bool? IsDeleted { get; set; }
+
+        [StringLength(50)]
+        public string CreatedBy { get; set; }
+
+        public DateTime? CreatedOn { get; set; }
+
+        [StringLength(50)]
+        public string UpdatedBy { get; set; }
+
+        public DateTime? UpdatedOn { get; set; }
+    }
+}
