@@ -83,6 +83,8 @@
     <Compile Include="UserDataAccess.cs" />
     <Compile Include="RouteDataAccess.cs" />
     <Compile Include="RoutePointDataAccess.cs" />
+    <Compile Include="SeatBaseDataAccess.cs" />
+    <Compile Include="TicketDataAccess.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OBTM.Core\OBTM.Core.csproj">
