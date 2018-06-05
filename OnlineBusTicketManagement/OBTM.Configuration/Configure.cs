@@ -27,6 +27,8 @@ namespace OBTM.Configuration
             container.RegisterType<IRoutePointRepository, RoutePointDataAccess>();
             container.RegisterType<IGenericRepository<RoutePoint>, GenericDataAccess<RoutePoint>>();
 
+            container.RegisterType<ITripBaseRepository, TripBaseDataAccess>();
+            container.RegisterType<IGenericRepository<TripBase>, GenericDataAccess<TripBase>>();
         }
 
         public static T GetInstance<T>()
