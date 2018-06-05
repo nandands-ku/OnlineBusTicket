@@ -57,6 +57,8 @@
     <Compile Include="Interfaces\IIntermediateRouteRepository.cs" />
     <Compile Include="Interfaces\IRoutePointRepository.cs" />
     <Compile Include="Interfaces\IRouteRepository.cs" />
+    <Compile Include="Interfaces\ISeatBaseRepository.cs" />
+    <Compile Include="Interfaces\ITicketRepository.cs" />
     <Compile Include="Models\BookingTicket.cs" />
     <Compile Include="Models\BusOperator.cs" />
     <Compile Include="Models\DateWiseTrip.cs" />
