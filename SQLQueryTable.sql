@@ -1,13 +1,14 @@
 USE [OnlineBus]
 GO
 
-/****** Object:  Table [dbo].[BookingTicket]    Script Date: 04-Jun-18 9:17:05 AM ******/
+/******Script Date: 04-Jun-18 9:17:05 AM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
+--CREATE TABLE SCRIPT
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_name = 'BookingTicket' )
 BEGIN	
 CREATE TABLE [dbo].[BookingTicket](
@@ -252,6 +253,7 @@ END
 
 GO
 
+--ALTER TABLES
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'Route' AND column_name = 'BusOperatorId')
 	ALTER TABLE dbo.Route ADD BusOperatorId INT NOT NULL
 
@@ -266,6 +268,8 @@ IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'Book
 	ALTER TABLE dbo.BookingTicket ADD BusOperatorId INT NOT NULL
 
 GO
+
+
 /*ALTER TABLE [dbo].[BookingTicket]  WITH CHECK ADD  CONSTRAINT [FK_BookingTicket_DateWiseTrip] FOREIGN KEY([DateWiseTripId])
 REFERENCES [dbo].[DateWiseTrip] ([Id])
 GO
