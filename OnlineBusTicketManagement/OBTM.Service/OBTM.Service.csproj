@@ -75,6 +75,8 @@
     <Compile Include="UserService.cs" />
     <Compile Include="RoutePointService.cs" />
     <Compile Include="RouteService.cs" />
+    <Compile Include="SeatBaseService.cs" />
+    <Compile Include="TicketService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OBTM.Configuration\OBTM.Configuration.csproj">

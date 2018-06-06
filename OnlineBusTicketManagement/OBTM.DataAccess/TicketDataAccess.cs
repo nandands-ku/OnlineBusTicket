@@ -12,6 +12,7 @@ namespace OBTM.DataAccess
     {
         public TicketDataAccess(OBTMDbContext context) : base(context)
         {
+
         }
     }
 }
