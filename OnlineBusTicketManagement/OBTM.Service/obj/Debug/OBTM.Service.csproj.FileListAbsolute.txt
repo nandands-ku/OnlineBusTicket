@@ -64,3 +64,4 @@ D:\Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Se
 D:\Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Service\bin\Debug\Unity.Interception.Configuration.pdb
 D:\Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Service\bin\Debug\Unity.RegistrationByConvention.pdb
 D:\Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Service\bin\Debug\Unity.ServiceLocation.pdb
+D:\Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OBTM.Service\bin\Debug\OBTM.Configuration.dll.config

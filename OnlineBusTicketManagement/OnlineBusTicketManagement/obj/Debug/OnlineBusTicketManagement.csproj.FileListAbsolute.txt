@@ -323,3 +323,4 @@ E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OnlineBusTicketManagement\obj
 E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OnlineBusTicketManagement\obj\Debug\OnlineBusTicketManagement.csproj.CopyComplete
 E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OnlineBusTicketManagement\obj\Debug\OnlineBusTicketManagement.dll
 E:\DG\projects\Bus\trunk\OnlineBusTicketManagement\OnlineBusTicketManagement\obj\Debug\OnlineBusTicketManagement.pdb
+D:\Projects\Online_Bus_Ticket_Management\trunk\OnlineBusTicketManagement\OnlineBusTicketManagement\bin\OBTM.Configuration.dll.config

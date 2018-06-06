@@ -18,10 +18,10 @@ namespace OBTM.DataAccess
         public virtual DbSet<BookingTicket> BookingTickets { get; set; }
         public virtual DbSet<BusOperator> BusOperators { get; set; }
         public virtual DbSet<DateWiseTrip> DateWiseTrips { get; set; }
-        public virtual DbSet<IntermediateRoute> IntermediateRoutes { get; set; }
+        public virtual DbSet<RoutePoints> RoutePoints { get; set; }
         public virtual DbSet<OperatorRouteMap> OperatorRouteMaps { get; set; }
         public virtual DbSet<Route> Routes { get; set; }
-        public virtual DbSet<RoutePoint> RoutePoints { get; set; }
+        public virtual DbSet<Locations> Locations { get; set; }
         public virtual DbSet<SeatBase> SeatBases { get; set; }
         public virtual DbSet<Ticket> Tickets { get; set; }
         public virtual DbSet<TripBase> TripBases { get; set; }
@@ -31,11 +31,6 @@ namespace OBTM.DataAccess
         {
             modelBuilder.Entity<BusOperator>()
                 .HasMany(e => e.OperatorRouteMaps)
-                .WithRequired(e => e.BusOperator)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<BusOperator>()
-                .HasMany(e => e.TripBases)
                 .WithRequired(e => e.BusOperator)
                 .WillCascadeOnDelete(false);
 

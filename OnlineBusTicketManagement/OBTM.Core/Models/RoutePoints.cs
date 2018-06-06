@@ -4,16 +4,20 @@ namespace OBTM.Core.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    [Table("IntermediateRoute")]
-    public partial class IntermediateRoute
+    [Table("RoutePoints")]
+    public partial class RoutePoints
     {
         public int Id { get; set; }
-
-        public TimeSpan BoardingTime { get; set; }
 
         public int RouteId { get; set; }
 
         public int RoutePointId { get; set; }
+
+        public bool IsFrom { get; set; }
+
+        public bool IsTo { get; set; }
+
+        public int SequenceId { get; set; }
 
         public bool? IsActive { get; set; }
 

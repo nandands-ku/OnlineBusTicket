@@ -17,10 +17,7 @@ namespace OnlineBusTicketManagement.Controllers
             TripBase tb = new TripBase() {
                 BusType = "AC",
                 DepartureTime = TimeSpan.Parse("10:11"),
-                RouteId = 1,
-                BusOperatorId=2,
-                 
-                
+                RouteId = 1,    
             };
             tbs.Save(tb);
             return View();

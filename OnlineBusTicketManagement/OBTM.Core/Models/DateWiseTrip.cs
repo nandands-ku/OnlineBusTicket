@@ -21,10 +21,6 @@ namespace OBTM.Core.Models
 
         public int Fare { get; set; }
 
-        public int BusOperatorId { get; set; }
-
-        public virtual BusOperator BusOperator { get; set; }
-
         public bool? IsActive { get; set; }
 
         public bool? IsDeleted { get; set; }

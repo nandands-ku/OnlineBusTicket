@@ -17,17 +17,10 @@ namespace OBTM.Core.Models
 
         public int Id { get; set; }
 
-        [Required]
         [StringLength(50)]
-        public string From { get; set; }
+        public string RouteName { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string To { get; set; }
-
-        public int BusOperatorId { get; set; }
-
-        public virtual BusOperator BusOperator { get; set; }
+        public int ReverseId { get; set; }
 
         public bool? IsActive { get; set; }
 

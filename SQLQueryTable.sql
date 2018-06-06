@@ -78,24 +78,67 @@ END
 
 GO
 
-IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_name = 'IntermediateRoute' )
+--IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_name = 'IntermediateRoute' )
+--BEGIN
+--CREATE TABLE [dbo].[IntermediateRoute](
+--	[Id] [int] IDENTITY(1,1) NOT NULL,
+--	[BoardingTime] [time](7) NOT NULL,
+--	[RouteId] [int] NOT NULL,
+--	[RoutePointId] [int] NOT NULL,
+--	[IsActive] [bit] NULL,
+--	[IsDeleted] [bit] NULL,
+--	[CreatedOn] [datetime] NULL,
+--	[CreatedBy] [nvarchar](50) NULL,
+--	[UpdatedOn] [datetime] NULL,
+--	[UpdatedBy] [nvarchar](50) NULL,
+-- CONSTRAINT [PK_IntermediateRoute] PRIMARY KEY CLUSTERED 
+--(
+--	[Id] ASC
+--)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+--) ON [PRIMARY]
+--END
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_name = 'RoutePoints' )
 BEGIN
-CREATE TABLE [dbo].[IntermediateRoute](
+CREATE TABLE [dbo].[RoutePoints](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[BoardingTime] [time](7) NOT NULL,
 	[RouteId] [int] NOT NULL,
-	[RoutePointId] [int] NOT NULL,
+	[LocationId] [int] NOT NULL,
 	[IsActive] [bit] NULL,
 	[IsDeleted] [bit] NULL,
 	[CreatedOn] [datetime] NULL,
 	[CreatedBy] [nvarchar](50) NULL,
 	[UpdatedOn] [datetime] NULL,
 	[UpdatedBy] [nvarchar](50) NULL,
+	[SequenceId] [int] NULL,
+	[IsFrom] [bit] NULL,
+	[IsTo] [bit] NULL,
  CONSTRAINT [PK_IntermediateRoute] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+GO
+
+--ALTER TABLE [dbo].[RoutePoints] ADD  DEFAULT ((0)) FOR [IsFrom]
+--GO
+
+--ALTER TABLE [dbo].[RoutePoints] ADD  DEFAULT ((0)) FOR [IsTo]
+--GO
+
+--ALTER TABLE [dbo].[RoutePoints]  WITH CHECK ADD  CONSTRAINT [FK_IntermediateRoute_Route] FOREIGN KEY([RouteId])
+--REFERENCES [dbo].[Route] ([Id])
+--GO
+
+--ALTER TABLE [dbo].[RoutePoints] CHECK CONSTRAINT [FK_IntermediateRoute_Route]
+--GO
+
+--ALTER TABLE [dbo].[RoutePoints]  WITH CHECK ADD  CONSTRAINT [FK_IntermediateRoute_RoutePoint] FOREIGN KEY([LocationId])
+--REFERENCES [dbo].[Locations] ([Id])
+--GO
+
+--ALTER TABLE [dbo].[RoutePoints] CHECK CONSTRAINT [FK_IntermediateRoute_RoutePoint]
+--GO
 END
 
 

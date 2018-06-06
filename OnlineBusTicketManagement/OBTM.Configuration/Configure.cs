@@ -23,8 +23,8 @@ namespace OBTM.Configuration
             
             container.RegisterType<IRouteRepository, RouteDataAccess>();
             container.RegisterType<IGenericRepository<Route>, GenericDataAccess<Route>>();
-            container.RegisterType<IRoutePointRepository, RoutePointDataAccess>();
-            container.RegisterType<IGenericRepository<RoutePoint>, GenericDataAccess<RoutePoint>>();
+            container.RegisterType<ILocationsRepository, RoutePointDataAccess>();
+            container.RegisterType<IGenericRepository<Locations>, GenericDataAccess<Locations>>();
 
             container.RegisterType<ITripBaseRepository, TripBaseDataAccess>();
             container.RegisterType<IGenericRepository<TripBase>, GenericDataAccess<TripBase>>();

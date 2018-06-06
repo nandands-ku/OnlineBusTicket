@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OBTM.Core.Interfaces
 {
-    public interface IRoutePointRepository : IGenericRepository<RoutePoint>
+    public interface ILocationsRepository : IGenericRepository<Locations>
     {
     }
 }

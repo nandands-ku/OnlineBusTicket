@@ -18,10 +18,6 @@ namespace OBTM.Core.Models
 
         public int DateWiseTripId { get; set; }
 
-        public int BusOperatorId { get; set; }
-
-        public virtual BusOperator BusOperator { get; set; }
-
         public int TicketId { get; set; }
 
         public bool? IsTempLocked { get; set; }

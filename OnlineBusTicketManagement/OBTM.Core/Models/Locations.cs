@@ -6,8 +6,8 @@ namespace OBTM.Core.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("RoutePoint")]
-    public partial class RoutePoint
+    [Table("Locations")]
+    public partial class Locations
     {
         public int Id { get; set; }
 

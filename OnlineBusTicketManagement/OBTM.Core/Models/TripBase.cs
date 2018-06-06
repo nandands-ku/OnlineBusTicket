@@ -17,8 +17,6 @@ namespace OBTM.Core.Models
         [StringLength(50)]
         public string BusType { get; set; }
 
-        public int BusOperatorId { get; set; }
-
         public int RouteId { get; set; }
 
         public bool? IsActive { get; set; }
@@ -34,8 +32,6 @@ namespace OBTM.Core.Models
         public string UpdatedBy { get; set; }
 
         public DateTime? UpdatedOn { get; set; }
-
-        public virtual BusOperator BusOperator { get; set; }
 
         public virtual Route Route { get; set; }
     }
