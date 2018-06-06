@@ -337,8 +337,10 @@ IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'DateWise
 GO
 
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'TripBase' AND column_name = 'BusOperatorId' )
+	BEGIN
+	ALTER TABLE [dbo].[TripBase] DROP CONSTRAINT [FK_TripBase_BusOperator]
 	ALTER TABLE dbo.TripBase DROP COLUMN BusOperatorId
-
+	END
 GO
 
 
