@@ -25,6 +25,10 @@ namespace OBTM.Core.Models
         [StringLength(50)]
         public string To { get; set; }
 
+        public int BusOperatorId { get; set; }
+
+        public virtual BusOperator BusOperator { get; set; }
+
         public bool? IsActive { get; set; }
 
         public bool? IsDeleted { get; set; }
