@@ -307,9 +307,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-<<<<<<< .mine    <Folder Include="Views\Ticket\" />
-=======    <Folder Include="Views\Route\" />
->>>>>>> .theirs    <Folder Include="Views\TripBase\" />
+    <Folder Include="Views\Ticket\" />
+    <Folder Include="Views\Route\" />
+    <Folder Include="Views\TripBase\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
