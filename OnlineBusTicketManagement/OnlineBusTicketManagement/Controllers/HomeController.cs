@@ -12,16 +12,16 @@ namespace OnlineBusTicketManagement.Controllers
     {
         public ActionResult Index()
         {
-            //var busService = new BusOperatorService();
+            var busService = new BusOperatorService();
             //var all = busService.GetAllBusOperators();
             //var single = busService.GetById(1);
-            //BusOperator bo = new BusOperator()
-            //{
-            //    Name="Green Line",
-            //    Email = "greenLine@gmail.com"
+            BusOperator bo = new BusOperator()
+            {
+                Name="Green Line",
+                Email = "greenLine@gmail.com"
                 
-            //};
-            //busService.Save(bo);
+            };
+            busService.Save(bo);
             return View();
         }
 
