@@ -253,54 +253,22 @@ END
 
 GO
 
---Renaming Tables
-
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_name = 'RoutePoint' )
-BEGIN
-EXEC sp_rename  'RoutePoint' , 'Locations'
-END
-
-GO
-
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_name = 'IntermediateRoute' )
-BEGIN
-EXEC sp_rename  'IntermediateRoute' , 'RoutePoints'
-END
-
-GO
 --ALTER TABLES
-
-
-
-GO
---Renamed RoutePointId column to LocationId
-IF  EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'RoutePoints' AND column_name = 'RoutePointId')
-EXEC sp_rename 'RoutePoints.RoutePointId', 'LocationId', 'COLUMN' 
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'Route' AND column_name = 'BusOperatorId')
+	ALTER TABLE dbo.Route ADD BusOperatorId INT NOT NULL
 
 GO
---added SequenceId column into RoutePoints table
-IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'RoutePoints' AND column_name = 'SequenceId')
-	ALTER TABLE dbo.RoutePoints ADD SequenceId INT
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'DateWiseTrip' AND column_name = 'BusOperatorId')
+	ALTER TABLE dbo.DateWiseTrip ADD BusOperatorId INT NOT NULL
 
 GO
---added IsFrom column into RoutePoints table
-IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'RoutePoints' AND column_name = 'IsFrom')
-	ALTER TABLE dbo.RoutePoints ADD IsFrom BIT DEFAULT 0 
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'BookingTicket' AND column_name = 'BusOperatorId')
+	ALTER TABLE dbo.BookingTicket ADD BusOperatorId INT NOT NULL
 
 GO
---added IsTo column into RoutePoints table
-IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'RoutePoints' AND column_name = 'IsTo')
-	ALTER TABLE dbo.RoutePoints ADD IsTo BIT DEFAULT 0 
 
-GO
---added ReverseId column into Route table
-IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'Route' AND column_name = 'ReverseId')
-	ALTER TABLE dbo.Route ADD ReverseId INT
-
-GO
---added RouteName column into Route table
-IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'Route' AND column_name = 'RouteName')
-	ALTER TABLE dbo.Route ADD RouteName NVARCHAR(50)
 
 GO
 --Drop Columns
