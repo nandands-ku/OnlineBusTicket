@@ -253,22 +253,101 @@ END
 
 GO
 
+--Renaming Tables
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_name = 'RoutePoint' )
+BEGIN
+EXEC sp_rename  'RoutePoint' , 'Locations'
+END
+
+GO
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE table_name = 'IntermediateRoute' )
+BEGIN
+EXEC sp_rename  'IntermediateRoute' , 'RoutePoints'
+END
+
+GO
 --ALTER TABLES
-IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'Route' AND column_name = 'BusOperatorId')
-	ALTER TABLE dbo.Route ADD BusOperatorId INT NOT NULL
+
+
+
+GO
+--Renamed RoutePointId column to LocationId
+IF  EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'RoutePoints' AND column_name = 'RoutePointId')
+EXEC sp_rename 'RoutePoints.RoutePointId', 'LocationId', 'COLUMN' 
+
+GO
+--added SequenceId column into RoutePoints table
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'RoutePoints' AND column_name = 'SequenceId')
+	ALTER TABLE dbo.RoutePoints ADD SequenceId INT
+
+GO
+--added IsFrom column into RoutePoints table
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'RoutePoints' AND column_name = 'IsFrom')
+	ALTER TABLE dbo.RoutePoints ADD IsFrom BIT DEFAULT 0 
+
+GO
+--added IsTo column into RoutePoints table
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'RoutePoints' AND column_name = 'IsTo')
+	ALTER TABLE dbo.RoutePoints ADD IsTo BIT DEFAULT 0 
+
+GO
+--added ReverseId column into Route table
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'Route' AND column_name = 'ReverseId')
+	ALTER TABLE dbo.Route ADD ReverseId INT
+
+GO
+--added RouteName column into Route table
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'Route' AND column_name = 'RouteName')
+	ALTER TABLE dbo.Route ADD RouteName NVARCHAR(50)
+
+GO
+--Drop Columns
+
+--deleted BoardingTime Column from RoutePoints Table
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'RoutePoints' AND column_name = 'BoardingTime')
+	ALTER TABLE dbo.RoutePoints DROP COLUMN BoardingTime 
 
 GO
 
-IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'DateWiseTrip' AND column_name = 'BusOperatorId')
-	ALTER TABLE dbo.DateWiseTrip ADD BusOperatorId INT NOT NULL
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'Route' AND column_name = 'BusOperatorId' )
+	ALTER TABLE dbo.Route DROP COLUMN BusOperatorId
 
 GO
 
-IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'BookingTicket' AND column_name = 'BusOperatorId')
-	ALTER TABLE dbo.BookingTicket ADD BusOperatorId INT NOT NULL
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'Route' AND column_name = 'From' )
+	ALTER TABLE dbo.Route DROP COLUMN [From]
 
 GO
 
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'Route' AND column_name = 'To' )
+	ALTER TABLE dbo.Route DROP COLUMN [To]
+
+GO
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'BookingTicket' AND column_name = 'BusOperatorId' )
+	ALTER TABLE dbo.BookingTicket DROP COLUMN BusOperatorId
+
+GO
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'DateWiseTrip' AND column_name = 'BusOperatorId' )
+	ALTER TABLE dbo.DateWiseTrip DROP COLUMN BusOperatorId
+
+GO
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.columns WHERE table_name = 'TripBase' AND column_name = 'BusOperatorId' )
+	ALTER TABLE dbo.TripBase DROP COLUMN BusOperatorId
+
+GO
+
+
+
+--IF ((SELECT COUNT(*) FROM BusOperator)=0 )
+-- begin 
+-- insert  BusOperator(Name, Email) values ('Sohag', 's@gmail.com')
+-- end
+--else delete from BusOperator
 
 /*ALTER TABLE [dbo].[BookingTicket]  WITH CHECK ADD  CONSTRAINT [FK_BookingTicket_DateWiseTrip] FOREIGN KEY([DateWiseTripId])
 REFERENCES [dbo].[DateWiseTrip] ([Id])
