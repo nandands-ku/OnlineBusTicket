@@ -3,7 +3,7 @@
     ViewBag.Title = "LogIn";
 }
 
-<h2>LogIn</h2>
+<h3>LogIn</h3>
 @using (Html.BeginForm())
 {
     <div class="form-horizontal">
@@ -22,7 +22,7 @@
            
                 <label class="control-label col-md-2">Password: </label>
                 <div class="form-group col-md-10">
-                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Password, "Password", new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                 </div>
            
@@ -32,7 +32,7 @@
                 <label class="control-label col-md-2 ">Email: </label>
                 <div class=" form-group col-md-10">
                     @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger", type = "email"})
                 </div>
             
         </div>
