@@ -229,7 +229,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BookingTicketController.cs" />
+    <Compile Include="Controllers\DateWiseTripController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IntermediateRouteController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TripBaseController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -305,6 +308,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\BookingTicket\" />
+    <Folder Include="Views\DateWiseTrip\" />
+    <Folder Include="Views\IntermediateRoute\" />
     <Folder Include="Views\TripBase\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
