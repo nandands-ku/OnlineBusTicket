@@ -54,17 +54,18 @@
         }
         else {
             $(this).toggleClass(settings.selectingSeatCss);
-            noOfSelectedSeat++;
+            
         }
 
-        var totalFare = noOfSelectedSeat * 1000;
-        $("#totalFare").text(totalFare);
+        noOfSelectedSeat = $('#place li.' + settings.selectingSeatCss + ' a').length;
         var str = [], item;
         $.each($('#place li.' + settings.selectingSeatCss + ' a'), function (index, value) {
             item = $(this).attr('title');
             str.push(item);
+            
         });
-
+        var totalFare = noOfSelectedSeat * 1000;
+        $("#totalFare").text(totalFare);
         $("#selectedSeats").text(str.join(','));
     });
 
