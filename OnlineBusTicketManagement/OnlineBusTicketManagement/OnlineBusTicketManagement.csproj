@@ -311,6 +311,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\ViewSeat.cshtml" />
     <Content Include="Views\BusSearch\ViewSeat.cshtml" />
+    <Content Include="Views\Home\LogIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
