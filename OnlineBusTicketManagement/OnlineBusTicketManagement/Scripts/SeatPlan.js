@@ -1,12 +1,4 @@
-﻿
-@{
-    ViewBag.Title = "ViewSeat";
-}
-
-
-<link rel="stylesheet" href="~/Content/SeatPlan.css"  />
-<script>
-    $(document).ready(function () {
+﻿$(document).ready(function () {
     var settings = {
         rows: 10,
         cols: 4,
@@ -89,60 +81,3 @@
 
 });
 
-
-</script>
-<h2>Choose Seat</h2>
-<div class="row">
-    <div class="col-lg-6">
-        <div id="holder">
-            <ul id="place"></ul>
-        </div>
-        <div style="float:left;">
-            <ul id="seatDescription">
-                <li style="background:url('../../Content/Picture/Green.png') no-repeat scroll 0 0 transparent;">Selected Seat</li>
-                <li style="background:url('../../Content/Picture/Red.png') no-repeat scroll 0 0 transparent;">Booked Seat</li>
-            </ul>
-        </div>
-        @*<div style="clear:both;width:100%">
-
-            <input type="button" id="btnShowNew" value="Show Selected Seats" />
-            <input type="button" id="btnShow" value="Show All" />
-        </div>*@
-    </div>
-    <div class="col-lg-6">
-        <div>
-            <lebel>Selected Seats:</lebel>
-            <label id="selectedSeats"></label>
-        </div>
-        <div>
-            <label>Fare per seat:</label>
-            <lebel>1000</lebel>
-        </div>
-        <div>
-            <label>Total Fare:</label>
-            <label id="totalFare"></label>
-        </div>
-        <div>
-            <button id="purchase">Continue Purchase</button>
-        </div>
-    </div>
-    
-    @*<h2> Choose seats by clicking the corresponding seat in the layout below:</h2>
-        <div>
-             @for (int i = 0; i < 10; i++)
-             {
-                 for (int j = 0; j < 4; j++)
-                 {
-                     {
-                         var seatNo = i * 4 + @j + 1;
-                         // var bookedSeats = ViewBag.SeatList;
-                         if ((ViewBag.SeatList).Contains(seatNo))
-                             <a class="">@seatNo</a>
-                         }
-                     }
-
-                 }
-         </div>*@
-    
-
-</div>
