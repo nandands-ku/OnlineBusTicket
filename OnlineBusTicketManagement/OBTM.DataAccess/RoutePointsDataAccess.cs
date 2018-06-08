@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace OBTM.DataAccess
 {
-    public class IntermediateRouteDataAccess : GenericDataAccess<RoutePoints> , IRoutePointsRepository
+    public class RoutePointsDataAccess : GenericDataAccess<RoutePoints> , IRoutePointsRepository
     {
-        public IntermediateRouteDataAccess(OBTMDbContext context) : base(context)
+        public RoutePointsDataAccess(OBTMDbContext context) : base(context)
         {
         }
     }

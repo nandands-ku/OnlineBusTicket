@@ -11,7 +11,7 @@ namespace OBTM.Core.Models
 
         public int RouteId { get; set; }
 
-        public int RoutePointId { get; set; }
+        public int LocationId { get; set; }
 
         public bool IsFrom { get; set; }
 

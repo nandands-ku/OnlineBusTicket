@@ -29,5 +29,7 @@ namespace OnlineBusTicketManagement.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<OBTM.Core.Models.DateWiseTrip> DateWiseTrips { get; set; }
     }
 }
