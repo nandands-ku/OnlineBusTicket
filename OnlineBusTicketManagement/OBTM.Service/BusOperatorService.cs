@@ -12,6 +12,11 @@ namespace OBTM.Service
             var result = SafeExecute(() => repository.GetAll());
             return result.Data;
         }
-
+        public Response<int> SaveEditedBus(BusOperator bus)
+        {
+            var repository = GetInstance<IBusOpertaorRepository>();
+            var result = SafeExecute(() => repository.SaveEditedBus(bus));
+            return result;
+        }
     }
 }

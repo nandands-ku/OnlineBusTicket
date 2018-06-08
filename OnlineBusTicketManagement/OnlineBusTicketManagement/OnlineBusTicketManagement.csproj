@@ -230,6 +230,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BookingTicketController.cs" />
+    <Compile Include="Controllers\BusOperatorController.cs" />
     <Compile Include="Controllers\BusSearchController.cs" />
     <Compile Include="Controllers\DateWiseTripController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -317,6 +318,8 @@
     <Content Include="Views\DateWiseTrip\DateWiseTrip.cshtml" />
     <Content Include="Views\DateWiseTrip\CreateDateWiseTrip.cshtml" />
     <Content Include="Views\DateWiseTrip\EditDateWiseTrip.cshtml" />
+    <Content Include="Views\BusOperator\CreateEditBus.cshtml" />
+    <Content Include="Views\BusOperator\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
