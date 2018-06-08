@@ -4,125 +4,85 @@
     ViewBag.Title = "DateWiseTrip";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <script type="text/javascript">
     $
 </script>
-<h2>DateWiseTrip</h2>
-
-@*This Section is for changing dropdowns using AJAX call, will be implented later*@
-@*<div class="row">
-   
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="form-horizontal">
-                <div class="form-group">
-                    @Html.DropDownList("BusOperatorId", (SelectList)ViewBag.BusOperator, new { @class = "form-control" })
-                </div>
-            </div>
-        }
-    <div class="form-group col-md-3">
-        @Html.DropDownList("BusOperatorId", (SelectList)ViewBag.BusOperator, new { @class = "form-control", @id = "BusOperatorDDL" })
-    </div>
-    <div class="form-group col-md-3">
-        @Html.DropDownList("RouteId", new SelectList(Enumerable.Empty<SelectListItem>(), "RouteId","RouteName"),"Select Route" ,new { @class = "form-control", @id = "RouteIdDDL" })
-    </div>
-    <div class="form-group col-md-3">
-        @Html.DropDownList("TripId", new SelectList(Enumerable.Empty<SelectListItem>(),"TripId","DepartureName"),"Select Trip", new { @class = "form-control", @id = "TripIdDDL" })
-    </div>
-    <div class="form-group col-md-3">
-        <label for="Route" class="text-primary">Select Route</label>
-        <div class="form-inline ">
-            <select id="RouteDropDownList" class="form-control">
-                <option value="0">Select Route</option>
-                <option value="0">Just Anther opt</option>
-            </select>
-        </div>
-    </div>
-    <div class="form-group col-md-3">
-        <label for="Route" class="text-primary">Select Trip</label>
-        <div class="form-inline">
-            <select id="TripDropDownList" class="form-control">
-                <option value="0">Select Trip</option>
-                <option value="0">Just Anther opt</option>
-            </select>
-        </div>
-    </div>
-    <div class="form-group col-md-3">
-        <br />
-        <div class="form-inline "><button class="btn btn-default">Search</button></div>
-    </div>
-</div>*@
 
 <div class="row">
+    <div class="col-md-2">@Html.Partial("NavbarPartial")</div>
 
-    <div class="form-horizontal col-md-2">
-        <div class="form-group">
-            @Html.DropDownList("BusOperatorId", new SelectList(Enumerable.Empty<SelectListItem>()), "Select Bus",new { @class = "form-control" })
-        </div>
-    </div>
+    <div class="col-md-10">
+        <h2>Datewise Trip</h2>
+        @using (Html.BeginForm("GetDateWiseTrips", "DateWiseTrip", FormMethod.Post))
 
-    <div class="form-group col-md-2">
-        <div class="form-inline "><button class="btn btn-default">Click for Route</button></div>
-    </div>
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
 
-    <div class="form-horizontal col-md-2">
-        <div class="form-group">
-            @Html.DropDownList("RouteId", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
-        </div>
-    </div>
+                <div class="form-horizontal col-md-3">
+                    <div class="form-group">
+                        @Html.DropDownList("BusOperatorId", new SelectList(Enumerable.Empty<SelectListItem>()), "Select Bus", new { @class = "form-control", required = "required" })
+                    </div>
+                </div>
 
-    <div class="form-group col-md-2">
-        <div class="form-inline "><button class="btn btn-default">Click for Trip Time</button></div>
-    </div>
+                <div class="form-horizontal col-md-3">
+                    <div class="form-group">
+                        @Html.DropDownList("RouteId", new SelectList(Enumerable.Empty<SelectListItem>()), "Select Route", new { @class = "form-control", required = "required" })
+                    </div>
+                </div>
 
-    <div class="form-horizontal col-md-2">
-        <div class="form-group">
-            @Html.DropDownList("TripId", new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group col-md-2">
-        <div class="form-inline "><button class="btn btn-default">Search Datewise Trips</button></div>
-    </div>
+                <div class="form-horizontal col-md-3">
+                    <div class="form-group">
+                        @Html.DropDownList("TripId", new SelectList(Enumerable.Empty<SelectListItem>()), "Select Trip Time", new { @class = "form-control", required = "required" })
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <div class="form-inline ">
+                        <button class="btn btn-default btn-primary" type="submit">Search Datewise Trips</button>
+                    </div>
+                </div>
 
+            </div>
+        }
+
+        <br />
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NoOfSeat)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fare)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NoOfSeat)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fare)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
 </div>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NoOfSeat)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fare)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NoOfSeat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fare)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
-
-</table>
