@@ -20,5 +20,9 @@ namespace OnlineBusTicketManagement.Controllers
             ViewBag.SeatList = temp;
             return View();
         }
+        public ActionResult SearchResult()
+        {
+            return View();
+        }
     }
 }

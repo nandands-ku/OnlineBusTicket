@@ -24,5 +24,9 @@ namespace OnlineBusTicketManagement.Controllers
         {
             return View();
         }
+        public ActionResult TicketDetails_()
+        {
+            return View();
+        }
     }
 }

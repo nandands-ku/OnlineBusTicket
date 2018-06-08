@@ -319,6 +319,11 @@
     <Content Include="Views\DateWiseTrip\DateWiseTrip.cshtml" />
     <Content Include="Views\DateWiseTrip\CreateDateWiseTrip.cshtml" />
     <Content Include="Views\DateWiseTrip\EditDateWiseTrip.cshtml" />
+    <Content Include="Views\Ticket\TicketDetails.cshtml" />
+    <Content Include="Views\Ticket\TicketInfo.cshtml" />
+    <Content Include="Views\BusSearch\SearchBus.cshtml" />
+    <Content Include="Views\BusSearch\SearchResult.cshtml" />
+    <Content Include="Views\Ticket\TicketDetails_.cshtml" />
     <Content Include="Views\TripBase\Index.cshtml" />
     <Content Include="Views\BusOperator\CreateEditBus.cshtml" />
     <Content Include="Views\BusOperator\Index.cshtml" />
@@ -329,7 +334,6 @@
     <Folder Include="Views\BookingTicket\" />
     <Folder Include="Views\IntermediateRoute\" />
     <Folder Include="Views\Route\" />
-    <Folder Include="Views\Ticket\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
