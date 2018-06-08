@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<script>
+    $(document).ready(function () {
+        $("#busOparetorDrpDown").change(function () {
+            var id = $("#busOparetorDrpDown option:selected").val();
+            GetBusRoute(id);
+
+        });
+
+
+        function GetBusRoute(id) {
+            debugger;
+            $.ajax({
+                type: "GET",
+                url: "/TripBase/GetBusRoute",
+                data: { id: id },
+                //cache: false,
+                
+                success: function ( data) {
+                    var options = '';
+                    for (var i = 0; i < data.length; i++) {
+                        options += '<option  value="' + data[i] + '">' + data[i] + '</option>';
+                    }
+                    $("#routeDropDown").html(options);
+                    //AnotherOptionBinding(data);
+                }
+            });
+        };
+
+    });
+
+
+    
+</script>
+<div class="row">
+    <div class="col-md-2">@Html.Partial("NavbarPartial")</div>
+    <div class="col-md-10">
+
+        <h2>Index</h2>
+        <div class="row">
+            <div class="form-group">
+                <label class="text-primary col-md-2">Bus Operator</label>
+                <select class="selectpicker form-control" id="busOparetorDrpDown">
+                    <option title="Select Bus Operator"></option>
+                    @foreach (var item in ViewBag.BusOperatorList)
+                    {
+
+                        <option id="busOperator" value="@item.Id">@item.Name</option>
+
+                    }
+                </select>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label class="text-primary col-md-2">Route</label>
+                    <select class="selectpicker form-control" id="routeDropDown"></select>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-4">
+                    <button class="btn btn-primary" type="button" id="btnSubmit">Submit</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+
+        </div>
+    </div>
+</div>
+

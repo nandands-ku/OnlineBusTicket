@@ -94,6 +94,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -318,8 +319,10 @@
     <Content Include="Views\DateWiseTrip\DateWiseTrip.cshtml" />
     <Content Include="Views\DateWiseTrip\CreateDateWiseTrip.cshtml" />
     <Content Include="Views\DateWiseTrip\EditDateWiseTrip.cshtml" />
+    <Content Include="Views\TripBase\Index.cshtml" />
     <Content Include="Views\BusOperator\CreateEditBus.cshtml" />
     <Content Include="Views\BusOperator\Index.cshtml" />
+    <Content Include="Views\Shared\NavbarPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -327,7 +330,6 @@
     <Folder Include="Views\IntermediateRoute\" />
     <Folder Include="Views\Route\" />
     <Folder Include="Views\Ticket\" />
-    <Folder Include="Views\TripBase\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>

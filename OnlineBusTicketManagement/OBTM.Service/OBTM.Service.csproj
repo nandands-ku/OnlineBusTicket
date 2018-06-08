@@ -70,6 +70,7 @@
     <Compile Include="DateWiseTripService.cs" />
     <Compile Include="GenericService.cs" />
     <Compile Include="RoutePointsService.cs" />
+    <Compile Include="OperatorRouteMapService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TripBaseService.cs" />
     <Compile Include="UserService.cs" />

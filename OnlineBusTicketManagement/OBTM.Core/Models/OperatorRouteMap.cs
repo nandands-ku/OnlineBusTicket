@@ -31,6 +31,8 @@ namespace OBTM.Core.Models
         public DateTime? UpdatedOn { get; set; }
 
         public virtual BusOperator BusOperator { get; set; }
+
+        public virtual Route Route { get; set; }
         public virtual Route Route { get; set; }
     }
 }
