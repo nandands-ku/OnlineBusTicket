@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OBTM.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,9 +10,9 @@ namespace OnlineBusTicketManagement.Controllers
     public class BusSearchController : Controller
     {
         // GET: BusSearch
-        public ActionResult Index()
+        public ActionResult SearchBus()
         {
-            return View();
+            return View(new SearchBus());
         }
         public ActionResult ViewSeat()
         {

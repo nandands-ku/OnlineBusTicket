@@ -1,0 +1,24 @@
+﻿@model OBTM.Core.Models.SearchBus
+
+@{
+    ViewBag.Title = "SearchResult";
+}
+
+<h2 style="text-align:center">Search Result</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <hr height="200px" />
+
+    <div class="form-horizontal">
+        <div class="row form-group" >
+            <div class="col-md-2">
+                <label class="label-default"> </label>
+            </div>
+        </div>
+
+    </div>
+
+}
+
+

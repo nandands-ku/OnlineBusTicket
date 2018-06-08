@@ -10,7 +10,7 @@ namespace OBTM.Core.Models
     public partial class TripBase
     {
         public int Id { get; set; }
-
+        [Column(TypeName ="Time")]
         public TimeSpan DepartureTime { get; set; }
 
         [Required]

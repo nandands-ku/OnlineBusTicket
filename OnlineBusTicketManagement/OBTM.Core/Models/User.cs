@@ -14,6 +14,7 @@ namespace OBTM.Core.Models
 
         [Required]
         [StringLength(50)]
+        [Display(Name ="User Name")]
         public string UserName { get; set; }
 
         [Required]

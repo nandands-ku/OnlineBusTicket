@@ -16,6 +16,7 @@ namespace OBTM.Core.Models
         public DateTime Date { get; set; }
 
         public int TripBaseId { get; set; }
+        public virtual TripBase GetTripBase { get; set; }
 
         public int NoOfSeat { get; set; }
 

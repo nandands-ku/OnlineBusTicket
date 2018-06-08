@@ -13,10 +13,12 @@ namespace OBTM.Core.Models
 
         [Required]
         [StringLength(50)]
+        [Display(Name ="Passenger's Name")]
         public string Name { get; set; }
 
         [Required]
         [StringLength(11)]
+        [Display(Name ="Cell No")]
         public string CellNo { get; set; }
 
         [Required]
@@ -25,6 +27,7 @@ namespace OBTM.Core.Models
 
         [Required]
         [StringLength(50)]
+        [Display(Name ="Total Fare")]
         public string TotalFare { get; set; }
 
         [Required]
@@ -33,6 +36,7 @@ namespace OBTM.Core.Models
 
         [Required]
         [StringLength(50)]
+        [Display(Name ="Ticket Pin")]
         public string TicketPIN { get; set; }
 
         public bool? IsActive { get; set; }

@@ -1,0 +1,55 @@
+﻿@model OBTM.Core.Models.SearchBus
+@{
+    /**/
+
+    /**/
+
+    ViewBag.Title = "SearchBus";
+}
+<head>
+   
+    @*<script language="javascript">
+        $(document).ready(function () {
+            $('.date').datepicker();
+
+        });
+    </script>*@
+</head>
+<div style="padding-left:200px">
+    <h2 style="padding-left:120px">Search Bus</h2>
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.From, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="form-group col-md-4">
+                    @Html.EditorFor(model => model.From, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.From, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.To, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="form-group col-md-4">
+                    @Html.EditorFor(model => model.To, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.To, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.DepartureDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="form-group col-md-4">
+                    @Html.EditorFor(model => model.DepartureDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DepartureDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Search Bus" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
