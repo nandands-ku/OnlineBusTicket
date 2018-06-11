@@ -38,6 +38,8 @@ namespace OBTM.Core.Models
         [StringLength(50)]
         [Display(Name ="Ticket Pin")]
         public string TicketPIN { get; set; }
+        
+        public string CreditCard { get; set; }
 
         public bool? IsActive { get; set; }
 

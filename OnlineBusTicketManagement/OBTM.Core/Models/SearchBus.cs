@@ -17,7 +17,12 @@ namespace OBTM.Core.Models
         public DateTime DepartureDate { get; set; }
 
         public virtual DateWiseTrip GetDateWiseTrip { get; set; }
-        
+        public int RouteId { get; set; }
+        public virtual OperatorRouteMap GetOperatorRouteMap { get; set; }
+
+        public int BusOperatorId { get; set; }
+        public virtual BusOperator GetBusOperator { get; set; }
+
 
     }
 }

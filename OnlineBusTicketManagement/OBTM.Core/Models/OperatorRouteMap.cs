@@ -33,6 +33,6 @@ namespace OBTM.Core.Models
         public virtual BusOperator BusOperator { get; set; }
 
         public virtual Route Route { get; set; }
+       
     }
 }
-    

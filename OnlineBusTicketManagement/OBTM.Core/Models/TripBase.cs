@@ -15,9 +15,11 @@ namespace OBTM.Core.Models
 
         [Required]
         [StringLength(50)]
+        [Display(Name ="Bus Type")]
         public string BusType { get; set; }
 
         public int RouteId { get; set; }
+        public Route GetRoute { get; set; }
 
         public bool? IsActive { get; set; }
 

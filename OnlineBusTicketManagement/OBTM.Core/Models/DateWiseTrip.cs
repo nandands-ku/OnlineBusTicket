@@ -9,7 +9,7 @@ namespace OBTM.Core.Models
     [Table("DateWiseTrip")]
     public partial class DateWiseTrip
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        
         public int Id { get; set; }
 
         [Column(TypeName = "date")]
@@ -18,6 +18,7 @@ namespace OBTM.Core.Models
         public int TripBaseId { get; set; }
         public virtual TripBase GetTripBase { get; set; }
 
+        [Display(Name ="Number Of Seat")]
         public int NoOfSeat { get; set; }
 
         public int Fare { get; set; }
