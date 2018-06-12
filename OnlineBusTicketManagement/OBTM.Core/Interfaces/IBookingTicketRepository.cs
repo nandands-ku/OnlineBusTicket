@@ -9,5 +9,6 @@ namespace OBTM.Core.Interfaces
 {
     public interface IBookingTicketRepository: IGenericRepository<BookingTicket>
     {
+        void CreateBookingTickets(int numOfSeats, int dateWiseTripId);
     }
 }

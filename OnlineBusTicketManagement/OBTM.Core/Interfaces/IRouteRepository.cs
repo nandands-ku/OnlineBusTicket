@@ -9,5 +9,6 @@ namespace OBTM.Core.Interfaces
 {
     public interface IRouteRepository: IGenericRepository<Route>
     {
+       IEnumerable<Route> GetRefinedRoutes(int busOperatorId);
     }
 }

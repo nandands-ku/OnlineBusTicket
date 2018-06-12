@@ -16,15 +16,15 @@ namespace OBTM.Core.Models
 
         public int DateWiseTripId { get; set; }
 
-        public int TicketId { get; set; }
+        public int? TicketId { get; set; }
 
         public bool? IsTempLocked { get; set; }
 
         public bool? IsBooked { get; set; }
 
-        public int? IsActive { get; set; }
+        public bool? IsActive { get; set; }
 
-        public int? IsDeleted { get; set; }
+        public bool? IsDeleted { get; set; }
 
         [StringLength(50)]
         public string CreatedBy { get; set; }

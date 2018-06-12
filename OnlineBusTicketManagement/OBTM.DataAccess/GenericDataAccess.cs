@@ -45,7 +45,8 @@ namespace OBTM.DataAccess
 
         public int Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            OBTMDbContext.Entry(entity).State = EntityState.Modified;
+            return OBTMDbContext.SaveChanges();
         }
     }
 }

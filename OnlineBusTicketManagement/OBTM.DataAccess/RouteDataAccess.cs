@@ -13,5 +13,11 @@ namespace OBTM.DataAccess
         public RouteDataAccess(OBTMDbContext context) : base(context)
         {
         }
+
+        public IEnumerable<Route> GetRefinedRoutes(int busOperatorId)
+        {
+            var route = OBTMDbContext.OperatorRouteMaps.Where(routes => routes.BusOperatorId == busOperatorId).Select(routes=>routes.Route).ToList();
+            return route;
+        }
     }
 }

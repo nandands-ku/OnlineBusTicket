@@ -5,7 +5,79 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script type="text/javascript">
-    $
+    $(document).ready(function () {
+        $("#BusOperatorId").change(function () {
+            var busOperatorID = $("#BusOperatorId").val();
+            RouteOptionData(busOperatorID);
+        });
+
+        $("#RouteId").change(function () {
+            var routeID = $("#RouteId").val();
+            var busOperatorID = $("#BusOperatorId").val();
+            TripOptionData(routeID, busOperatorID);
+        });
+    });
+
+
+    function RouteOptionData(busOperatorId) {
+        $.ajax(
+            {
+                type: "GET",
+                url: "/DateWiseTrip/GetRoutes",
+                data: { busOperatorID: busOperatorId },
+                cache: false,
+                success: function (data) {
+                    RouteOptionBind(data);
+                }
+            }
+        );
+    };
+    function RouteOptionBind(data) {
+        var i = 0;
+        var routeList = data;
+        var routes = $("#RouteId");
+        routes.empty();
+        if (routeList != null) {
+            routes.append('<option value="0">Select Route</option>');
+            for (i = 0; i < routeList.length; i++) {
+                routes.append('<option value="' + routeList[i].Id + '" >' + routeList[i].RouteName + '</option>');
+            }
+        }
+        else {
+            routes.append('<option value="0">Select Route</option>');
+        }
+
+    };
+
+
+    function TripOptionData(routeId, busOperatorId) {
+        $.ajax(
+            {
+                type: "GET",
+                url: "/DateWiseTrip/GetTrips",
+                data: { routeID: routeId, busOperatorID: busOperatorId },
+                cache: false,
+                success: function (data) {
+                    TripOptionBind(data);
+                }
+            }
+        );
+    };
+    function TripOptionBind(data) {
+        var i = 0;
+        var tripList = data;
+        var trips = $("#TripId");
+        trips.empty();
+        if (tripList != null) {
+            trips.append('<option value="0">Select Trip Time</option>');
+            for (i = 0; i < tripList.length; i++) {
+                trips.append('<option value="' + tripList[i].Id + '">' + tripList[i].DepartureTime.Hours + ":" + tripList[i].DepartureTime.Minutes + '</option>');
+            }
+        }
+        else {
+            trips.append('<option value="0">Select Trip</option>');
+        }
+    };
 </script>
 
 <div class="row">
@@ -13,7 +85,7 @@
 
     <div class="col-md-10">
         <h2>Datewise Trip</h2>
-        @using (Html.BeginForm("GetDateWiseTrips", "DateWiseTrip", FormMethod.Post))
+        @using (Html.BeginForm("GetDateWiseTripList", "DateWiseTrip", FormMethod.Post))
 
         {
             @Html.AntiForgeryToken()
@@ -21,19 +93,19 @@
 
                 <div class="form-horizontal col-md-3">
                     <div class="form-group">
-                        @Html.DropDownList("BusOperatorId", new SelectList(Enumerable.Empty<SelectListItem>()), "Select Bus", new { @class = "form-control", required = "required" })
+                        @Html.DropDownList("BusOperatorId", (SelectList)ViewBag.BusOperator, "Select Bus", new { @class = "form-control", required = "required", value="0" })
                     </div>
                 </div>
 
                 <div class="form-horizontal col-md-3">
                     <div class="form-group">
-                        @Html.DropDownList("RouteId", new SelectList(Enumerable.Empty<SelectListItem>()), "Select Route", new { @class = "form-control", required = "required" })
+                        @Html.DropDownList("RouteId", new SelectList(Enumerable.Empty<SelectListItem>()), "Select Route", new { @class = "form-control", required = "required" ,value="0"})
                     </div>
                 </div>
 
                 <div class="form-horizontal col-md-3">
                     <div class="form-group">
-                        @Html.DropDownList("TripId", new SelectList(Enumerable.Empty<SelectListItem>()), "Select Trip Time", new { @class = "form-control", required = "required" })
+                        @Html.DropDownList("TripId", new SelectList(Enumerable.Empty<SelectListItem>()), "Select Trip Time", new { @class = "form-control", required = "required", value="0"})
                     </div>
                 </div>
                 <div class="form-group col-md-3">

@@ -18,10 +18,10 @@ namespace OBTM.Core.Models
         [Display(Name ="Bus Type")]
         public string BusType { get; set; }
 
+        public int BusOperatorId { get; set; }
+
         public int RouteId { get; set; }
         public Route GetRoute { get; set; }
-
-        public int BusOperatorId { get; set; }
 
         public bool? IsActive { get; set; }
 

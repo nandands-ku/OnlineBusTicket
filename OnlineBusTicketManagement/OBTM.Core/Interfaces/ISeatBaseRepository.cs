@@ -9,6 +9,6 @@ namespace OBTM.Core.Interfaces
 {
     public interface ISeatBaseRepository : IGenericRepository<SeatBase>
     {
-
+        string GetSeatName(int seatId);
     }
 }

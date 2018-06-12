@@ -13,7 +13,7 @@ namespace OBTM.Core.Models
         public BusOperator()
         {
             OperatorRouteMaps = new HashSet<OperatorRouteMap>();
-            TripBases = new HashSet<TripBase>();
+            //TripBases = new HashSet<TripBase>();
         }
 
         public int Id { get; set; }
@@ -43,7 +43,7 @@ namespace OBTM.Core.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OperatorRouteMap> OperatorRouteMaps { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TripBase> TripBases { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<TripBase> TripBases { get; set; }
     }
 }

@@ -13,5 +13,11 @@ namespace OBTM.DataAccess
         public SeatBaseDataAccess(OBTMDbContext context) : base(context)
         {
         }
+
+        public string GetSeatName(int seatId)
+        {
+            string seatName = OBTMDbContext.SeatBases.Where(seat=> seat.Id==seatId).Select(seat=> seat.SeatName).FirstOrDefault().ToString() ;
+            return seatName;
+        }
     }
 }

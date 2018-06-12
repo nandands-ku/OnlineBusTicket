@@ -20,7 +20,7 @@ namespace OBTM.Core.Models
         [StringLength(50)]
         public string RouteName { get; set; }
 
-        public int ReverseId { get; set; }
+        public int? ReverseId { get; set; }
 
         public bool? IsActive { get; set; }
 

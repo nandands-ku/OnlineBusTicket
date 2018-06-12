@@ -13,5 +13,10 @@ namespace OBTM.DataAccess
         public BookingTicketDataAccess(OBTMDbContext context) : base(context)
         {
         }
+
+        public void CreateBookingTickets(int numOfSeats, int dateWiseTripId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
