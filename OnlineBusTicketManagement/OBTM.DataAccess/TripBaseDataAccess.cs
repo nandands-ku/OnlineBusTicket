@@ -18,7 +18,7 @@ namespace OBTM.DataAccess
 
         public int DeleteTrip(int id)
         {
-            var entity = OBTMDbContext.TripBase.Where(i => i.Id == id).Single();
+            var entity = OBTMDbContext.TripBases.Where(i => i.Id == id).Single();
             entity.IsDeleted = true;
             OBTMDbContext.Entry(entity).State = EntityState.Modified;
             return OBTMDbContext.SaveChanges();
