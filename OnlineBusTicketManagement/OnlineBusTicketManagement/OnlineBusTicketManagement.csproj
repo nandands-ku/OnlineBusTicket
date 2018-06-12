@@ -328,6 +328,8 @@
     <Content Include="Views\BusOperator\CreateEditBus.cshtml" />
     <Content Include="Views\BusOperator\Index.cshtml" />
     <Content Include="Views\Shared\NavbarPartial.cshtml" />
+    <Content Include="Views\TripBase\TripPartial.cshtml" />
+    <Content Include="Views\TripBase\TripInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

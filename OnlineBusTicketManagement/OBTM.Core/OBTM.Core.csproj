@@ -42,6 +42,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -86,12 +88,11 @@
     <Compile Include="Models\BookingTicket.cs" />
     <Compile Include="Models\BusOperator.cs" />
     <Compile Include="Models\DateWiseTrip.cs" />
-    <Compile Include="Models\DateWiseTripView.cs" />
-    <Compile Include="Models\RoutePoints.cs" />
+    <Compile Include="Models\Locations.cs" />
     <Compile Include="Models\OperatorRouteMap.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\Route.cs" />
-    <Compile Include="Models\Locations.cs" />
+    <Compile Include="Models\RoutePoints.cs" />
     <Compile Include="Models\SearchBus.cs" />
     <Compile Include="Models\SeatBase.cs" />
     <Compile Include="Models\Ticket.cs" />

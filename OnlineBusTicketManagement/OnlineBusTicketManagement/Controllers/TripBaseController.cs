@@ -17,39 +17,76 @@ namespace OnlineBusTicketManagement.Controllers
         BusOperatorService bo = new BusOperatorService();
         RouteService rs = new RouteService();
         OperatorRouteMapService orms = new OperatorRouteMapService();
-        
+
         // GET: TripBase
-        public ActionResult Index()
+        public ActionResult Index(TripBase trip)
         {
-            
-            //TripBase tb = new TripBase() {
-            //    BusType = "AC",
-            //    DepartureTime = TimeSpan.Parse("10:11"),
-            //    RouteId = 1,    
-            //};
-            //tbs.Save(tb);
             ViewBag.BusOperatorList = bo.GetAll();
-            return View();
+            return View(trip);
         }
 
         [HttpGet]
         public JsonResult GetBusRoute(int id)
         {
-            var routesIdList=orms.GetAll().Where(m=>m.BusOperatorId==id).Select(m=>m.Route).ToList();
-            //var routesIdList=
-            //DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(List<OperatorRouteMap>));
-            //MemoryStream ms = new MemoryStream();
-            //ser.WriteObject(ms, routesIdList);
-            //StreamReader sr = new StreamReader(ms);
-            //routesIdList = sr.ReadToEnd();
-            //sr.Close();
-            //ms.Close();
-            //JavaScriptSerializer jss = new JavaScriptSerializer();
-            //string result = jss.Serialize(routesIdList);
-            var rrr=rs.GetAll().ToList();
-
+            var routesIdList = orms.GetAll().Where(m => m.BusOperatorId == id).Select(m => new { m.Route.Id, m.Route.RouteName }).ToList();
 
             return Json(routesIdList, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public ActionResult GetBusTrips(int operatorId, int routeId)
+        {
+            IEnumerable<TripBase> tripList = tbs.GetAll().Where(m => m.BusOperatorId == operatorId&&m.RouteId==routeId&&m.IsDeleted!=true).ToList();
+            return PartialView("TripPartial", tripList);
+        }
+
+        
+        public ActionResult Create()
+        {
+            ViewBag.BusOperatorList = new SelectList(bo.GetAll(),"Id","Name");
+            return View("TripInfo");
+        }
+
+
+        [HttpPost]
+        public ActionResult Create(TripBase trip)
+        {
+            tbs.Save(trip);
+            return RedirectToAction("Index",trip);
+            
+        }
+      
+        public ActionResult Edit(int Id)
+        {
+            ViewBag.BusOperatorList = new SelectList(bo.GetAll(), "Id", "Name");
+            return View("TripInfo", tbs.GetById(Id));
+        }
+
+        [HttpPost]
+        public ActionResult Edit(TripBase trip)
+        {
+            tbs.Update(trip);
+            return RedirectToAction("Index");
+        }
+
+        
+        public ActionResult Delete(int Id)
+        {
+            tbs.Delete(Id);
+            return RedirectToAction("Index");
+        }
+
     }
 }
+
+
+
+//IEnumerable<BusType> busTypes = Enum.GetValues(typeof(BusType))
+//                                            .Cast<BusType>();
+
+//IEnumerable<SelectListItem>  selectList = from bus in busTypes
+//                                          select new SelectListItem
+//                    {
+//                        Text = bus.ToString(),
+//                        Value = ((int)bus).ToString()
+//                    };

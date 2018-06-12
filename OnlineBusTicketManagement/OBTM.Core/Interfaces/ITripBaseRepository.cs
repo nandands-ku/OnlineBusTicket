@@ -9,6 +9,6 @@ namespace OBTM.Core.Interfaces
 {
     public interface ITripBaseRepository:IGenericRepository<TripBase>
     {
-
+        int DeleteTrip(int id);
     }
 }

@@ -1,14 +1,28 @@
-﻿@{
+﻿@model OBTM.Core.Models.TripBase
+
+@{
     ViewBag.Title = "Index";
 }
 <script>
     $(document).ready(function () {
+        debugger;
+        //$("#operatorDropDown").val("@Html.Raw(Model != null ? Model.BusOperatorId : 0)");
+        //$("#routeDropDown").val("@Html.Raw(Model != null ? Model.RouteId : 0)");
+        //$("#busOparetorDrpDown").trigger("change");
+
         $("#busOparetorDrpDown").change(function () {
             var id = $("#busOparetorDrpDown option:selected").val();
             GetBusRoute(id);
 
         });
 
+        $("#btnSubmit").click(function () {
+
+            var operatorId = $(busOparetorDrpDown).val();
+            var routeId = $(routeDropDown).val();
+            
+            GetBusTrips(operatorId,routeId);
+        });
 
         function GetBusRoute(id) {
             debugger;
@@ -17,13 +31,30 @@
                 url: "/TripBase/GetBusRoute",
                 data: { id: id },
                 //cache: false,
-                
-                success: function ( data) {
+
+                success: function (data) {
                     var options = '';
                     for (var i = 0; i < data.length; i++) {
-                        options += '<option  value="' + data[i] + '">' + data[i] + '</option>';
+                        options += '<option  value="' + data[i].Id + '">' + data[i].RouteName + '</option>';
                     }
                     $("#routeDropDown").html(options);
+                    //AnotherOptionBinding(data);
+                }
+            });
+        };
+
+
+        function GetBusTrips(operatorId, routeId) {
+            debugger;
+            $.ajax({
+                type: "GET",
+                url: "/TripBase/GetBusTrips",
+                data: { operatorId: operatorId, routeId: routeId },
+                //cache: false,
+
+                success: function (data) {
+
+                    $("#tripList").html(data);
                     //AnotherOptionBinding(data);
                 }
             });
@@ -32,32 +63,29 @@
     });
 
 
-    
+
 </script>
 <div class="row">
     <div class="col-md-2">@Html.Partial("NavbarPartial")</div>
     <div class="col-md-10">
 
-        <h2>Index</h2>
+        <h2>Trips</h2>
         <div class="row">
-            <div class="form-group">
-                <label class="text-primary col-md-2">Bus Operator</label>
+            <div class="form-group col-lg-4">
+                <label>Bus Operator</label>
                 <select class="selectpicker form-control" id="busOparetorDrpDown">
-                    <option title="Select Bus Operator"></option>
+                    <option name="BusOperatorId" id="operatorDropDown" title="Select Bus Operator"></option>
                     @foreach (var item in ViewBag.BusOperatorList)
                     {
-
                         <option id="busOperator" value="@item.Id">@item.Name</option>
-
-                    }
+                    }sss
                 </select>
             </div>
-            <div class="row">
-                <div class="form-group">
-                    <label class="text-primary col-md-2">Route</label>
-                    <select class="selectpicker form-control" id="routeDropDown"></select>
 
-                </div>
+            <div class="form-group col-lg-4">
+                <label>Route</label>
+                <select class="selectpicker form-control" id="routeDropDown"></select>
+
             </div>
             <div class="row">
                 <div class="col-md-offset-4">
@@ -67,7 +95,8 @@
 
         </div>
         <div class="row">
-
+            <div id="tripList">
+            </div>
         </div>
     </div>
 </div>
