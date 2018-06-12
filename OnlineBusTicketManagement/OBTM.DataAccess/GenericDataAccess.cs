@@ -19,7 +19,7 @@ namespace OBTM.DataAccess
             this.OBTMDbSet = context.Set<TEntity>();
         }
 
-        public int Delete(object id)
+        public virtual int Delete(object id)
         {
             var obj= OBTMDbSet.Find(id);
             OBTMDbSet.Remove(obj);

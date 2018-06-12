@@ -4,12 +4,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using OBTM.DataAccess;
+using OBTM.Service;
 
 namespace OnlineBusTicketManagement.Controllers
 {
     public class BusSearchController : Controller
     {
+        
         // GET: BusSearch
+        public List<BusOperator> busOperators = new List<BusOperator>();
+
+        OBTMDbContext dbContext = new OBTMDbContext();
+
+        BusOperatorService operatorService = new BusOperatorService();
+        TripBaseService tripBaseService = new TripBaseService();
+
         public ActionResult SearchBus()
         {
             return View(new SearchBus());
@@ -22,6 +32,8 @@ namespace OnlineBusTicketManagement.Controllers
         }
         public ActionResult SearchResult()
         {
+            ViewBag.OperatorList = operatorService.GetAll();
+            //ViewBag.BusType = tripBaseService.GetAll();
             return View();
         }
     }

@@ -26,9 +26,8 @@ namespace OBTM.Core.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(50)]
         [Display(Name ="Total Fare")]
-        public string TotalFare { get; set; }
+        public decimal TotalFare { get; set; }
 
         [Required]
         [StringLength(50)]

@@ -1,0 +1,66 @@
+﻿@model OBTM.Core.Models.Ticket
+
+@{
+                /**/
+
+                ViewBag.Title = "CanelTicketConfirm";
+                Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Cancel Ticket Confirm</h3>
+@using (Html.BeginForm("CancelTicketDone", "Ticket"))
+{
+
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.Name)
+            @Html.HiddenFor(model => model.CellNo)
+            @Html.HiddenFor(model => model.TotalFare)
+            @Html.HiddenFor(model => model.Seats)
+            @Html.HiddenFor(model => model.Email)
+            @Html.HiddenFor(model => model.TicketPIN)
+            @Html.HiddenFor(model => model.CreditCard)
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CellNo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CellNo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TotalFare)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TotalFare)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Seats)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Seats)
+            </dd>
+
+        </dl>
+    </div>
+    <div class="col-md-2">
+        <input type="submit" value="Done Canceletion" class="btn btn-default" />
+    </div>
+
+}
+
+
+

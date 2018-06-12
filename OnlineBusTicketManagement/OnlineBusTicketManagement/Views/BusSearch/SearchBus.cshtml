@@ -7,18 +7,23 @@
     ViewBag.Title = "SearchBus";
 }
 <head>
-   
-    @*<script language="javascript">
-        $(document).ready(function () {
-            $('.date').datepicker();
 
-        });
-    </script>*@
+    @*<script language="javascript">
+            $(document).ready(function () {
+                $('.date').datepicker();
+
+            });
+        </script>*@
 </head>
+<div style="padding-left:900px">
+    @Html.ActionLink("Cancel Ticket", "CancelTicketView", "Ticket")
+</div>
+
 <div style="padding-left:200px">
     <h2 style="padding-left:120px">Search Bus</h2>
 
-    @using (Html.BeginForm("SearchResult","BusSearch"))
+
+    @using (Html.BeginForm("SearchResult", "BusSearch"))
     {
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })

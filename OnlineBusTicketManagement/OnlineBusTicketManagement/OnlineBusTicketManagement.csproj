@@ -319,8 +319,7 @@
     <Content Include="Views\DateWiseTrip\DateWiseTrip.cshtml" />
     <Content Include="Views\DateWiseTrip\CreateDateWiseTrip.cshtml" />
     <Content Include="Views\DateWiseTrip\EditDateWiseTrip.cshtml" />
-    <Content Include="Views\Ticket\TicketDetails.cshtml" />
-    <Content Include="Views\Ticket\TicketInfo.cshtml" />
+    <Content Include="Views\Ticket\ShowTicketInfo.cshtml" />
     <Content Include="Views\BusSearch\SearchBus.cshtml" />
     <Content Include="Views\BusSearch\SearchResult.cshtml" />
     <Content Include="Views\Ticket\TicketDetails_.cshtml" />
@@ -328,8 +327,10 @@
     <Content Include="Views\BusOperator\CreateEditBus.cshtml" />
     <Content Include="Views\BusOperator\Index.cshtml" />
     <Content Include="Views\Shared\NavbarPartial.cshtml" />
-    <Content Include="Views\TripBase\TripPartial.cshtml" />
-    <Content Include="Views\TripBase\TripInfo.cshtml" />
+    <Content Include="Views\BusSearch\View.cshtml" />
+    <Content Include="Views\Shared\NavBarForUserEnd.cshtml" />
+    <Content Include="Views\Ticket\CancelTicketView.cshtml" />
+    <Content Include="Views\Ticket\CancelTicketConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -354,6 +355,10 @@
     <ProjectReference Include="..\OBTM.Core\OBTM.Core.csproj">
       <Project>{9e8beb9c-8c5d-4b7c-bac7-f573fd5fcd52}</Project>
       <Name>OBTM.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OBTM.DataAccess\OBTM.DataAccess.csproj">
+      <Project>{1ae57f95-ce39-4a7b-8a66-281bc17b17d5}</Project>
+      <Name>OBTM.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\OBTM.Service\OBTM.Service.csproj">
       <Project>{DB1F8E11-7A8B-4687-A176-763EDDC49C11}</Project>

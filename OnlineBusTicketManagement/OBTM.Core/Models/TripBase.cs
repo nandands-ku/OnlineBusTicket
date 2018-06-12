@@ -21,6 +21,8 @@ namespace OBTM.Core.Models
         public int RouteId { get; set; }
         public Route GetRoute { get; set; }
 
+        public int BusOperatorId { get; set; }
+
         public bool? IsActive { get; set; }
 
         public bool? IsDeleted { get; set; }
