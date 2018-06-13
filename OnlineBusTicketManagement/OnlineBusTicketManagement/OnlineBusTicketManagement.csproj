@@ -316,6 +316,7 @@
     <Content Include="Views\ViewSeat.cshtml" />
     <Content Include="Views\BusSearch\ViewSeat.cshtml" />
     <Content Include="Views\Home\LogIn.cshtml" />
+    <Content Include="Views\User\LogIn.cshtml" />
     <Content Include="Views\DateWiseTrip\DateWiseTrip.cshtml" />
     <Content Include="Views\DateWiseTrip\CreateDateWiseTrip.cshtml" />
     <Content Include="Views\DateWiseTrip\EditDateWiseTrip.cshtml" />
@@ -327,6 +328,11 @@
     <Content Include="Views\BusOperator\CreateEditBus.cshtml" />
     <Content Include="Views\BusOperator\Index.cshtml" />
     <Content Include="Views\Shared\NavbarPartial.cshtml" />
+    <Content Include="Views\User\DashBoard.cshtml" />
+    <Content Include="Views\Route\AddRouteView.cshtml" />
+    <Content Include="Views\Route\Index.cshtml" />
+    <Content Include="Views\TripBase\TripPartial.cshtml" />
+    <Content Include="Views\TripBase\TripInfo.cshtml" />
     <Content Include="Views\BusSearch\View.cshtml" />
     <Content Include="Views\Shared\NavBarForUserEnd.cshtml" />
     <Content Include="Views\Ticket\CancelTicketView.cshtml" />

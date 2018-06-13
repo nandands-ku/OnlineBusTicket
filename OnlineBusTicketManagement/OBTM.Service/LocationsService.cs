@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OBTM.Service
 {
-    public class RoutePointService: GenericService<Locations>
+    public class LocationsService: GenericService<Locations>
     {
     }
 }

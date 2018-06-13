@@ -1,0 +1,45 @@
+﻿@model IEnumerable<OBTM.Core.Models.BusOperator>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+
+
+
+<div class="row">
+    <div class="col-md-2">@Html.Partial("NavbarPartial")</div>
+    <div class="col-md-10">
+        <input type="button" class="btn btn-success" value="Create New" onclick="location.href='@Url.Action("CreateRoute", "Route")'" />
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="row">
+                    <label for="BusOperator" style="color:#0094ff">Bus Operator Name:</label>
+                    @item.Name
+
+                </div>
+                <div class="row">
+                    @foreach (var itm in item.OperatorRouteMaps)
+                    {
+                        <div class="col-md-6">
+                            <div>
+                                @itm.Route.RouteName
+
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            </div>
+                        </div>
+
+                    }
+
+                </div>
+            </div>
+        }
+
+        <br />
+    </div>
+</div>

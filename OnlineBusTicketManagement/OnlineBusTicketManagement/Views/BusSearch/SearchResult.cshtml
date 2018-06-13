@@ -7,7 +7,7 @@
 
 
 <h4 style="text-align:center">Search Result</h4>
-@using (Html.BeginForm())
+@using (Html.BeginForm("ViewSeat", "BusSearch",FormMethod.Post))
 {
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <hr height="200px" />
@@ -43,7 +43,7 @@
             <div class="form-group col-md-2">
                 <select class="form-group" id="busOperatorFilter">
                     <option selected title="Select Bus Operator">Select Bus Operator</option>
-                    @foreach (var item in ViewBag.OperatorList)
+                    @foreach (var item in ViewBag.BusOperatorList)
                     {
                         <option id="busOperator" value="@item.Id">@item.Name</option>
 
@@ -62,38 +62,39 @@
         <table class="table-responsive">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.GetBusOperator.Name)
+                    Bus Operator Name
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.GetDateWiseTrip.GetTripBase.DepartureTime)
+                   DepartureTime
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.GetDateWiseTrip.NoOfSeat)
+                    Available Seat Number
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.GetDateWiseTrip.Fare)
+                    Fare
                 </th>
             </tr>
-            @*@foreach (var item in Model)
+            @foreach (var item in Model.GetDateWiseTrip)
             {
+            <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item)
+                    @item.TripBase.BusOperator.Name
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CreatedOn)
+                    @item.TripBase.DepartureTime
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.UpdatedOn)
+                    @item.NoOfSeat
+                </td>
+
+                <td>
+                    @item.Fare
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.UpdatedBy)
+                    <button type="submit" id="ViewSeat" onclick="location.href='@Url.Action("ViewSeat","BusSearch")'">Continue Purchase</button>
                 </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
-            }*@
+            </tr>
+            }
         </table>
 
     </div>

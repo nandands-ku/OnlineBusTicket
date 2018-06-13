@@ -10,6 +10,12 @@ namespace OBTM.Service
 {
     public class TripBaseService:GenericService<TripBase>
     {
+        public List<TripBase> GetTripByRouteId(int id)
+        {
+            var repository = GetInstance<ITripBaseRepository>();
+            var result = SafeExecute(() => repository.GetTripByRouteId(id));
+            return result.Data;
+        }
         public IEnumerable<TripBase> GetRefinedTrips(int routeId, int busOperatorId)
         {
             var tripRepository = GetInstance<ITripBaseRepository>();

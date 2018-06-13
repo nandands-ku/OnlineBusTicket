@@ -9,5 +9,6 @@ namespace OBTM.Core.Interfaces
 {
     public interface ILocationsRepository : IGenericRepository<Locations>
     {
+       
     }
 }

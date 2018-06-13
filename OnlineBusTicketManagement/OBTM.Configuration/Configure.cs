@@ -15,10 +15,7 @@ namespace OBTM.Configuration
             
             container.RegisterType<IBusOpertaorRepository, BusOpertaorDataAccess>();
             container.RegisterType<IGenericRepository<BusOperator>, GenericDataAccess<BusOperator>>();
-
             container.RegisterType<ITicketRepository, TicketDataAccess>();
-            container.RegisterType<IGenericRepository<Ticket>, GenericDataAccess<Ticket>>();
-
             container.RegisterType<ISeatBaseRepository, SeatBaseDataAccess>();
 
             container.RegisterType<IUserRepository, UserDataAccess>();
@@ -26,18 +23,19 @@ namespace OBTM.Configuration
             
             container.RegisterType<IRouteRepository, RouteDataAccess>();
             container.RegisterType<IGenericRepository<Route>, GenericDataAccess<Route>>();
-
-            container.RegisterType<ILocationsRepository, RoutePointDataAccess>();
-            container.RegisterType<IGenericRepository<Locations>, GenericDataAccess<Locations>>();
+            container.RegisterType<IRoutePointsRepository, RoutePointsDataAccess>();
+            container.RegisterType<IGenericRepository<RoutePoints>, GenericDataAccess<RoutePoints>>();
 
             container.RegisterType<ITripBaseRepository, TripBaseDataAccess>();
             container.RegisterType<IGenericRepository<TripBase>, GenericDataAccess<TripBase>>();
 
+            container.RegisterType<IOperatorRouteMapRepository, OperatorRouteMapDataAccess>();
+            container.RegisterType<IGenericRepository<OperatorRouteMap>, GenericDataAccess<OperatorRouteMap>>();
+
+            container.RegisterType<ILocationsRepository, LocationsDataAccess>();
+            container.RegisterType<IGenericRepository<Locations>, GenericDataAccess<Locations>>();
             container.RegisterType<IDateWiseTripRepository, DateWiseTripDataAccess>();
             container.RegisterType<IGenericRepository<DateWiseTrip>, GenericDataAccess<DateWiseTrip>>();
-
-            container.RegisterType<IBookingTicketRepository, BookingTicketDataAccess>();
-            container.RegisterType<IGenericRepository<BookingTicket>, GenericDataAccess<BookingTicket>>();
         }
 
         public static T GetInstance<T>()

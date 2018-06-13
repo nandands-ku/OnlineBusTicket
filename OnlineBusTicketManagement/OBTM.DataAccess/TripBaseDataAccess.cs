@@ -13,6 +13,13 @@ namespace OBTM.DataAccess
     {
         public TripBaseDataAccess(OBTMDbContext context) : base(context)
         {
+
+        }
+        public List<TripBase> GetTripByRouteId(int id)
+        {
+            //var TripBaseList = (from T in OBTMDbContext.TripBases where T.RouteId == id select T).ToList();
+            var tripBaseList = OBTMDbContext.TripBases.Where(trip => trip.RouteId == id).ToList();
+            return tripBaseList;
         }
 
         public IEnumerable<TripBase> GetRefinedTrips(int routeId, int busOperatorId)

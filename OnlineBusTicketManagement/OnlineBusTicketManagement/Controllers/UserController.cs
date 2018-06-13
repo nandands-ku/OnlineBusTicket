@@ -13,15 +13,20 @@ namespace OnlineBusTicketManagement.Controllers
         // GET: User
         public ActionResult Index()
         {
-            UserService us = new UserService();
-            User nandan = new User() {
-                 UserName="Nandan",
-                 Email="nandan.ku@gmail.com",
-                 Password="1234",
+            //UserService us = new UserService();
+            //User nandan = new User() {
+            //     UserName="Nandan",
+            //     Email="nandan.ku@gmail.com",
+            //     Password="1234",
                  
-            };
-            us.Save(nandan);
-            return View();
+            //};
+            //us.Save(nandan);
+
+            return View("LogIn");
+        }
+        public ActionResult ViewDashBoard()
+        {
+            return View("DashBoard");
         }
     }
 }

@@ -93,6 +93,7 @@
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\Route.cs" />
     <Compile Include="Models\RoutePoints.cs" />
+    <Compile Include="Models\RouteView.cs" />
     <Compile Include="Models\SearchBus.cs" />
     <Compile Include="Models\SeatBase.cs" />
     <Compile Include="Models\Ticket.cs" />

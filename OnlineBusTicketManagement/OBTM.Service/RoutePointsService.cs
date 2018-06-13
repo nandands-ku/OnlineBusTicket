@@ -1,4 +1,5 @@
-﻿using OBTM.Core.Models;
+﻿using OBTM.Core.Interfaces;
+using OBTM.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,12 @@ namespace OBTM.Service
 {
     public class RoutePointsService : GenericService<RoutePoints>
     {
+        public List<int> GetRoute(int UserFrom, int UserTo)
+        {
+            var repository = GetInstance<IRoutePointsRepository>();
+            var result = SafeExecute(() => repository.GetRoute(UserFrom,UserTo));
+            return result.Data;
+        }
+
     }
 }

@@ -35,10 +35,6 @@ namespace OBTM.Core.Models
                 .HasMany(e => e.TripBases)
                 .WithRequired(e => e.Route)
                 .WillCascadeOnDelete(false);
-            //modelBuilder.Entity<BusOperator>()
-            //    .HasMany(e => e.TripBases)
-            //    .WithRequired(e => e.BusOperator)
-            //    .WillCascadeOnDelete(false);
 
             //modelBuilder.Entity<DateWiseTrip>()
             //    .HasMany(e => e.BookingTickets)
@@ -52,19 +48,28 @@ namespace OBTM.Core.Models
             //    .WillCascadeOnDelete(false);
 
             //modelBuilder.Entity<Route>()
-            //    .HasMany(e => e.OperatorRouteMaps)
-            //    .WithRequired(e => e.Routes)
+            //    .HasMany(e => e.OperatorRouteMap)
+            //    .WithRequired(e => e.Route)
             //    .WillCascadeOnDelete(false);
 
             //modelBuilder.Entity<Route>()
             //    .HasMany(e => e.RoutePoints)
-            //    .WithRequired(e => e.Routes)
+            //    .WithRequired(e => e.Route)
             //    .WillCascadeOnDelete(false);
 
-            //modelBuilder.Entity<TripBase>()
-            //    .HasMany(e => e.DateWiseTrips)
-            //    .WithRequired(e => e.TripBases)
+            //modelBuilder.Entity<Route>()
+            //    .HasMany(e => e.TripBase)
+            //    .WithRequired(e => e.Route)
             //    .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<TripBase>()
+                .HasMany(e => e.DateWiseTrip)
+                .WithRequired(e => e.TripBase)
+                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<BusOperator>()
+               .HasMany(e => e.TripBases)
+               .WithRequired(e => e.BusOperator)
+               .WillCascadeOnDelete(false);
         }
     }
 }

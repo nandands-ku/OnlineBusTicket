@@ -9,19 +9,25 @@ namespace OBTM.Core.Models
     [Table("TripBase")]
     public partial class TripBase
     {
-        public int Id { get; set; }
-        [Column(TypeName ="Time")]
-        public TimeSpan DepartureTime { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TripBase()
+        {
+            DateWiseTrip = new HashSet<DateWiseTrip>();
+        }
 
-        [Required]
-        [StringLength(50)]
-        [Display(Name ="Bus Type")]
-        public string BusType { get; set; }
+        public int Id { get; set; }
 
         public int BusOperatorId { get; set; }
 
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:HH:mm}")]
+        public DateTime DepartureTime { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public String BusType { get; set; }
+
         public int RouteId { get; set; }
-        public Route GetRoute { get; set; }
 
         public bool? IsActive { get; set; }
 
@@ -36,6 +42,11 @@ namespace OBTM.Core.Models
         public string UpdatedBy { get; set; }
 
         public DateTime? UpdatedOn { get; set; }
+
+        public virtual BusOperator BusOperator { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DateWiseTrip> DateWiseTrip { get; set; }
 
         public virtual Route Route { get; set; }
     }

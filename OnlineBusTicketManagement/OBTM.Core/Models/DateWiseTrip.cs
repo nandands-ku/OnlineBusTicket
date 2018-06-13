@@ -16,7 +16,7 @@ namespace OBTM.Core.Models
         public DateTime Date { get; set; }
 
         public int TripBaseId { get; set; }
-        public virtual TripBase GetTripBase { get; set; }
+        //public virtual TripBase GetTripBase { get; set; }
 
         [Display(Name ="Number Of Seat")]
         public int NoOfSeat { get; set; }
@@ -36,5 +36,6 @@ namespace OBTM.Core.Models
 
         [StringLength(50)]
         public string UpdatedBy { get; set; }
+        public virtual TripBase TripBase { get; set; }
     }
 }

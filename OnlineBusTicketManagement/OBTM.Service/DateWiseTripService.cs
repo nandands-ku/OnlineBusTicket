@@ -10,6 +10,12 @@ namespace OBTM.Service
 {
     public class DateWiseTripService : GenericService<DateWiseTrip>
     {
+        public List<DateWiseTrip> GetDateWiseByTrip(int id)
+        {
+            var repository = GetInstance<IDateWiseTripRepository>();
+            var result = SafeExecute(() => repository.GetDateWiseByTrip(id));
+            return result.Data;
+        }
         public IEnumerable<DateWiseTrip> GetDateWiseTrip(int tripId)
         {
             var dateWiseTripRepository = GetInstance<IDateWiseTripRepository>();
@@ -17,4 +23,5 @@ namespace OBTM.Service
             return result.Data;
         }
     }
+
 }

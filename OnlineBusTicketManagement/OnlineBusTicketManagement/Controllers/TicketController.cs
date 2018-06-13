@@ -21,12 +21,12 @@ namespace OnlineBusTicketManagement.Controllers
             return View();
         }
 
-        public ActionResult ShowTicketInfo(List<string> seats, int fare)
+        public ActionResult ShowTicketInfo(String seatList, int totalFare)
         {
             //string[] arr1 = new string[] { "A", "B", "C" };
             Ticket ticket = new Ticket()
             {
-                Seats = string.Join(",", seats),
+                Seats = string.Join(",", seatList),
                 TotalFare = 1000,
                 TicketPIN = ticketService.RandomNumber().ToString()
             };

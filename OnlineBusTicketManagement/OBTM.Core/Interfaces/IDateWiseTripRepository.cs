@@ -9,6 +9,7 @@ namespace OBTM.Core.Interfaces
 {
     public interface IDateWiseTripRepository : IGenericRepository<DateWiseTrip>
     {
+        List<DateWiseTrip> GetDateWiseByTrip(int id);
         IEnumerable<DateWiseTrip> GetDateWiseTrip(int tripId);
     }
 }

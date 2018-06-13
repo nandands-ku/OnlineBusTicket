@@ -33,5 +33,7 @@ namespace OnlineBusTicketManagement.Models
         public System.Data.Entity.DbSet<OBTM.Core.Models.DateWiseTrip> DateWiseTrips { get; set; }
 
         public System.Data.Entity.DbSet<OBTM.Core.Models.Ticket> Tickets { get; set; }
+
+        public System.Data.Entity.DbSet<OBTM.Core.Models.BusOperator> BusOperators { get; set; }
     }
 }

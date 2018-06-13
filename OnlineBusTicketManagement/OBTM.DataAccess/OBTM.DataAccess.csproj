@@ -82,7 +82,7 @@
     <Compile Include="TripBaseDataAccess.cs" />
     <Compile Include="UserDataAccess.cs" />
     <Compile Include="RouteDataAccess.cs" />
-    <Compile Include="RoutePointDataAccess.cs" />
+    <Compile Include="LocationsDataAccess.cs" />
     <Compile Include="SeatBaseDataAccess.cs" />
     <Compile Include="TicketDataAccess.cs" />
   </ItemGroup>
