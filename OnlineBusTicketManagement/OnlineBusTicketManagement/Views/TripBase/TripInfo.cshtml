@@ -29,7 +29,7 @@
                     }
 
                     $("#routeDropDown").html(options);
-                    $("#routeDropDown").val("@Html.Raw(Model != null ? Model.Route.Id : 0)");
+                    $("#routeDropDown").val("@Html.Raw(Model != null ? Model.RouteId: 0)");
                     
                     //AnotherOptionBinding(data);
                 }

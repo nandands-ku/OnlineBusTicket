@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,7 +23,7 @@ namespace OBTM.DataAccess
 
         public virtual int Delete(object id)
         {
-            var obj= OBTMDbSet.Find(id);
+            var obj = OBTMDbSet.Find(id);
             OBTMDbSet.Remove(obj);
             return OBTMDbContext.SaveChanges();
         }
@@ -48,5 +49,14 @@ namespace OBTM.DataAccess
             OBTMDbContext.Entry(entity).State = EntityState.Modified;
             return OBTMDbContext.SaveChanges();
         }
+
+        //public virtual int Delete(object id)
+        //{
+        //    var obj = OBTMDbSet.Find(id);
+        //    //Type type = obj.GetType();
+        //    PropertyInfo property = obj.GetType().GetProperty("IsDeleted");
+        //    property.SetValue(obj, Convert.ChangeType(true, property.PropertyType), null);
+        //    return OBTMDbContext.SaveChanges();
+        //}
     }
 }

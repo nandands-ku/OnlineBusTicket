@@ -18,15 +18,28 @@ namespace OnlineBusTicketManagement.Controllers
         public List<TripBase> tripBases = new List<TripBase>();
         public List<DateWiseTrip> dateWiseTrips = new List<DateWiseTrip>();
         // GET: BusSearch
+        public List<BusOperator> busOperators = new List<BusOperator>();
+
+        OBTMDbContext dbContext = new OBTMDbContext();
+
+        BusOperatorService operatorService = new BusOperatorService();
+        TripBaseService tripBaseService = new TripBaseService();
+        BookingTicketService bookingTicketService = new BookingTicketService();
+        DateWiseTripService dateWiseTripService = new DateWiseTripService();
+
         public ActionResult SearchBus()
         {
             ViewBag.BusOperatorList = new SelectList(context.BusOperators, "Id", "Name");
             ViewBag.LocationList = new SelectList(context.Locations, "Id", "Location");
             return View(new SearchBus());
         }
+
+        //int dateWiseTripId
         public ActionResult ViewSeat()
         {
             var temp = new List<int>() { 5, 10, 25 };
+            //ViewBag.TotalFare = dateWiseTripService.GetById(dateWiseTripId).Fare;
+            //ViewBag.SeatList = bookingTicketService.GetAll().Where(m => m.IsBooked != true&&m.IsTempLocked!=true).ToList();
             ViewBag.SeatList = temp;
             return View();
         }
@@ -42,7 +55,7 @@ namespace OnlineBusTicketManagement.Controllers
                 if (tbs.GetTripByRouteId(item)!=null)
                 {
                     tripBases.AddRange(tbs.GetTripByRouteId(item));
-                }
+        }
                 //try
                 //{
                 //    tripBases.AddRange(tbs.GetTripByRouteId(item));
@@ -53,7 +66,7 @@ namespace OnlineBusTicketManagement.Controllers
                 //    Response.Write("Tripbase for the corresponding route is missing in Tripbase table");
                 //}
                 
-            }
+    }
             foreach (var item in tripBases)
             {
                 if (dws.GetDateWiseByTrip(item.Id) != null)

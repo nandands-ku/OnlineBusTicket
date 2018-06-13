@@ -21,7 +21,7 @@ namespace OnlineBusTicketManagement.Controllers
         // GET: TripBase
         public ActionResult Index(TripBase trip)
         {
-            ViewBag.BusOperatorList = bo.GetAll();
+            ViewBag.BusOperatorList = new SelectList(bo.GetAll(), "Id", "Name");
             return View(trip);
         }
 
