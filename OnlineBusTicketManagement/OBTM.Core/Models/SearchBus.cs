@@ -11,6 +11,8 @@ namespace OBTM.Core.Models
     {
         public int From { get; set; }
         public int To { get; set; }
+        public string FromLocation { get; set; }
+        public string ToLocation { get; set; }
         [Display(Name ="Departure Date")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

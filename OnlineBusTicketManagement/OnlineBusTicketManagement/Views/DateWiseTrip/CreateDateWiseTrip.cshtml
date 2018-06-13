@@ -76,7 +76,7 @@
         if (tripList != null) {
             trips.append('<option value="0">Select Trip Time</option>');
             for (i = 0; i < tripList.length; i++) {
-                trips.append('<option value="' + tripList[i].Id + '">' + tripList[i].DepartureTime.Hours + ":" + tripList[i].DepartureTime.Minutes + '</option>');
+                trips.append('<option value="' + tripList[i].Id + '">' + tripList[i].DepartureTime + '</option>');
             }
         }
         else {

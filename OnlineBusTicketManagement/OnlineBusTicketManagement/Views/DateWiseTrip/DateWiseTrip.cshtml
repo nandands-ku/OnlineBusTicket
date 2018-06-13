@@ -69,9 +69,10 @@
         var trips = $("#TripId");
         trips.empty();
         if (tripList != null) {
+            debugger;
             trips.append('<option value="0">Select Trip Time</option>');
             for (i = 0; i < tripList.length; i++) {
-                trips.append('<option value="' + tripList[i].Id + '">' + tripList[i].DepartureTime.Hours + ":" + tripList[i].DepartureTime.Minutes + '</option>');
+                trips.append('<option value="' + tripList[i].Id + '">' + tripList[i].TimeOfDay.Hours + ":" + tripList[i].TimeOfDay.Minutes + '</option>');
             }
         }
         else {
@@ -105,6 +106,7 @@
 
                 <div class="form-horizontal col-md-3">
                     <div class="form-group">
+                     
                         @Html.DropDownList("TripId", new SelectList(Enumerable.Empty<SelectListItem>()), "Select Trip Time", new { @class = "form-control", required = "required", value="0"})
                     </div>
                 </div>
@@ -139,7 +141,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Date)
+                        @Html.DisplayFor(modelItem => item.Date.Date)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.NoOfSeat)

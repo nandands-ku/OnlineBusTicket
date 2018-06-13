@@ -40,6 +40,8 @@ namespace OBTM.Configuration
             container.RegisterType<IGenericRepository<Locations>, GenericDataAccess<Locations>>();
             container.RegisterType<IDateWiseTripRepository, DateWiseTripDataAccess>();
             container.RegisterType<IGenericRepository<DateWiseTrip>, GenericDataAccess<DateWiseTrip>>();
+            container.RegisterType<IBookingTicketRepository, BookingTicketDataAccess>();
+            container.RegisterType<IGenericRepository<BookingTicket>, GenericDataAccess<BookingTicket>>();
         }
 
         public static T GetInstance<T>()

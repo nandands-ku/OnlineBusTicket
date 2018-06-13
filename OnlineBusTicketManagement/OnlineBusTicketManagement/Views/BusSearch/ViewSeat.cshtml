@@ -19,7 +19,7 @@
         selectingSeatCss: 'selectingSeat'
     };
 
-
+    var bookedSeats = @Html.Raw(Json.Encode(ViewBag.SeatList));
     var init = function (reservedSeat) {
         var str = [], seatNo, className;
         for (i = 0; i < settings.rows; i++) {
@@ -41,7 +41,10 @@
     //case I: Show from starting
     //init();
     //Case II: If already booked
-    var bookedSeats = @Html.Raw(Json.Encode(ViewBag.SeatList));
+        
+       
+
+        debugger;
     // var bookedSeats = [5, 10, 25];
     init(bookedSeats);
     var noOfSelectedSeat = 0;

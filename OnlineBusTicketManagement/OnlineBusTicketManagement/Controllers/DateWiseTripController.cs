@@ -67,7 +67,7 @@ namespace OnlineBusTicketManagement.Controllers
         {
             int routeId = Convert.ToInt32(routeID);
             int busOperatorId = Convert.ToInt32(busOperatorID);
-            var tripList = tripBaseService.GetRefinedTrips(routeId, busOperatorId).Select(m=> new { m.Id, m.DepartureTime});
+            var tripList = tripBaseService.GetRefinedTrips(routeId, busOperatorId).Select(m=> new { m.Id, m.DepartureTime.TimeOfDay});
             return Json(tripList, JsonRequestBehavior.AllowGet);
         }
 

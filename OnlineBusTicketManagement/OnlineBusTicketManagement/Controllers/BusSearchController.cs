@@ -14,6 +14,7 @@ namespace OnlineBusTicketManagement.Controllers
         RoutePointsService rps = new RoutePointsService();
         TripBaseService tbs = new TripBaseService();
         DateWiseTripService dws = new DateWiseTripService();
+        LocationsService ls = new LocationsService();
         OBTMDbContext context = new OBTMDbContext();
         public List<TripBase> tripBases = new List<TripBase>();
         public List<DateWiseTrip> dateWiseTrips = new List<DateWiseTrip>();
@@ -33,14 +34,12 @@ namespace OnlineBusTicketManagement.Controllers
             ViewBag.LocationList = new SelectList(context.Locations, "Id", "Location");
             return View(new SearchBus());
         }
-
-        //int dateWiseTripId
-        public ActionResult ViewSeat()
+        public ActionResult ViewSeat(int? dateWiseTripId)
         {
-            var temp = new List<int>() { 5, 10, 25 };
-            //ViewBag.TotalFare = dateWiseTripService.GetById(dateWiseTripId).Fare;
-            //ViewBag.SeatList = bookingTicketService.GetAll().Where(m => m.IsBooked != true&&m.IsTempLocked!=true).ToList();
-            ViewBag.SeatList = temp;
+            //var temp = new List<int>() { 5, 10, 25 };
+            ViewBag.TotalFare = dateWiseTripService.GetById(dateWiseTripId).Fare;
+            ViewBag.SeatList = bookingTicketService.GetAll().Where(m => m.IsBooked == true && m.IsTempLocked != true).ToList();
+            //ViewBag.SeatList = temp;
             return View();
         }
         [HttpPost]
@@ -49,7 +48,8 @@ namespace OnlineBusTicketManagement.Controllers
             ViewBag.BusOperatorList = context.BusOperators.ToList();
             //ViewBag.LocationList = context.Locations.ToList();
             var routeList = rps.GetRoute(searchBus.From, searchBus.To);
-            
+            var from = ls.GetById(searchBus.From);
+            var to = ls.GetById(searchBus.To);
             foreach (var item in routeList)
             {
                 if (tbs.GetTripByRouteId(item)!=null)
@@ -69,15 +69,19 @@ namespace OnlineBusTicketManagement.Controllers
     }
             foreach (var item in tripBases)
             {
-                if (dws.GetDateWiseByTrip(item.Id) != null)
+                if (dws.GetDateWiseByTrip(item.Id, searchBus.DepartureDate) != null)
                 {
-                    dateWiseTrips.AddRange(dws.GetDateWiseByTrip(item.Id));
+                    dateWiseTrips.AddRange(dws.GetDateWiseByTrip(item.Id, searchBus.DepartureDate));
+                    
                 }
                     
             }
+
             SearchBus s = new SearchBus
             {
-                GetDateWiseTrip = dateWiseTrips
+                GetDateWiseTrip = dateWiseTrips,
+                FromLocation=from.Location,
+                ToLocation=to.Location
             };
 
             return View(s);

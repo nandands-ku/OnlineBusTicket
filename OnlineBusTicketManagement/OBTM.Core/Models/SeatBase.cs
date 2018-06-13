@@ -14,6 +14,7 @@ namespace OBTM.Core.Models
         [StringLength(50)]
         public string SeatName { get; set; }
 
+
         public bool? IsActive { get; set; }
 
         public bool? IsDeleted { get; set; }

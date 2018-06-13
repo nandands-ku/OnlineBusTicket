@@ -19,13 +19,13 @@
 
             @Html.LabelFor(model => model.From, htmlAttributes: new { @class = "form-group col-md-1" })
             <div class="form-group col-md-2">
-                @Html.EditorFor(m => m.From)
-                @Html.ValidationMessageFor(m => m.From, "", new { @class = "text-danger" })
+                @Html.EditorFor(m => m.FromLocation)
+                @Html.ValidationMessageFor(m => m.FromLocation, "", new { @class = "text-danger" })
             </div>
             @Html.LabelFor(model => model.To, htmlAttributes: new { @class = "form-group col-md-1" })
             <div class="form-group col-md-2">
-                @Html.EditorFor(m => m.To)
-                @Html.ValidationMessageFor(m => m.To, "", new { @class = "text-danger" })
+                @Html.EditorFor(m => m.ToLocation)
+                @Html.ValidationMessageFor(m => m.ToLocation, "", new { @class = "text-danger" })
             </div>
             @Html.LabelFor(model => model.DepartureDate, htmlAttributes: new { @class = "form-group col-md-2" })
             <div class="form-group col-md-2">
@@ -59,19 +59,28 @@
             </div>
         </div>
         <hr height="200px" />
-        <table class="table-responsive">
+        <table class="table">
             <tr>
                 <th>
                     Bus Operator Name
                 </th>
                 <th>
-                   DepartureTime
+                    DepartureTime
+                </th>
+                <th>
+                    Route
+                </th>
+                <th>
+                    Bus Type
                 </th>
                 <th>
                     Available Seat Number
                 </th>
                 <th>
                     Fare
+                </th>
+                <th>
+
                 </th>
             </tr>
             @foreach (var item in Model.GetDateWiseTrip)
@@ -81,7 +90,13 @@
                     @item.TripBase.BusOperator.Name
                 </td>
                 <td>
-                    @item.TripBase.DepartureTime
+                    @item.TripBase.DepartureTime.TimeOfDay
+                </td>
+                <td>
+                    @item.TripBase.Route.RouteName
+                </td>
+                <td>
+                    @item.TripBase.BusType
                 </td>
                 <td>
                     @item.NoOfSeat
@@ -91,7 +106,8 @@
                     @item.Fare
                 </td>
                 <td>
-                    <button type="submit" id="ViewSeat" onclick="location.href='@Url.Action("ViewSeat","BusSearch")'">Continue Purchase</button>
+                    @Html.ActionLink("Continue Purchase", "ViewSeat", new { dateWiseTripId = item.Id })
+
                 </td>
             </tr>
             }

@@ -13,9 +13,9 @@ namespace OBTM.DataAccess
         public DateWiseTripDataAccess(OBTMDbContext context) : base(context)
         {
         }
-        public List<DateWiseTrip> GetDateWiseByTrip(int id)
+        public List<DateWiseTrip> GetDateWiseByTrip(int id, DateTime date)
         {
-            var DateWiseTripList= (from T in OBTMDbContext.DateWiseTrips where T.TripBaseId == id select T).ToList();
+            var DateWiseTripList= (from T in OBTMDbContext.DateWiseTrips where T.TripBaseId == id && T.Date==date.Date select T).ToList();
             return DateWiseTripList;
         }
         public IEnumerable<DateWiseTrip> GetDateWiseTrip(int tripId)
