@@ -17,22 +17,24 @@
         seatCss: 'seat',
         selectedSeatCss: 'selectedSeat',
         selectingSeatCss: 'selectingSeat'
-    };
+        };
 
-    var bookedSeats = @Html.Raw(Json.Encode(ViewBag.SeatList));
-    var init = function (reservedSeat) {
+        var seatName =  @Html.Raw(Json.Encode(ViewBag.SeatNameList));
+        var availableSeats = @Html.Raw(Json.Encode(ViewBag.SeatNoList));
+        var dateWiseTripId=@Html.Raw(Json.Encode(ViewBag.DateWiseTripId));
+    var init = function (availableSeats) {
         var str = [], seatNo, className;
         for (i = 0; i < settings.rows; i++) {
             for (j = 0; j < settings.cols; j++) {
                 seatNo = (i * settings.cols + j + 1);
                 className = settings.seatCss + ' ' + settings.rowCssPrefix + i.toString() + ' ' + settings.colCssPrefix + j.toString();
-                if ($.isArray(reservedSeat) && $.inArray(seatNo, reservedSeat) != -1) {
+                if ($.isArray(availableSeats) && $.inArray(seatNo, availableSeats) == -1) {
                     className += ' ' + settings.selectedSeatCss;
                 }
 
                 str.push('<li class="' + className + '"' +
                     'style="top:' + (i * settings.seatHeight).toString() + 'px;left:' + (j * settings.seatWidth).toString() + 'px">' +
-                    '<a title="' + seatNo + '">' + seatNo + '</a>' +
+                    '<a title="' + seatName[seatNo-1] + '">' + seatName[seatNo-1] + '</a>' +
                     '</li>');
             }
         }
@@ -41,12 +43,12 @@
     //case I: Show from starting
     //init();
     //Case II: If already booked
-        
-       
+
+
 
         debugger;
     // var bookedSeats = [5, 10, 25];
-    init(bookedSeats);
+        init(availableSeats);
     var noOfSelectedSeat = 0;
         var totalFare = 0;
         var seatList = [], item;
@@ -68,7 +70,7 @@
             str.push(item);
 
         });
-        totalFare = noOfSelectedSeat * 1000;
+        totalFare = noOfSelectedSeat * @Html.Raw(Json.Encode(ViewBag.TotalFare));
         $("#totalFare").text(totalFare);
         $("#selectedSeats").text(str.join(','));
         seatList = str;
@@ -78,18 +80,7 @@
             debugger;
             var queryString = seatList.join(",");
             debugger;
-            window.location.href = '/Ticket/ShowTicketInfo?seatList=' + queryString + '&totalFare=' +totalFare;
-            //$.ajax({
-            //    type: "POST",
-            //    url: "/Ticket/ShowTicketInfo",
-            //    traditional:true,
-            //    data: { seatList: seatList, totalFare: totalFare},
-            //    success: function (data) {
-            //        $(document).html(data);
-            //        //AnotherOptionBinding(data);
-            //    }
-            //})
-
+            window.location.href = '/Ticket/ShowTicketInfo?seatList=' + queryString + '&totalFare=' + totalFare + '&dateWiseTripId=' + dateWiseTripId;
         })
 
 

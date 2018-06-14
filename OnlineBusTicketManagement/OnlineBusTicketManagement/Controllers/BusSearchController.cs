@@ -16,6 +16,7 @@ namespace OnlineBusTicketManagement.Controllers
         DateWiseTripService dws = new DateWiseTripService();
         LocationsService ls = new LocationsService();
         OBTMDbContext context = new OBTMDbContext();
+
         public List<TripBase> tripBases = new List<TripBase>();
         public List<DateWiseTrip> dateWiseTrips = new List<DateWiseTrip>();
         // GET: BusSearch
@@ -27,7 +28,7 @@ namespace OnlineBusTicketManagement.Controllers
         TripBaseService tripBaseService = new TripBaseService();
         BookingTicketService bookingTicketService = new BookingTicketService();
         DateWiseTripService dateWiseTripService = new DateWiseTripService();
-
+        SeatBaseService seatBaseService = new SeatBaseService();
         public ActionResult SearchBus()
         {
             ViewBag.BusOperatorList = new SelectList(context.BusOperators, "Id", "Name");
@@ -38,7 +39,10 @@ namespace OnlineBusTicketManagement.Controllers
         {
             //var temp = new List<int>() { 5, 10, 25 };
             ViewBag.TotalFare = dateWiseTripService.GetById(dateWiseTripId).Fare;
-            ViewBag.SeatList = bookingTicketService.GetAll().Where(m => m.IsBooked == true && m.IsTempLocked != true).ToList();
+             var BookingTickets= bookingTicketService.GetAll().Where(m =>m.DateWiseTripId==dateWiseTripId&& m.IsBooked != true && m.IsTempLocked != true).Select(m=>m.SeatName).ToList();
+            ViewBag.SeatNoList = seatBaseService.GetAll().Where(m => BookingTickets.Contains(m.SeatName)).Select(m => m.Id).ToList();
+            ViewBag.SeatNameList = seatBaseService.GetAll().Select(m => m.SeatName).ToList();
+            ViewBag.DateWiseTripId = dateWiseTripId;
             //ViewBag.SeatList = temp;
             return View();
         }

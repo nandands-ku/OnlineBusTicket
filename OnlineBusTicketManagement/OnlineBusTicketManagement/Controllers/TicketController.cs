@@ -11,7 +11,7 @@ namespace OnlineBusTicketManagement.Controllers
 {
     public class TicketController : Controller
     {
-
+        BookingTicketService bookingTicketService = new BookingTicketService();
         TicketService ticketService = new TicketService();
         OBTMDbContext dbContext = new OBTMDbContext();
 
@@ -23,13 +23,16 @@ namespace OnlineBusTicketManagement.Controllers
 
 
       
-        public ActionResult ShowTicketInfo(String seatList, int totalFare)
+        public ActionResult ShowTicketInfo(String seatList, int totalFare,int dateWiseTripId)
         {
+            //faisal, merge this section with your copy
+            var seatNameList = seatList.Split(',').ToList();
+            var bookingTickets = bookingTicketService.GetAll().Where(m => m.DateWiseTripId == dateWiseTripId && seatNameList.Contains(m.SeatName)).ToList();
             //string[] arr1 = new string[] { "A", "B", "C" };
             Ticket ticket = new Ticket()
             {
                 Seats = seatList,
-                TotalFare = 1000,
+                TotalFare = totalFare,
                 TicketPIN = ticketService.RandomNumber().ToString()
             };
 

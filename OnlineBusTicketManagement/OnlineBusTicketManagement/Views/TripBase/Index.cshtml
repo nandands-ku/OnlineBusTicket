@@ -74,7 +74,7 @@
             <div class="form-group col-lg-4">
                 <label>Bus Operator</label>
                 <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.BusOperatorId, (SelectList)ViewBag.BusOperatorList, new { @class = "form-control", @id = "busOparetorDrpDown" })
+                    @Html.DropDownListFor(model => model.BusOperatorId, (SelectList)ViewBag.BusOperatorList, "Select Bus Operator", new { @class = "form-control", @id = "busOparetorDrpDown" })
                     @Html.ValidationMessageFor(model => model.BusOperatorId, "", new { @class = "text-danger" })
                 </div>
                 @*<select class="selectpicker form-control" id="busOparetorDrpDown">
@@ -88,8 +88,10 @@
 
             <div class="form-group col-lg-4">
                 <label>Route</label>
-                <select class="selectpicker form-control" name="RouteId" id="routeDropDown"></select>
-
+                <select class="selectpicker form-control" name="RouteId" id="routeDropDown">
+                    <option>Select Route</option>
+                </select>
+                    
             </div>
             <div class="row">
                 <div class="col-md-offset-4">
