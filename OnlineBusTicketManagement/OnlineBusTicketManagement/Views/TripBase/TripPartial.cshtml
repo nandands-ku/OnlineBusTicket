@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<OBTM.Core.Models.TripBase>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "CreateTrip",new { operatorId=Model.First().BusOperatorId, routeId=Model.First().RouteId })
 </p>
 <table class="table">
     <tr>
@@ -15,7 +15,7 @@
             @Html.DisplayNameFor(model => model.DepartureTime)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BusType)
+            @Html.DisplayNameFor(model => model.ShowBusType)
         </th>
 
         <th></th>
@@ -35,7 +35,7 @@
                     @Html.DisplayFor(modelItem => item.DepartureTime)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BusType)
+                    @Html.DisplayFor(modelItem => item.ShowBusType)
                 </td>
 
                 <td>

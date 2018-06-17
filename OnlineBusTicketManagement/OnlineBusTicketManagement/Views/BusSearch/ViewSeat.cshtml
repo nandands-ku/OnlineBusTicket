@@ -19,6 +19,8 @@
         selectingSeatCss: 'selectingSeat'
         };
 
+        var perSeatFare =@Html.Raw(Json.Encode(ViewBag.Fare));
+        $("#perFare").text(perSeatFare);
         var seatName =  @Html.Raw(Json.Encode(ViewBag.SeatNameList));
         var availableSeats = @Html.Raw(Json.Encode(ViewBag.SeatNoList));
         var dateWiseTripId=@Html.Raw(Json.Encode(ViewBag.DateWiseTripId));
@@ -70,7 +72,7 @@
             str.push(item);
 
         });
-        totalFare = noOfSelectedSeat * @Html.Raw(Json.Encode(ViewBag.TotalFare));
+        totalFare = noOfSelectedSeat * perSeatFare;
         $("#totalFare").text(totalFare);
         $("#selectedSeats").text(str.join(','));
         seatList = str;
@@ -114,7 +116,7 @@
             </div>
             <div>
                 <label>Fare per seat:</label>
-                <lebel>1000</lebel>
+                <lebel id="perFare"></lebel>
             </div>
             <div>
                 <label>Total Fare:</label>

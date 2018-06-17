@@ -38,7 +38,7 @@ namespace OnlineBusTicketManagement.Controllers
         public ActionResult ViewSeat(int? dateWiseTripId)
         {
             //var temp = new List<int>() { 5, 10, 25 };
-            ViewBag.TotalFare = dateWiseTripService.GetById(dateWiseTripId).Fare;
+            ViewBag.Fare = dateWiseTripService.GetById(dateWiseTripId).Fare;
              var BookingTickets= bookingTicketService.GetAll().Where(m =>m.DateWiseTripId==dateWiseTripId&& m.IsBooked != true && m.IsTempLocked != true).Select(m=>m.SeatName).ToList();
             ViewBag.SeatNoList = seatBaseService.GetAll().Where(m => BookingTickets.Contains(m.SeatName)).Select(m => m.Id).ToList();
             ViewBag.SeatNameList = seatBaseService.GetAll().Select(m => m.SeatName).ToList();

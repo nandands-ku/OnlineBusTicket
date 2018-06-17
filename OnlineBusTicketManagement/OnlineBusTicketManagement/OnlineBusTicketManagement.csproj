@@ -337,8 +337,6 @@
     <Content Include="Views\Shared\NavBarForUserEnd.cshtml" />
     <Content Include="Views\Ticket\CancelTicketView.cshtml" />
     <Content Include="Views\Ticket\CancelTicketConfirm.cshtml" />
-    <Content Include="Views\TripBase\TripInfo.cshtml" />
-    <Content Include="Views\TripBase\TripPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

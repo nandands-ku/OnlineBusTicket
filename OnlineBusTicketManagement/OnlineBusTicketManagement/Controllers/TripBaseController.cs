@@ -41,17 +41,21 @@ namespace OnlineBusTicketManagement.Controllers
         }
 
         
-        public ActionResult Create()
+        public ActionResult CreateTrip(int operatorId, int routeId)
         {
             ViewBag.BusOperatorList = new SelectList(bo.GetAll(),"Id","Name");
-            return View("TripInfo");
+            TripBase temp = new TripBase() { BusOperatorId = operatorId, RouteId = routeId};
+            return View("TripInfo", temp);
         }
 
 
         [HttpPost]
         public ActionResult Create(TripBase trip)
         {
-            tbs.Save(trip);
+            if(trip.Id==0)
+                tbs.Save(trip);
+            else
+                tbs.Update(trip);
             return RedirectToAction("Index",trip);
             
         }
@@ -62,31 +66,12 @@ namespace OnlineBusTicketManagement.Controllers
             return View("TripInfo", tbs.GetById(Id));
         }
 
-        [HttpPost]
-        public ActionResult Edit(TripBase trip)
-        {
-            tbs.Update(trip);
-            return RedirectToAction("Index");
-        }
-
-        
         public ActionResult Delete(int Id)
         {
             tbs.Delete(Id);
-            return RedirectToAction("Index");
+            TripBase temp = tbs.GetById(Id);
+            return RedirectToAction("Index", temp);
         }
 
     }
 }
-
-
-
-//IEnumerable<BusType> busTypes = Enum.GetValues(typeof(BusType))
-//                                            .Cast<BusType>();
-
-//IEnumerable<SelectListItem>  selectList = from bus in busTypes
-//                                          select new SelectListItem
-//                    {
-//                        Text = bus.ToString(),
-//                        Value = ((int)bus).ToString()
-//                    };

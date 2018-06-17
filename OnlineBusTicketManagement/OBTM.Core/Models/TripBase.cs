@@ -6,6 +6,12 @@ namespace OBTM.Core.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
+    public enum BusType
+    {
+        AC,
+        NonAC
+    }
+
     [Table("TripBase")]
     public partial class TripBase
     {
@@ -19,13 +25,16 @@ namespace OBTM.Core.Models
 
         public int BusOperatorId { get; set; }
 
+        [Required]
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:HH:mm}")]
+        [DisplayFormat(DataFormatString = "{0:hh:mm tt}", ApplyFormatInEditMode = true)]
         public DateTime DepartureTime { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public String BusType { get; set; }
+        public BusType BusType { get; set; }
+
+        [Display(Name="Bus Type")]
+        public String ShowBusType { get { return Enum.GetName(typeof(BusType), this.BusType); } }
 
         public int RouteId { get; set; }
 

@@ -5,15 +5,14 @@
 }
 <script>
     $(document).ready(function () {
-        //$("#operatorDropDown").val("@Html.Raw(Model != null ? Model.BusOperatorId : 0)");
-        //$("#routeDropDown").val("@Html.Raw(Model != null ? Model.RouteId : 0)");
-        //$("#busOparetorDrpDown").trigger("change");
-        $("#busOparetorDrpDown").trigger("change");
+        
         $("#busOparetorDrpDown").change(function () {
             var id = $("#busOparetorDrpDown option:selected").val();
             GetBusRoute(id);
 
         });
+        $("#busOparetorDrpDown").trigger("change");
+        $("#btnSubmit").trigger("click");
 
         $("#btnSubmit").click(function () {
 
@@ -24,7 +23,6 @@
         });
 
         function GetBusRoute(id) {
-            debugger;
             $.ajax({
                 type: "GET",
                 url: "/TripBase/GetBusRoute",
@@ -45,7 +43,7 @@
 
 
         function GetBusTrips(operatorId, routeId) {
-            debugger;
+
             $.ajax({
                 type: "GET",
                 url: "/TripBase/GetBusTrips",
@@ -55,7 +53,7 @@
                 success: function (data) {
 
                     $("#tripList").html(data);
-                    //AnotherOptionBinding(data);
+                  
                 }
             });
         };
@@ -72,29 +70,22 @@
         <h2>Trips</h2>
         <div class="row">
             <div class="form-group col-lg-4">
-                <label>Bus Operator</label>
+                @Html.Label("Bus Operator", htmlAttributes: new { @class = "control-label col-md-6" })
                 <div class="col-md-10">
                     @Html.DropDownListFor(model => model.BusOperatorId, (SelectList)ViewBag.BusOperatorList, "Select Bus Operator", new { @class = "form-control", @id = "busOparetorDrpDown" })
                     @Html.ValidationMessageFor(model => model.BusOperatorId, "", new { @class = "text-danger" })
                 </div>
-                @*<select class="selectpicker form-control" id="busOparetorDrpDown">
-                    <option name="BusOperatorId" id="operatorDropDown" title="Select Bus Operator"></option>
-                    @foreach (var item in ViewBag.BusOperatorList)
-                    {
-                        <option id="busOperator" value="@item.Id">@item.Name</option>
-                    }sss
-                </select>*@
             </div>
 
             <div class="form-group col-lg-4">
-                <label>Route</label>
+                <label class = "control-label col-md-6">Route</label>
                 <select class="selectpicker form-control" name="RouteId" id="routeDropDown">
                     <option>Select Route</option>
                 </select>
                     
             </div>
-            <div class="row">
-                <div class="col-md-offset-4">
+            <div class="form-group col-lg-4">
+                <div class="row">
                     <button class="btn btn-primary" type="button" id="btnSubmit">Submit</button>
                 </div>
             </div>
