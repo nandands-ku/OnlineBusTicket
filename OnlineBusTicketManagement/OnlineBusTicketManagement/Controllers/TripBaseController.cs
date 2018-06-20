@@ -37,6 +37,8 @@ namespace OnlineBusTicketManagement.Controllers
         public ActionResult GetBusTrips(int operatorId, int routeId)
         {
             IEnumerable<TripBase> tripList = tbs.GetAll().Where(m => m.BusOperatorId == operatorId&&m.RouteId==routeId&&m.IsDeleted!=true).ToList();
+            ViewBag.BusOperatorId = operatorId;
+            ViewBag.RouteId = routeId;
             return PartialView("TripPartial", tripList);
         }
 

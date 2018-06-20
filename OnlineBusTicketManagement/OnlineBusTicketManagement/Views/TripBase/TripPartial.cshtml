@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<OBTM.Core.Models.TripBase>
 
 <p>
-    @Html.ActionLink("Create New", "CreateTrip",new { operatorId=Model.First().BusOperatorId, routeId=Model.First().RouteId })
+    @*,new { operatorId=Model.First().BusOperatorId, routeId=Model.First().RouteId }*@
+    @Html.ActionLink("Create New", "CreateTrip",new { operatorId = ViewBag.BusOperatorId, routeId = ViewBag.RouteId })
 </p>
 <table class="table">
     <tr>

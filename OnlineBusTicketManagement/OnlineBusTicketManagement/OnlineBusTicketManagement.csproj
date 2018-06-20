@@ -256,6 +256,7 @@
     <Content Include="Content\Picture\Green.png" />
     <Content Include="Content\Picture\images.png" />
     <Content Include="Content\Picture\Red.png" />
+    <Content Include="Content\SeatPlan.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -342,8 +343,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\BookingTicket\" />
     <Folder Include="Views\IntermediateRoute\" />
-    <Folder Include="Views\Route\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

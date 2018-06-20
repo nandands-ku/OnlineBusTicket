@@ -23,7 +23,8 @@
         $("#perFare").text(perSeatFare);
         var seatName =  @Html.Raw(Json.Encode(ViewBag.SeatNameList));
         var availableSeats = @Html.Raw(Json.Encode(ViewBag.SeatNoList));
-        var dateWiseTripId=@Html.Raw(Json.Encode(ViewBag.DateWiseTripId));
+        var dateWiseTripId =@Html.Raw(Json.Encode(ViewBag.DateWiseTripId));
+
     var init = function (availableSeats) {
         var str = [], seatNo, className;
         for (i = 0; i < settings.rows; i++) {
@@ -91,45 +92,41 @@
 
 </script>
 <div id="body">
-    <h2>Choose Seat</h2>
     <div class="row">
-        <div class="col-lg-6">
-            <div id="holder">
-                <ul id="place"></ul>
+        <div class="col-lg-8">
+            <div class="col-lg-8">
+                <h2 style="text-align:right">Choose Seat</h2>
+                <div class="row" id="holder">
+                    <ul id="place"></ul>
+                </div>
             </div>
-            <div style="float:left;">
+            <div class="col-lg-4" style="float:left;margin-top:63px">
                 <ul id="seatDescription">
-                    <li style="background:url('../../Content/Picture/Green.png') no-repeat scroll 0 0 transparent;">Selected Seat</li>
+                    <li>Available Seat</li>
                     <li style="background:url('../../Content/Picture/Red.png') no-repeat scroll 0 0 transparent;">Booked Seat</li>
                 </ul>
             </div>
-            @*<div style="clear:both;width:100%">
-
-                    <input type="button" id="btnShowNew" value="Show Selected Seats" />
-                    <input type="button" id="btnShow" value="Show All" />
-                </div>*@
         </div>
-        <div class="col-lg-6">
-            <div>
-                <lebel>Selected Seats:</lebel>
+        <div class="col-lg-4" style="margin-top:63px">
+            <div class="row">
+                <lebel style="font-size:larger; font-weight:normal">Selected Seats:</lebel>
                 <label id="selectedSeats"></label>
             </div>
-            <div>
-                <label>Fare per seat:</label>
+            <div class="row">
+                <label style="font-size:larger; font-weight:normal">Fare per seat:</label>
                 <lebel id="perFare"></lebel>
             </div>
-            <div>
-                <label>Total Fare:</label>
+            <div class="row">
+                <label style="font-size:larger;font-weight:normal">Total Fare:</label>
                 <label id="totalFare"></label>
             </div>
-            <div>
-                <button type="submit" id="purchase">Continue Purchase</button>
-
-                @*<button type="submit" id="purchase" onclick="location.href='@Url.Action("TicketInfo","Ticket")'">Continue Purchase</button>*@
+            <div class="row">
+                <div class="col-sm-6">
+                    <button class="btn btn-primary" type="submit" id="purchase">Continue Purchase</button>
+                </div>
+               
             </div>
         </div>
-
-
     </div>
 </div>
 
