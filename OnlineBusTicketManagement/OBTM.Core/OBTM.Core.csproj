@@ -100,6 +100,7 @@
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Models\TripBase.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

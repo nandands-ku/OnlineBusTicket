@@ -1,5 +1,6 @@
 ﻿using OBTM.Core.Models;
 using OBTM.Service;
+using OnlineBusTicketManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +12,8 @@ using System.Web.Script.Serialization;
 
 namespace OnlineBusTicketManagement.Controllers
 {
+
+    [AuthorizeWithSession]
     public class TripBaseController : Controller
     {
         TripBaseService tbs = new TripBaseService();

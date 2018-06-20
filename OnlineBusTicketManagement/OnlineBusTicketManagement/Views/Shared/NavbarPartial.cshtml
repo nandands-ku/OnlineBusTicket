@@ -39,22 +39,27 @@
                 -o-text-overflow: ellipsis;
                 text-overflow: ellipsis;
             }
-
     </style>
-    </head>
+</head>
 <body>
 
 
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    
+
     <div class="container">
 
         <div class="row">
             <div class="col-sm-2">
                 <nav class="nav-sidebar">
                     <ul class="nav">
+                        @if (HttpContext.Current.Session["User"] != null)
+                        {
+                            <li><a>@HttpContext.Current.Session["User"] </a> </li>
+                            <li>@Html.ActionLink("Log Out","LogOut","User")</li>
+                        }
+
                         <li>@Html.ActionLink("Bus Operator", "Index", "BusOperator")</li>
                         <li>@Html.ActionLink("Route", "Index", "Route")</li>
                         <li>@Html.ActionLink("Trip", "Index", "TripBase")</li>
