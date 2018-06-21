@@ -13,6 +13,7 @@
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(m=>m.Bookings)
         <h3 style="text-align:left">Passenger info</h3>
         <div class="form-group row">
             @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -35,6 +36,10 @@
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger", type = "email" })
             </div>
         </div>
+       @foreach(var item in ViewBag.DWTI)
+       {
+           
+       }
         <hr height="200px" />
 
         <h3 style="text-align:left">Ticket info</h3>

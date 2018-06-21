@@ -8,6 +8,7 @@
 <h3>For Ticket Cancel</h3>
 @using (Html.BeginForm("CancelTicketConfirm","Ticket"))
 {
+    @Html.HiddenFor(m=>m.Id)
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group row">

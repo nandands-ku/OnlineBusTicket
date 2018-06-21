@@ -15,7 +15,7 @@ namespace OBTM.Core.Models
         public string ToLocation { get; set; }
         [Display(Name ="Departure Date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd-mm-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DepartureDate { get; set; }
 
         public virtual ICollection<DateWiseTrip> GetDateWiseTrip { get; set; }
