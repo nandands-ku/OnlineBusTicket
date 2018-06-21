@@ -17,5 +17,10 @@ namespace OnlineBusTicketManagement.Models
            
             return true;
         }
+
+        protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
+        {
+            filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary { {"action","LogIn" }, {"controller","User" } });
+        }
     }
 }
