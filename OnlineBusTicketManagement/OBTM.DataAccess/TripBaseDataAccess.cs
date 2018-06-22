@@ -24,7 +24,7 @@ namespace OBTM.DataAccess
 
         public IEnumerable<TripBase> GetRefinedTrips(int routeId, int busOperatorId)
         {
-            var refinedtripList = OBTMDbContext.TripBases.Where(trip => trip.RouteId == routeId && trip.BusOperatorId == busOperatorId&&trip.IsDeleted!=true).ToList();
+            var refinedtripList = OBTMDbContext.TripBases.Where(trip => trip.RouteId == routeId && trip.BusOperatorId == busOperatorId && trip.IsDeleted==false).ToList();
             return refinedtripList;
         }
 

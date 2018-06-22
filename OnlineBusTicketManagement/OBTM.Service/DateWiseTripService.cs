@@ -22,6 +22,12 @@ namespace OBTM.Service
             var result = SafeExecute(() => dateWiseTripRepository.GetDateWiseTrip(tripId));
             return result.Data;
         }
+        public Response<int> SoftDelete(int id)
+        {
+            var dateWiseTripRepository = GetInstance<IDateWiseTripRepository>();
+            var result = SafeExecute(() => dateWiseTripRepository.SoftDelete(id));
+            return result;
+        }
     }
 
 }

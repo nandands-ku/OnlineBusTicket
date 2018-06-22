@@ -13,6 +13,8 @@ namespace OBTM.Core.Models
         public int Id { get; set; }
 
         [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 
         public int TripBaseId { get; set; }

@@ -11,5 +11,6 @@ namespace OBTM.Core.Interfaces
     {
         List<DateWiseTrip> GetDateWiseByTrip(int id, DateTime date);
         IEnumerable<DateWiseTrip> GetDateWiseTrip(int tripId);
+        int SoftDelete(int id);
     }
 }

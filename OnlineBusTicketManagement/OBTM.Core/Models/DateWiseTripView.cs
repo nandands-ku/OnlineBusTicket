@@ -11,6 +11,6 @@ namespace OBTM.Core.Models
         public BusOperator BusOperator { get; set; }
         public Route Route { get; set; }
         public TripBase TripBase { get; set; }
-        public virtual ICollection<DateWiseTrip> DateWiseTripList { get; set; }
+        public virtual IEnumerable<DateWiseTrip> DateWiseTripList { get; set; }
     }
 }

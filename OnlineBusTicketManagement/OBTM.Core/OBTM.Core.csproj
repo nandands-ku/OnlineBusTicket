@@ -88,6 +88,7 @@
     <Compile Include="Models\BookingTicket.cs" />
     <Compile Include="Models\BusOperator.cs" />
     <Compile Include="Models\DateWiseTrip.cs" />
+    <Compile Include="Models\DateWiseTripEditView.cs" />
     <Compile Include="Models\DateWiseTripView.cs" />
     <Compile Include="Models\Locations.cs" />
     <Compile Include="Models\OperatorRouteMap.cs" />

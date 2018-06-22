@@ -1,62 +1,71 @@
-﻿@model OBTM.Core.Models.DateWiseTrip
+﻿@model OBTM.Core.Models.DateWiseTripEditView
 
 @{
     ViewBag.Title = "EditDateWiseTrip";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>EditDateWiseTrip</h2>
 
 
-@using (Html.BeginForm("Save","DateWiseTrip",FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>DateWiseTrip</h4>
+<div class="row">
+    <div class="col-md-2">@Html.Partial("NavbarPartial")</div>
+    <div class="col-md-10">
+        <h3>Edit datewise trip</h3>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.TripBaseId)
-        @Html.HiddenFor(model => model.CreatedBy)
-        @Html.HiddenFor(model => model.CreatedOn)
-        @Html.HiddenFor(model => model.UpdatedBy)
-        @Html.HiddenFor(model => model.UpdatedOn)
+        @using (Html.BeginForm("SaveEdited", "DateWiseTrip", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-2">
-                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.DateWiseTrip.Id)
+                @Html.HiddenFor(model => model.DateWiseTrip.TripBaseId)
+                @Html.HiddenFor(model => model.DateWiseTrip.IsActive)
+                @Html.HiddenFor(model => model.DateWiseTrip.CreatedBy)
+                @Html.HiddenFor(model => model.DateWiseTrip.CreatedOn)
+                @Html.HiddenFor(model => model.DateWiseTrip.UpdatedBy)
+                @Html.HiddenFor(model => model.DateWiseTrip.UpdatedOn)
+                @Html.HiddenFor(model => model.DateWiseTrip.IsDeleted)
+                @Html.HiddenFor(model => model.BusOperatorId)
+                @Html.HiddenFor(model => model.TripId)
+                @Html.HiddenFor(model => model.RouteId)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.NoOfSeat, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-2">
-                @Html.EditorFor(model => model.NoOfSeat, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NoOfSeat, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DateWiseTrip.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.DateWiseTrip.Date, "{0:dd-MM-yyyy}", new { htmlAttributes = new { @class ="form-control"} })
+                        @Html.ValidationMessageFor(model => model.DateWiseTrip.Date, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Fare, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-2">
-                @Html.EditorFor(model => model.Fare, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Fare, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DateWiseTrip.NoOfSeat, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.DateWiseTrip.NoOfSeat, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DateWiseTrip.NoOfSeat, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DateWiseTrip.Fare, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.DateWiseTrip.Fare, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DateWiseTrip.Fare, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
             </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to Datewise Trip Home", "Index")
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {

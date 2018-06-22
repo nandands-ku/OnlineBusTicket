@@ -3,8 +3,7 @@ using OBTM.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Collections.Generic;
-using System.Linq;
+using System.Data.Entity;
 
 namespace OBTM.DataAccess
 {
@@ -20,8 +19,16 @@ namespace OBTM.DataAccess
         }
         public IEnumerable<DateWiseTrip> GetDateWiseTrip(int tripId)
         {
-            var dateWiseTripList = OBTMDbContext.DateWiseTrips.Where(dWTrip => dWTrip.TripBaseId == tripId).ToList();
+            var dateWiseTripList = OBTMDbContext.DateWiseTrips.Where(dWTrip => dWTrip.TripBaseId == tripId && dWTrip.IsDeleted==false).ToList();
             return dateWiseTripList;
+        }
+
+        public int SoftDelete(int id)
+        {
+            DateWiseTrip dateWiseTrip = OBTMDbContext.DateWiseTrips.Find(id);
+            dateWiseTrip.IsDeleted = true;
+            OBTMDbContext.Entry(dateWiseTrip).State = EntityState.Modified;
+            return OBTMDbContext.SaveChanges();
         }
     }
 }

@@ -19,41 +19,63 @@ namespace OnlineBusTicketManagement.Controllers
 
         public ActionResult Index()
         {
-            List<DateWiseTrip> dateWiseTripList = new List<DateWiseTrip>();
+            IEnumerable<DateWiseTrip> dateWiseTripList = new List<DateWiseTrip>();
+            DateWiseTripView dateWiseTripView = new DateWiseTripView();
+            dateWiseTripView.DateWiseTripList = dateWiseTripList;
+            dateWiseTripView.BusOperator = new BusOperator();
+            dateWiseTripView.Route = new Route();
+            dateWiseTripView.TripBase = new TripBase();
             ViewBag.BusOperator = new SelectList(busOperatorService.GetAll(), "Id", "Name");
-            return View("DateWiseTrip", dateWiseTripList);
+            return View("DateWiseTrip", dateWiseTripView);
         }
 
-        public ActionResult GetDateWiseTripList(string tripId)
+        public ActionResult GetDateWiseTripList(DateWiseTripView dateWiseTripView)
         {
-            int tripID = Convert.ToInt32(tripId);
-            IEnumerable<DateWiseTrip> dateWiseTripList = dateWiseTripService.GetDateWiseTrip(tripID);
+            IEnumerable<DateWiseTrip> dateWiseTripList = dateWiseTripService.GetDateWiseTrip(dateWiseTripView.TripBase.Id);
             ViewBag.BusOperator = new SelectList(busOperatorService.GetAll(), "Id", "Name");
-            return View("DateWiseTrip", dateWiseTripList);
+            DateWiseTripView _dateWiseTripView = new DateWiseTripView
+            {
+                DateWiseTripList = dateWiseTripList,
+                BusOperator = dateWiseTripView.BusOperator,
+                Route = dateWiseTripView.Route,
+                TripBase = dateWiseTripView.TripBase
+            };
+
+
+            return View("DateWiseTrip", _dateWiseTripView);
         }
 
-        public ActionResult Save(DateWiseTrip dateWiseTrip, string tripId)
+        public ActionResult SaveNew(DateWiseTrip dateWiseTrip, string tripId)
         {
             int tripID = Convert.ToInt32(tripId);
             if (ModelState.IsValid)
-            {
-                if (dateWiseTrip.Id == 0)
-                {
-                    dateWiseTrip.TripBaseId = tripID;
-                    dateWiseTrip.IsDeleted = false;
-                    dateWiseTrip.IsActive = true;
-                    dateWiseTrip.CreatedOn = DateTime.Now;
-                    dateWiseTripService.Save(dateWiseTrip);
-                    bookingTicketService.CreateBookingTickets(dateWiseTrip.NoOfSeat, dateWiseTrip.Id);
-                }
-                else
-                {
-                    dateWiseTrip.UpdatedOn = DateTime.Now;
-                    dateWiseTripService.Update(dateWiseTrip);
-                }
-               
+            {  
+                 dateWiseTrip.TripBaseId = tripID;
+                 dateWiseTrip.IsDeleted = false;
+                 dateWiseTrip.IsActive = true;
+                 dateWiseTrip.CreatedOn = DateTime.Now;
+                 dateWiseTripService.Save(dateWiseTrip);
+                 bookingTicketService.CreateBookingTickets(dateWiseTrip.NoOfSeat, dateWiseTrip.Id);           
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Create");
+        }
+
+        public ActionResult SaveEdited(DateWiseTripEditView dateWiseTripEditView)
+        {
+            dateWiseTripEditView.DateWiseTrip.UpdatedOn = DateTime.Now;
+            dateWiseTripService.Update(dateWiseTripEditView.DateWiseTrip);
+
+            IEnumerable<DateWiseTrip> dateWiseTripList = dateWiseTripService.GetDateWiseTrip(dateWiseTripEditView.DateWiseTrip.TripBaseId);
+            ViewBag.BusOperator = new SelectList(busOperatorService.GetAll(), "Id", "Name");
+            DateWiseTripView _dateWiseTripView = new DateWiseTripView
+            {
+                DateWiseTripList = dateWiseTripList,
+                BusOperator = new BusOperator { Id= dateWiseTripEditView.BusOperatorId },
+                Route = new Route { Id = dateWiseTripEditView.RouteId },
+                TripBase = new TripBase { Id = dateWiseTripEditView.TripId }
+            };
+
+            return View("DateWiseTrip", _dateWiseTripView);
         }
 
         public JsonResult GetRoutes(string busOperatorID)
@@ -78,10 +100,34 @@ namespace OnlineBusTicketManagement.Controllers
             return View("CreateDateWiseTrip", dateWiseTrip);
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, int busOperatorId, int routeId, int tripId)
         {
             DateWiseTrip dateWiseTrip = dateWiseTripService.GetById(id);
-            return View("EditDateWiseTrip", dateWiseTrip);
+            DateWiseTripEditView dateWiseTripEditView = new DateWiseTripEditView
+            {
+                DateWiseTrip = dateWiseTrip,
+                BusOperatorId = busOperatorId,
+                RouteId = routeId,
+                TripId = tripId
+            };
+            return View("EditDateWiseTrip", dateWiseTripEditView);
+        }
+
+        public ActionResult Delete(int id, int busOperatorId, int routeId, int tripId)
+        {
+            dateWiseTripService.SoftDelete(id);
+            IEnumerable<DateWiseTrip> dateWiseTripList = dateWiseTripService.GetDateWiseTrip(tripId);
+            ViewBag.BusOperator = new SelectList(busOperatorService.GetAll(), "Id", "Name");
+
+            DateWiseTripView _dateWiseTripView = new DateWiseTripView
+            {
+                DateWiseTripList = dateWiseTripList,
+                BusOperator = new BusOperator { Id = busOperatorId},
+                Route = new Route { Id = routeId},
+                TripBase = new TripBase { Id = tripId}
+            };
+
+            return View("DateWiseTrip", _dateWiseTripView);
         }
     }
 }

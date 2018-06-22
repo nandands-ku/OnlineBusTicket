@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OBTM.Core.Models.DateWiseTrip>
+﻿@model OBTM.Core.Models.DateWiseTripView
 
 @{
     ViewBag.Title = "DateWiseTrip";
@@ -6,18 +6,37 @@
 }
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#BusOperatorId").change(function () {
-            var busOperatorID = $("#BusOperatorId").val();
-            RouteOptionData(busOperatorID);
+
+        $("#BusOperator_Id").val("@Html.Raw(Model.BusOperator != null ? Model.BusOperator.Id : 0)");
+       
+        debugger;
+
+        $("#BusOperator_Id").change(function () {
+            
+            var busOperatorID = $("#BusOperator_Id").val();
+            if (!busOperatorID) {
+                $("#Route_Id").empty();
+                $("#TripBase_Id").empty();             
+            }
+            else {
+                RouteOptionData(busOperatorID);
+            }
         });
 
-        $("#RouteId").change(function () {
-            var routeID = $("#RouteId").val();
-            var busOperatorID = $("#BusOperatorId").val();
-            TripOptionData(routeID, busOperatorID);
+        $("#BusOperator_Id").trigger("change");
+
+        $("#Route_Id").change(function () {
+            var routeID = $("#Route_Id").val();
+            var busOperatorID = $("#BusOperator_Id").val();
+            if (!routeID || !busOperatorID) {
+                $("#TripBase_Id").empty();
+            }
+            else {
+                TripOptionData(routeID, busOperatorID);
+            }
+            
         });
     });
-
 
     function RouteOptionData(busOperatorId) {
         $.ajax(
@@ -35,13 +54,15 @@
     function RouteOptionBind(data) {
         var i = 0;
         var routeList = data;
-        var routes = $("#RouteId");
+        var routes = $("#Route_Id");
         routes.empty();
-        if (routeList != null) {
+        if (routeList !== null) {
             routes.append('<option value="0">Select Route</option>');
             for (i = 0; i < routeList.length; i++) {
                 routes.append('<option value="' + routeList[i].Id + '" >' + routeList[i].RouteName + '</option>');
             }
+            routes.val("@Html.Raw(Model.Route != null? Model.Route.Id : 0)");
+            routes.trigger("change");
         }
         else {
             routes.append('<option value="0">Select Route</option>');
@@ -66,14 +87,14 @@
     function TripOptionBind(data) {
         var i = 0;
         var tripList = data;
-        var trips = $("#TripId");
+        var trips = $("#TripBase_Id");
         trips.empty();
-        if (tripList != null) {
-            debugger;
+        if (tripList !== null) {
             trips.append('<option value="0">Select Trip Time</option>');
             for (i = 0; i < tripList.length; i++) {
                 trips.append('<option value="' + tripList[i].Id + '">' + tripList[i].TimeOfDay.Hours + ":" + tripList[i].TimeOfDay.Minutes + '</option>');
             }
+            trips.val("@Html.Raw(Model.TripBase != null ? Model.TripBase.Id : 0)");
         }
         else {
             trips.append('<option value="0">Select Trip</option>');
@@ -83,40 +104,44 @@
 
 <div class="row">
     <div class="col-md-2">@Html.Partial("NavbarPartial")</div>
-
     <div class="col-md-10">
-        <h2>Datewise Trip</h2>
+        <h2>Datewise Trip Home</h2>
+        <hr />
         @using (Html.BeginForm("GetDateWiseTripList", "DateWiseTrip", FormMethod.Post))
 
         {
             @Html.AntiForgeryToken()
-            <div class="row">
 
-                <div class="form-horizontal col-md-3">
-                    <div class="form-group">
-                        @Html.DropDownList("BusOperatorId", (SelectList)ViewBag.BusOperator, "Select Bus", new { @class = "form-control", required = "required", value="0" })
-                    </div>
-                </div>
+        <div class="row">
 
-                <div class="form-horizontal col-md-3">
-                    <div class="form-group">
-                        @Html.DropDownList("RouteId", new SelectList(Enumerable.Empty<SelectListItem>()), "Select Route", new { @class = "form-control", required = "required" ,value="0"})
-                    </div>
+            <div class="form-horizontal col-md-3">
+                <div class="form-group">
+                    @Html.Label("Select Bus")
+                    @Html.DropDownListFor(model => model.BusOperator.Id, (SelectList)ViewBag.BusOperator, "Select Bus", new { @class = "form-control", required = "required", value = "0" })
                 </div>
+            </div>
 
-                <div class="form-horizontal col-md-3">
-                    <div class="form-group">
-                     
-                        @Html.DropDownList("TripId", new SelectList(Enumerable.Empty<SelectListItem>()), "Select Trip Time", new { @class = "form-control", required = "required", value="0"})
-                    </div>
+            <div class="form-horizontal col-md-3">
+                <div class="form-group">
+                    @Html.Label("Select Route")
+                    @Html.DropDownListFor(model => model.Route.Id, new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control", required = "required" })
                 </div>
-                <div class="form-group col-md-3">
-                    <div class="form-inline ">
-                        <button class="btn btn-default btn-primary" type="submit">Search Datewise Trips</button>
-                    </div>
+            </div>
+
+            <div class="form-horizontal col-md-3">
+                <div class="form-group">
+                    @Html.Label("Select Trip")
+                    @Html.DropDownListFor(model => model.TripBase.Id, new SelectList(Enumerable.Empty<SelectListItem>()), new { @class = "form-control", required = "required" })
                 </div>
+            </div>
+            <div class="form-group col-md-3">
+
+                <br />
+                <button class="btn btn-default btn-primary" type="submit">Search Datewise Trips</button>
 
             </div>
+
+        </div>
         }
 
         <br />
@@ -126,22 +151,22 @@
         <table class="table">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Date)
+                    @Html.DisplayName("Date")
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.NoOfSeat)
+                    @Html.DisplayName("Number of seats")
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Fare)
+                    @Html.DisplayName("Fare")
                 </th>
                 <th></th>
             </tr>
 
-            @foreach (var item in Model)
+            @foreach (var item in Model.DateWiseTripList)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Date.Date)
+                        @Html.DisplayFor(modelItem => item.Date)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.NoOfSeat)
@@ -150,9 +175,9 @@
                         @Html.DisplayFor(modelItem => item.Fare)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id, busOperatorId = Model.BusOperator.Id, routeId = Model.Route.Id, tripId = Model.TripBase.Id }) |
+
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id, busOperatorId = Model.BusOperator.Id, routeId = Model.Route.Id, tripId = Model.TripBase.Id })
                     </td>
                 </tr>
             }
