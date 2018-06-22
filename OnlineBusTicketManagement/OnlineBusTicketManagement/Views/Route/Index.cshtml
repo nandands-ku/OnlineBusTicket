@@ -1,45 +1,68 @@
 ﻿@model IEnumerable<OBTM.Core.Models.BusOperator>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ViewRoute";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
-
-
+<h2>ViewRoute</h2>
 
 <div class="row">
-    <div class="col-md-2">@Html.Partial("NavbarPartial")</div>
+    <div class="col-md-2">
+        @Html.Partial("NavbarPartial")
+    </div>
     <div class="col-md-10">
         <input type="button" class="btn btn-success" value="Create New" onclick="location.href='@Url.Action("CreateRoute", "Route")'" />
-        @foreach (var item in Model)
-        {
-            <div class="row">
-                <div class="row">
-                    <label for="BusOperator" style="color:#0094ff">Bus Operator Name:</label>
-                    @item.Name
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
 
-                </div>
-                <div class="row">
-                    @foreach (var itm in item.OperatorRouteMaps)
-                    {
-                        <div class="col-md-6">
-                            <div>
-                                @itm.Route.RouteName
+                <th></th>
+            </tr>
 
-                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                            </div>
-                        </div>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
 
-                    }
+                    <td>
+                        @foreach (var itm in item.OperatorRouteMaps)
+                        {
+                            <table>
+                                @if (itm.IsDeleted == null || itm.IsDeleted == false)
+                                {
+                                    <tr>
+                                        <td>@itm.Route.RouteName</td>
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = itm.Id })
+                                        </td>
 
-                </div>
-            </div>
-        }
 
-        <br />
+
+                                    </tr>
+
+                                }
+                            </table>
+                        }
+
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+
     </div>
 </div>
+

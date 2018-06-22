@@ -18,5 +18,13 @@ namespace OBTM.DataAccess
         {
             throw new NotImplementedException();
         }
+
+
+        public int GetAvailableSeatByDateWise(int id)
+        {
+            var count = OBTMDbContext.BookingTickets.Where(c => c.DateWiseTripId == id && c.IsBooked!=true).Count();
+            return count;
+        }
+
     }
 }

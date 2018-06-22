@@ -19,7 +19,7 @@ namespace OBTM.DataAccess
         }
         public IEnumerable<DateWiseTrip> GetDateWiseTrip(int tripId)
         {
-            var dateWiseTripList = OBTMDbContext.DateWiseTrips.Where(dWTrip => dWTrip.TripBaseId == tripId && dWTrip.IsDeleted==false).ToList();
+            var dateWiseTripList = OBTMDbContext.DateWiseTrips.Where(dWTrip => dWTrip.TripBaseId == tripId && dWTrip.IsDeleted!=true).ToList();
             return dateWiseTripList;
         }
 

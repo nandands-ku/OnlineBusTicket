@@ -4,117 +4,210 @@
 @{
     ViewBag.Title = "SearchResult";
 }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+@*<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnFilter").click(function () {
+            debugger;
+            var busOperatorID = $("#busOperator").val();
+            var fromValue = $("#from").val();
+            var toValue = $("#to").val();
+            var dateValue = $("#date").val();
+            SearchByBus(busOperatorID, fromValue, toValue, dateValue);
+        });
+    });
 
+    function SearchByBus(busOperatorID) {
+        $.ajax(
+            {
+                type: "POST",
+                url: "/BusSearch/FilterSearchByBus",
+                data: { busID: busOperatorID, fromLoc: fromValue, toLoc: toValue, date: dateValue },
+                cache: false,
+                success: function (data) {
+                    result(data);
+                }
+            }
+        );
+    };
+
+    function result(data) {
+        var i = 0;
+        var List = data;
+        var table = $("#t1");
+
+        if (List != null) {
+            debugger;
+
+            for (i = 0; i < List.length; i++) {
+                table.append("<tr><td>List[i].TripBase.BusOperator.Name</td><td>List[i].TripBase.DepartureTime.TimeOfDay</td><td>List[i].TripBase.Route.RouteName</td><td>List[i].TripBase.BusType</td><td>List[i].NoOfSeat</td><td>List[i].Fare</td></tr>");
+            }
+        }
+
+    };
+    </script>*@
 
 <h4 style="text-align:center">Search Result</h4>
-@using (Html.BeginForm("ViewSeat", "BusSearch",FormMethod.Post))
+
+@*@using (Html.BeginForm("ModifySearch", "BusSearch", FormMethod.Post))
+    {
+                <div class="row">
+
+                <div class="form-horizontal col-md-3">
+                    <div class="form-group">
+                        @Html.DropDownListFor(m => m.BusOperatorId, (SelectList)ViewBag.BusOperatorList, "Select Bus", new { @class = "form-control", value = "0" })
+                    </div>
+                </div>
+
+                <div class="form-horizontal col-md-3">
+                    <div class="form-group">
+                        @Html.EnumDropDownListFor(m => m.GetTripBase.BusType, "Select a Bus Type", new {@class = "form-control", value = "0" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <div class="form-inline ">
+                        <button class="btn btn-default btn-primary" id="btnFilter" type="submit">Filter Search</button>
+                    </div>
+                </div>
+
+            </div>
+    }*@
+@using (Html.BeginForm("ModifySearch", "BusSearch", FormMethod.Post))
 {
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <hr height="200px" />
 
     <div class="form-horizontal">
         <div class="form-group row">
+            <div class="row">
+                @Html.Label("Modify Search :", htmlAttributes: new { @class = "control-Label col-md-2 " })
+            </div>
+            
+            
 
-            @Html.Label("Modify Search :", htmlAttributes: new { @class = "control-Label col-md-1 " })
-
-            @Html.LabelFor(model => model.From, htmlAttributes: new { @class = "form-group col-md-1" })
-            <div class="form-group col-md-2">
-                @Html.EditorFor(m => m.FromLocation)
-                @Html.ValidationMessageFor(m => m.FromLocation, "", new { @class = "text-danger" })
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.From, htmlAttributes: new { @class = "control-Label col-md-1 " })
+                @Html.DropDownListFor(m => m.From, (SelectList)ViewBag.LocationList, new { @class = "form-control", @id = "from" })
+                @*@Html.ValidationMessageFor(m => m.FromLocation, "", new { @class = "text-danger" })*@
             </div>
-            @Html.LabelFor(model => model.To, htmlAttributes: new { @class = "form-group col-md-1" })
-            <div class="form-group col-md-2">
-                @Html.EditorFor(m => m.ToLocation)
-                @Html.ValidationMessageFor(m => m.ToLocation, "", new { @class = "text-danger" })
+           
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.To, htmlAttributes: new { @class = "control-Label col-md-1 " })
+                @Html.DropDownListFor(m => m.To, (SelectList)ViewBag.LocationList, new { @class = "form-control", @id = "to" })
+                @*@Html.ValidationMessageFor(m => m.ToLocation, "", new { @class = "text-danger" })*@
             </div>
-            @Html.LabelFor(model => model.DepartureDate, htmlAttributes: new { @class = "form-group col-md-2" })
-            <div class="form-group col-md-2">
-                @Html.EditorFor(model => model.DepartureDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DepartureDate, "", new { @class = "text-danger" })
+            
+            <div class="form-group col-md-3">
+                @Html.Label("Date:", htmlAttributes: new { @class = "control-Label col-md-1 " })
+                @Html.EditorFor(model => model.DepartureDate, new { htmlAttributes = new { @class = "form-control", @id = "date" } })
+                @*@Html.ValidationMessageFor(model => model.DepartureDate, "", new { @class = "text-danger" })*@
             </div>
+            <br />
             <div class="col-md-2">
                 <input type="submit" value="Search" class="btn btn-default" />
             </div>
 
         </div>
         <hr height="200px" />
-        <div class="form-group row">
-            @Html.Label("Filter By :", htmlAttributes: new { @class = "control-Label col-md-2 " })
-            <div class="form-group col-md-2">
-                <select class="form-group" id="busOperatorFilter">
-                    <option selected title="Select Bus Operator">Select Bus Operator</option>
-                    @foreach (var item in ViewBag.BusOperatorList)
-                    {
-                        <option id="busOperator" value="@item.Id">@item.Name</option>
+        @*<div class="form-group row">
+                @Html.Label("Filter By :", htmlAttributes: new { @class = "control-Label col-md-2 " })
+                <div class="form-group col-md-2">
+                    <select class="form-group" id="busOperatorFilter">
+                        <option selected title="Select Bus Operator">Select Bus Operator</option>
+                        @foreach (var item in ViewBag.BusOperatorList)
+                        {
+                            <option id="busOperator" value="@item.Id">@item.Name</option>
 
-                    }
-                </select>
-            </div>
-            <div class="form-group col-md-2">
-                <select class="form-group" id="busTypeFilter">
-                    <option selected title="">Select Bus Type</option>
-                    <option id="busType" value="AC">Ac</option>
-                    <option id="busType" value="NonAC">Non-Ac</option>
-                </select>
-            </div>
-        </div>
-        <hr height="200px" />
-        <table class="table">
-            <tr>
-                <th>
-                    Bus Operator Name
-                </th>
-                <th>
-                    DepartureTime
-                </th>
-                <th>
-                    Route
-                </th>
-                <th>
-                    Bus Type
-                </th>
-                <th>
-                    Available Seat Number
-                </th>
-                <th>
-                    Fare
-                </th>
-                <th>
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <select class="form-group" id="busTypeFilter">
+                        <option selected title="">Select Bus Type</option>
+                        <option id="busType" value="AC">Ac</option>
+                        <option id="busType" value="NonAC">Non-Ac</option>
+                    </select>
+                </div>
+            </div>*@
 
-                </th>
-            </tr>
-            @foreach (var item in Model.GetDateWiseTrip)
-            {
-            <tr>
-                <td>
-                    @item.TripBase.BusOperator.Name
-                </td>
-                <td>
-                    @item.TripBase.DepartureTime.TimeOfDay
-                </td>
-                <td>
-                    @item.TripBase.Route.RouteName
-                </td>
-                <td>
-                    @item.TripBase.BusType
-                </td>
-                <td>
-                    @item.NoOfSeat
-                </td>
 
-                <td>
-                    @item.Fare
-                </td>
-                <td>
-                    @Html.ActionLink("Continue Purchase", "ViewSeat", new { dateWiseTripId = item.Id })
-
-                </td>
-            </tr>
-            }
-        </table>
 
     </div>
 
 }
 
+    <div class="form-group row">
+        <div class="col-md-2">
+            <input type="text" class="form-control" id="myInput" placeholder="Enter a bus">
+        </div>
+    </div>
 
+
+
+<div class="form-group row">
+    <table class="table" id="myTable">
+        <tr>
+            <th>
+                Bus Operator Name
+            </th>
+            <th>
+                DepartureTime
+            </th>
+            <th>
+                Route
+            </th>
+            <th>
+                Bus Type
+            </th>
+            <th>
+                Available Seat Number
+            </th>
+            <th>
+                Fare
+            </th>
+            <th>
+
+            </th>
+        </tr>
+        
+        @foreach (var DS in Model.GetDateWiseTrip.Zip(Model.noOfAvailableSeat,Tuple.Create))
+        {
+            <tr>
+                <td id="bus">
+                    @DS.Item1.TripBase.BusOperator.Name
+                </td>
+                <td>
+                    @DS.Item1.TripBase.DepartureTime.TimeOfDay
+                </td>
+                <td>
+                    @DS.Item1.TripBase.Route.RouteName
+                </td>
+                <td>
+                    @DS.Item1.TripBase.BusType
+                </td>
+                <td>
+                    @DS.Item2
+                </td>
+
+                <td>
+                    @DS.Item1.Fare
+                </td>
+                <td>
+                    @Html.ActionLink("Continue Purchase", "ViewSeat", new { dateWiseTripId = DS.Item1.Id })
+
+                </td>
+            </tr>
+        }
+    </table>
+</div>

@@ -24,6 +24,7 @@ namespace OBTM.Core.Models
         public virtual TripBase GetTripBase { get; set; }
         public int BusOperatorId { get; set; }
         public virtual BusOperator GetBusOperator { get; set; }
+        public List<int> noOfAvailableSeat { get; set; }
 
 
 

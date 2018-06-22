@@ -16,6 +16,12 @@ namespace OBTM.Service
             var result = SafeExecute(() => repository.GetTripByRouteId(id));
             return result.Data;
         }
+        public List<TripBase> GetTripByRouteIdAndBus(int id, int busOperatorID)
+        {
+            var repository = GetInstance<ITripBaseRepository>();
+            var result = SafeExecute(() => repository.GetTripByRouteIdAndBus(id, busOperatorID));
+            return result.Data;
+        }
         public IEnumerable<TripBase> GetRefinedTrips(int routeId, int busOperatorId)
         {
             var tripRepository = GetInstance<ITripBaseRepository>();

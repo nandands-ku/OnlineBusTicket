@@ -16,7 +16,7 @@ namespace OBTM.DataAccess
 
         public IEnumerable<Route> GetRefinedRoutes(int busOperatorId)
         {
-            var route = OBTMDbContext.OperatorRouteMaps.Where(routes => routes.BusOperatorId == busOperatorId && routes.Route.IsDeleted==false).Select(routes=>routes.Route).ToList();
+            var route = OBTMDbContext.OperatorRouteMaps.Where(routes => routes.BusOperatorId == busOperatorId && routes.Route.IsDeleted!=true).Select(routes=>routes.Route).ToList();
             return route;
         }
     }

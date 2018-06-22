@@ -10,6 +10,7 @@ namespace OBTM.Core.Interfaces
     public interface ITripBaseRepository:IGenericRepository<TripBase>
     {
         List<TripBase> GetTripByRouteId(int id);
+        List<TripBase> GetTripByRouteIdAndBus(int id, int busOperatorID);
         IEnumerable<TripBase> GetRefinedTrips(int routeId, int busOperatorId);
         //int DeleteTrip(int id);
     }

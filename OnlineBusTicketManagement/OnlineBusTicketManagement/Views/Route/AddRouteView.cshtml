@@ -7,6 +7,9 @@
 
 <h2>AddRouteView</h2>
 
+<div class="row">
+    <div class="col-md-2">@Html.Partial("NavbarPartial")</div>
+    <div class="col-md-10">
 
         <link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
         <script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js" type="text/javascript"></script>
@@ -15,77 +18,88 @@
                 $('.listbox').multiselect({
                     includeSelectAllOption: true
                 });
+
+    
             });
+            $('#textChange').change(function(){
+                //var text = "a route is successfully added. no need to add new entries";
+                //document.getElementById('textDiv').innerHTML = text;
+                alert("ad");
+           });
+
         </script>
         @using (Html.BeginForm("AddRouteView", "Route", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            <h4>RouteView</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.BusOperatorId, htmlAttributes: new { @class = "control-label col-md-2" })
-                @*<label for="BusOperatorId">Bus Operator</label>*@
-                <div class="col-md-10">
-                    @Html.DropDownListFor(m => m.BusOperatorId, (SelectList)ViewBag.BusOperatorList, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.BusOperatorId, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Routes.Id, htmlAttributes: new { @class = "control-label col-md-2" })
-                @*<label for="ExistingRoutes">Existing Routes</label>*@
-                <div class="col-md-10">
-                    @Html.DropDownListFor(m => m.Routes.Id, (SelectList)ViewBag.ExistingRouteList, "--Select an Existing Route--", new { @class = "required", title = "priority" })
-                    @Html.ValidationMessageFor(model => model.Routes.Id, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.From, htmlAttributes: new { @class = "control-label col-md-2" })
-                @*<label for="LocationId">From</label>*@
-                <div class="col-md-10">
-                    @Html.DropDownListFor(m => m.From, (SelectList)ViewBag.LocationList, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.From, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Via, htmlAttributes: new { @class = "control-label col-md-2" })
-                @*<label for="LocationId">Via</label>*@
-                <div class="col-md-10">
-                    @Html.ListBoxFor(m => m.Via, (SelectList)ViewBag.LocationList, new { @class = "listbox" })
-                    @Html.ValidationMessageFor(model => model.Via, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.To, htmlAttributes: new { @class = "control-label col-md-2" })
-                @*<label for="LocationId">To</label>*@
-                <div class="col-md-10">
-                    @Html.DropDownListFor(m => m.To, (SelectList)ViewBag.LocationList, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.To, "", new { @class = "text-danger" })
-                </div>
-            </div>
+            <div class="form-horizontal">
+                <h4>RouteView</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.IsReverse, htmlAttributes: new { @class = "control-label col-md-2" })
-                @*<label for="LocationId">To</label>*@
-                <div class="col-md-10">
-                    @Html.CheckBoxFor(m => m.IsReverse)
-                  
+                    @Html.Label("Bus Name:", htmlAttributes: new { @class = "control-Label col-md-2 " })
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(m => m.BusOperatorId, (SelectList)ViewBag.BusOperatorList, "--Select a bus operator--", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.BusOperatorId, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
+                <div class="form-group">
+                    @Html.Label("Existing Route:", htmlAttributes: new { @class = "control-Label col-md-2"})
+                    @*<label for="ExistingRoutes">Existing Routes</label>*@
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(m => m.Routes.Id, (SelectList)ViewBag.ExistingRouteList, "--Select an Existing Route--", new { @class = "required", title = "priority", @id = "textChange" })
+                        <div id="textDiv" style="color:Green; font-family:Calibri; font-size:small; font-weight:bold"> </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("From Location:", htmlAttributes: new { @class = "control-Label col-md-2 " })
+                    @*<label for="LocationId">From</label>*@
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(m => m.From, (SelectList)ViewBag.LocationList, "--Select a Location--", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.From, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Via Locations:", htmlAttributes: new { @class = "control-Label col-md-2 " })
+                    @*<label for="LocationId">Via</label>*@
+                    <div class="col-md-3">
+                        @Html.ListBoxFor(m => m.Via, (SelectList)ViewBag.LocationList, new { @class = "listbox" })
+                        @Html.ValidationMessageFor(model => model.Via, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("To Location:", htmlAttributes: new { @class = "control-Label col-md-2 " })
+                    @*<label for="LocationId">To</label>*@
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(m => m.To, (SelectList)ViewBag.LocationList, "--Select a Location--", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.To, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                <div class="form-group">
+                    @Html.Label("Is this route reversed?", htmlAttributes: new { @class = "control-Label col-md-2 " })
+                    @*<label for="LocationId">To</label>*@
+                    <div class="col-md-3">
+                        @Html.CheckBoxFor(m => m.IsReverse)
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
                 </div>
             </div>
-        </div>
         }
 
 
 
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+    </div>
+    </div>

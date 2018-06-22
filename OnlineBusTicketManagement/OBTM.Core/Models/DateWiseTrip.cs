@@ -39,5 +39,6 @@ namespace OBTM.Core.Models
         [StringLength(50)]
         public string UpdatedBy { get; set; }
         public virtual TripBase TripBase { get; set; }
+        
     }
 }

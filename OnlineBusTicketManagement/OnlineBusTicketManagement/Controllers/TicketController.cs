@@ -31,13 +31,16 @@ namespace OnlineBusTicketManagement.Controllers
                 item.IsTempLocked = true;
                 bookingTicketService.Update(item);
             }
-
+            ViewBag.booking = bookingTickets;
             Ticket ticket = new Ticket()
             {
                 Seats = seatList,
                 TotalFare = totalFare,
                 TicketPIN = ticketService.RandomNumber().ToString(),
-                Bookings = bookingTickets
+                Bookings = bookingTickets,
+                DateWiseTripID=dateWiseTripId
+               
+
             };
 
             return View(ticket);
@@ -47,7 +50,10 @@ namespace OnlineBusTicketManagement.Controllers
         public ActionResult TicketDetails_(Ticket ticket)
         {
             var id = ticket.Id;
-            var bookingTicket = ticket.Bookings;
+            //var bookingTickets = ticket.Bookings;
+            var bookingTickets = bookingTicketService.GetAll().Where(m => m.DateWiseTripId == ticket.DateWiseTripID && ticket.Seats.Contains(m.SeatName)).ToList();
+
+
 
             Ticket T = new Ticket()
             {
@@ -59,7 +65,7 @@ namespace OnlineBusTicketManagement.Controllers
                 TicketPIN = ticket.TicketPIN,
                 CreditCard = ticket.CreditCard
             };
-            foreach (var item in bookingTicket)
+            foreach (var item in bookingTickets)
             {
                 item.IsTempLocked = false;
                 item.IsBooked = true;

@@ -9,5 +9,7 @@ namespace OBTM.Core.Interfaces
 {
     public interface IOperatorRouteMapRepository:IGenericRepository<OperatorRouteMap>
     {
+        int DeleteOperatorRouteSoft(int id);
+        int DeleteSingleRouteForBus(int id);
     }
 }

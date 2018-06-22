@@ -16,7 +16,7 @@ namespace OBTM.DataAccess
 
         public string GetSeatName(int seatId)
         {
-            string seatName = OBTMDbContext.SeatBases.Where(seat=> seat.Id==seatId && seat.IsDeleted==false).Select(seat=> seat.SeatName).FirstOrDefault().ToString() ;
+            string seatName = OBTMDbContext.SeatBases.Where(seat=> seat.Id==seatId && seat.IsDeleted!=true).Select(seat=> seat.SeatName).FirstOrDefault().ToString() ;
             return seatName;
         }
     }

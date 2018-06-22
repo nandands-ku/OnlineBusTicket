@@ -1,6 +1,7 @@
 ﻿using OBTM.Core.Models;
 using OBTM.DataAccess;
 using OBTM.Service;
+using OnlineBusTicketManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace OnlineBusTicketManagement.Controllers
 {
+    [AuthorizeWithSession]
     public class RouteController : Controller
     {
         RouteService rs = new RouteService();
@@ -39,8 +41,17 @@ namespace OnlineBusTicketManagement.Controllers
             ViewBag.BusOperatorList = new SelectList(context.BusOperators, "Id", "Name");
             ViewBag.LocationList = new SelectList(context.Locations, "Id", "Location");
             ViewBag.ExistingRouteList = new SelectList(context.Routes, "Id", "RouteName");
-            var model = bos.GetAll();
-            return View(model);
+            var preBusList = bos.GetAll();
+            List<BusOperator> postBusList = new List<BusOperator>();
+            foreach (var item in preBusList)
+            {
+                if (item.IsDeleted==null || item.IsDeleted==false)
+                {
+                    postBusList.Add(item);
+                }
+                
+            }
+            return View(postBusList);
             
 
         }
@@ -50,11 +61,10 @@ namespace OnlineBusTicketManagement.Controllers
             rs.Save(r);
             return View("Index");
         }
-        public ActionResult DeleteRoute(int id)
+        public ActionResult Delete(int id)
         {
-            RouteService rs = new RouteService();
-            rs.Delete(id);
-            return View("Index");
+            orm.DeleteSingleRouteForBus(id);
+            return RedirectToAction("Index");
         }
         //public ActionResult Edit()
         //{

@@ -28,5 +28,13 @@ namespace OBTM.Service
                 Save(bookingTicket);
             }
         }
+
+        public int GetAvailableSeatByDateWise(int id)
+        {
+            var repository = GetInstance<IBookingTicketRepository>();
+            var result = SafeExecute(() => repository.GetAvailableSeatByDateWise(id));
+            return result.Data;
+        }
+
     }
 }

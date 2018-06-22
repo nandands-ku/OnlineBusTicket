@@ -22,9 +22,16 @@ namespace OBTM.DataAccess
             return tripBaseList;
         }
 
+        public List<TripBase> GetTripByRouteIdAndBus(int id, int busOperatorID)
+        {
+            //var TripBaseList = (from T in OBTMDbContext.TripBases where T.RouteId == id select T).ToList();
+            var tripBaseList = OBTMDbContext.TripBases.Where(trip => trip.RouteId == id && trip.BusOperator.Id==busOperatorID).ToList();
+            return tripBaseList;
+        }
+
         public IEnumerable<TripBase> GetRefinedTrips(int routeId, int busOperatorId)
         {
-            var refinedtripList = OBTMDbContext.TripBases.Where(trip => trip.RouteId == routeId && trip.BusOperatorId == busOperatorId && trip.IsDeleted==false).ToList();
+            var refinedtripList = OBTMDbContext.TripBases.Where(trip => trip.RouteId == routeId && trip.BusOperatorId == busOperatorId && trip.IsDeleted!=true).ToList();
             return refinedtripList;
         }
 

@@ -10,64 +10,74 @@
 {
 
 
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(m=>m.Bookings)
-        <h3 style="text-align:left">Passenger info</h3>
-        <div class="form-group row">
-            @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="form-group col-md-4">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(m => m.CellNo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="form-group col-md-4">
-                @Html.EditorFor(model => model.CellNo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CellNo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(m => m.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="form-group col-md-4">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger", type = "email" })
-            </div>
-        </div>
-        <hr height="200px" />
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+    @*@for (int i = 0; i < Model.Bookings.Count(); i++)
+        {
+            @Html.HiddenFor(model => Model.Bookings[i])
+        }*@
 
-        <h3 style="text-align:left">Ticket info</h3>
-        <div class="form-group">
-            <dl class="dl-horizontal form-group">
-                <dt>
-                    @Html.DisplayNameFor(model => model.TicketPIN)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.TicketPIN)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.TotalFare)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.TotalFare)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Seats)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Seats)
-                </dd>
-            </dl>
+    <h3 style="text-align:left">Passenger info</h3>
+    <div class="form-group row">
+        @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group col-md-4">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
         </div>
-        @Html.HiddenFor(m => m.TicketPIN)
-        @Html.HiddenFor(m => m.Seats)
-        @Html.HiddenFor(m => m.TotalFare)
-        @*<div class="form-group row">
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(m => m.CellNo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group col-md-4">
+            @Html.EditorFor(model => model.CellNo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CellNo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(m => m.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group col-md-4">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger", type = "email" })
+        </div>
+    </div>
+
+    <hr height="200px" />
+
+    <h3 style="text-align:left">Ticket info</h3>
+    <div class="form-group">
+        <dl class="dl-horizontal form-group">
+            <dt>
+                @Html.DisplayNameFor(model => model.TicketPIN)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TicketPIN)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.TotalFare)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TotalFare)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Seats)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Seats)
+            </dd>
+
+        </dl>
+    </div>
+    @Html.HiddenFor(m => m.TicketPIN)
+    @Html.HiddenFor(m => m.Seats)
+    @Html.HiddenFor(m => m.TotalFare)
+    @Html.HiddenFor(m => m.DateWiseTripID)
+
+
+
+    @*<div class="form-group row">
             @Html.LabelFor(m => m.TicketPIN, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="form-group col-md-4">
                 @Html.EditorFor(model => model.TicketPIN, new { htmlAttributes = new { @class = "form-control" } })
@@ -88,20 +98,20 @@
                 @Html.ValidationMessageFor(model => model.TotalFare, "", new { @class = "text-danger" })
             </div>
         </div>*@
-        <hr height="200px" />
-        <div class="form-group row">
-            <h3 style="text-align:left">Payment info</h3>
-            <label class="control-label  col-md-2">Credit card no </label>
-            <div class="form-group col-md-4">
-                @Html.EditorFor(model => model.CreditCard, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreditCard, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Confirm Purchase" class="btn btn-default" />
-            </div>
+    <hr height="200px" />
+    <div class="form-group row">
+        <h3 style="text-align:left">Payment info</h3>
+        <label class="control-label  col-md-2">Credit card no </label>
+        <div class="form-group col-md-4">
+            @Html.EditorFor(model => model.CreditCard, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CreditCard, "", new { @class = "text-danger" })
         </div>
     </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Confirm Purchase" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
 

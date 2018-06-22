@@ -39,8 +39,8 @@ namespace OBTM.Core.Models
         public string TicketPIN { get; set; }
         
         public string CreditCard { get; set; }
-        public int DateWiseTripId { get; set; }
-        public List <BookingTicket> Bookings { get; set; }
+        
+        public virtual List <BookingTicket> Bookings { get; set; }
 
         public bool? IsActive { get; set; }
 
@@ -55,5 +55,6 @@ namespace OBTM.Core.Models
         public string UpdatedBy { get; set; }
 
         public DateTime? UpdatedOn { get; set; }
+        public int DateWiseTripID { get; set; }
     }
 }

@@ -15,12 +15,16 @@ namespace OnlineBusTicketManagement.Controllers
         TripBaseService tbs = new TripBaseService();
         DateWiseTripService dws = new DateWiseTripService();
         LocationsService ls = new LocationsService();
+        BookingTicketService bts = new BookingTicketService();
         OBTMDbContext context = new OBTMDbContext();
 
         public List<TripBase> tripBases = new List<TripBase>();
         public List<DateWiseTrip> dateWiseTrips = new List<DateWiseTrip>();
+        public List<TripBase> tripBaseFilter = new List<TripBase>();
+        public List<DateWiseTrip> dateWiseTripFilter = new List<DateWiseTrip>();
         // GET: BusSearch
         public List<BusOperator> busOperators = new List<BusOperator>();
+        public List<int> availableSeat = new List<int>();
 
         OBTMDbContext dbContext = new OBTMDbContext();
 
@@ -33,25 +37,26 @@ namespace OnlineBusTicketManagement.Controllers
         {
             ViewBag.BusOperatorList = new SelectList(context.BusOperators, "Id", "Name");
             ViewBag.LocationList = new SelectList(context.Locations, "Id", "Location");
+           
             return View(new SearchBus());
         }
-
-
         public ActionResult ViewSeat(int? dateWiseTripId)
         {
+            //var temp = new List<int>() { 5, 10, 25 };
             ViewBag.Fare = dateWiseTripService.GetById(dateWiseTripId).Fare;
-            var BookingTickets= bookingTicketService.GetAll().Where(m =>m.DateWiseTripId== dateWiseTripId && m.IsTempLocked != true && m.IsBooked != true).Select(m=>m.SeatName).ToList();
+             var BookingTickets= bookingTicketService.GetAll().Where(m =>m.DateWiseTripId==dateWiseTripId&& m.IsBooked != true && m.IsTempLocked != true).Select(m=>m.SeatName).ToList();
             ViewBag.SeatNoList = seatBaseService.GetAll().Where(m => BookingTickets.Contains(m.SeatName)).Select(m => m.Id).ToList();
             ViewBag.SeatNameList = seatBaseService.GetAll().Select(m => m.SeatName).ToList();
             ViewBag.DateWiseTripId = dateWiseTripId;
+            //ViewBag.SeatList = temp;
             return View();
         }
-
-
-        [HttpPost]
+       // [HttpPost]
         public ActionResult SearchResult(SearchBus searchBus)
         {
-            ViewBag.BusOperatorList = context.BusOperators.ToList();
+            ViewBag.BusOperatorList = new SelectList(context.BusOperators, "Id", "Name");
+            ViewBag.LocationList = new SelectList(context.Locations, "Id", "Location");
+            
             //ViewBag.LocationList = context.Locations.ToList();
             var routeList = rps.GetRoute(searchBus.From, searchBus.To);
             var from = ls.GetById(searchBus.From);
@@ -61,18 +66,10 @@ namespace OnlineBusTicketManagement.Controllers
                 if (tbs.GetTripByRouteId(item)!=null)
                 {
                     tripBases.AddRange(tbs.GetTripByRouteId(item));
-        }
-                //try
-                //{
-                //    tripBases.AddRange(tbs.GetTripByRouteId(item));
-                //}
-                //catch (Exception)
-                //{
-
-                //    Response.Write("Tripbase for the corresponding route is missing in Tripbase table");
-                //}
+                }
+             
                 
-    }
+            }
             foreach (var item in tripBases)
             {
                 if (dws.GetDateWiseByTrip(item.Id, searchBus.DepartureDate) != null)
@@ -83,18 +80,58 @@ namespace OnlineBusTicketManagement.Controllers
                     
             }
 
+            foreach (var item in dateWiseTrips)
+            {
+                availableSeat.Add(bts.GetAvailableSeatByDateWise(item.Id));
+            }
+
             SearchBus s = new SearchBus
             {
                 GetDateWiseTrip = dateWiseTrips,
                 FromLocation=from.Location,
-                ToLocation=to.Location
+                ToLocation=to.Location,
+                noOfAvailableSeat=availableSeat            
             };
 
             return View(s);
         }
-        //public ActionResult SearchResult()
+        [HttpPost]
+        public ActionResult ModifySearch(SearchBus modifySearch)
+        {
+            return RedirectToAction("SearchResult", modifySearch);
+        }
+
+        //[HttpPost]
+        //public JsonResult FilterSearchByBus(int busID, int fromLoc, int toLoc, DateTime date)
         //{
-        //    return View();
+        //    int busOperator = Convert.ToInt32(busID);
+        //    int from = Convert.ToInt32(fromLoc);
+        //    int to = Convert.ToInt32(toLoc);
+        //    DateTime dateVal = Convert.ToDateTime(date);
+        //    var routeList = rps.GetRoute(from, to);
+
+        //    foreach (var item in routeList)
+        //    {
+        //        if (tbs.GetTripByRouteIdAndBus(item,busID) != null)
+        //        {
+        //            tripBaseFilter.AddRange(tbs.GetTripByRouteIdAndBus(item, busID));
+        //        }
+
+
+        //    }
+        //    foreach (var item in tripBases)
+        //    {
+        //        if (dws.GetDateWiseByTrip(item.Id, dateVal) != null)
+        //        {
+        //            dateWiseTripFilter.AddRange(dws.GetDateWiseByTrip(item.Id, dateVal));
+
+        //        }
+
+        //    }
+        //    return Json(dateWiseTripFilter, JsonRequestBehavior.AllowGet);
         //}
+
+
+
     }
 }

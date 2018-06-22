@@ -1,0 +1,52 @@
+﻿@model IEnumerable<OBTM.Core.Models.BusOperator>
+
+@{
+    ViewBag.Title = "ViewRoute";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ViewRoute</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+
+        <td>
+            @foreach (var itm in item.OperatorRouteMaps)
+            {
+                if (itm.IsDeleted == null || itm.IsDeleted == false)
+                {
+        
+                            @itm.Route.RouteName
+
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = itm.Id })
+               
+                }
+
+            }
+           
+    </tr>
+}
+
+</table>

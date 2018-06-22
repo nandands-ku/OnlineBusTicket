@@ -26,5 +26,14 @@ namespace OBTM.DataAccess
             OBTMDbContext.Entry(b).State = EntityState.Modified;
             return OBTMDbContext.SaveChanges();
         }
+        public int DeleteBusSoft(int id)
+        {
+            var obj = OBTMDbContext.BusOperators.Find(id);
+            obj.IsDeleted = true;
+            OBTMDbContext.Entry(obj).State = EntityState.Modified;
+            
+
+            return OBTMDbContext.SaveChanges();
+        }
     }
 }
