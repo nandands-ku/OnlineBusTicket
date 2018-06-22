@@ -25,7 +25,7 @@ namespace OBTM.Service
         public Response<int> Delete(int id)
         {
             var repository = GetInstance<ITripBaseRepository>();
-            var result = SafeExecute(() => repository.DeleteTrip(id));
+            var result = SafeExecute(() => repository.Delete(id));
             return result;
         }
 

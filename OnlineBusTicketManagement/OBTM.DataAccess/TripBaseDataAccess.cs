@@ -24,17 +24,17 @@ namespace OBTM.DataAccess
 
         public IEnumerable<TripBase> GetRefinedTrips(int routeId, int busOperatorId)
         {
-            var refinedtripList = OBTMDbContext.TripBases.Where(trip => trip.RouteId == routeId && trip.BusOperatorId == busOperatorId).ToList();
+            var refinedtripList = OBTMDbContext.TripBases.Where(trip => trip.RouteId == routeId && trip.BusOperatorId == busOperatorId&&trip.IsDeleted!=true).ToList();
             return refinedtripList;
         }
 
 
-        public int DeleteTrip(int id)
-        {
-            var entity = OBTMDbContext.TripBases.Where(i => i.Id == id).Single();
-            entity.IsDeleted = true;
-            OBTMDbContext.Entry(entity).State = EntityState.Modified;
-            return OBTMDbContext.SaveChanges();
-        }
+        //public int DeleteTrip(int id)
+        //{
+        //    var entity = OBTMDbContext.TripBases.Where(i => i.Id == id).Single();
+        //    entity.IsDeleted = true;
+        //    OBTMDbContext.Entry(entity).State = EntityState.Modified;
+        //    return OBTMDbContext.SaveChanges();
+        //}
     }
 }

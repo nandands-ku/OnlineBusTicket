@@ -22,12 +22,12 @@ namespace OBTM.DataAccess
             this.OBTMDbSet = context.Set<TEntity>();
         }
 
-        public virtual int Delete(object id)
-        {
-            var obj = OBTMDbSet.Find(id);
-            OBTMDbSet.Remove(obj);
-            return OBTMDbContext.SaveChanges();
-        }
+        //public virtual int Delete(object id)
+        //{
+        //    var obj = OBTMDbSet.Find(id);
+        //    OBTMDbSet.Remove(obj);
+        //    return OBTMDbContext.SaveChanges();
+        //}
 
         public List<TEntity> GetAll()
         {
@@ -51,13 +51,13 @@ namespace OBTM.DataAccess
             return OBTMDbContext.SaveChanges();
         }
 
-        //public virtual int Delete(object id)
-        //{
-        //    var obj = OBTMDbSet.Find(id);
-        //    //Type type = obj.GetType();
-        //    PropertyInfo property = obj.GetType().GetProperty("IsDeleted");
-        //    property.SetValue(obj, Convert.ChangeType(true, property.PropertyType), null);
-        //    return OBTMDbContext.SaveChanges();
-        //}
+        public virtual int Delete(object id)
+        {
+            var obj = OBTMDbSet.Find(id);
+            //Type type = obj.GetType();
+            PropertyInfo property = obj.GetType().GetProperty("IsDeleted");
+            property.SetValue(obj, Convert.ChangeType(1, property.PropertyType), null);
+            return OBTMDbContext.SaveChanges();
+        }
     }
 }

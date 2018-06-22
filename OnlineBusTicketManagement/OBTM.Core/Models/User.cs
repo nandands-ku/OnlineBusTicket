@@ -18,16 +18,18 @@ namespace OBTM.Core.Models
         public string UserName { get; set; }
 
         [Required]
+        [DataType(DataType.EmailAddress)]
         [StringLength(50)]
         public string Email { get; set; }
 
         [Required]
+        [DataType(DataType.Password)]
         [StringLength(100)]
         public string Password { get; set; }
 
         public bool? IsActive { get; set; }
 
-        public bool? IsDeleted { get; set; }
+        public bool IsDeleted { get; set; }
 
         [StringLength(50)]
         public string CreatedBy { get; set; }

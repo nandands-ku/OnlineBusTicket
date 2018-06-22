@@ -11,6 +11,6 @@ namespace OBTM.Core.Interfaces
     {
         List<TripBase> GetTripByRouteId(int id);
         IEnumerable<TripBase> GetRefinedTrips(int routeId, int busOperatorId);
-        int DeleteTrip(int id);
+        //int DeleteTrip(int id);
     }
 }

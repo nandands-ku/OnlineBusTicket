@@ -2,10 +2,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="~/Content/NavbarStyle.css">
+    @*<link rel="stylesheet" type="text/css" href="~/Content/NavbarStyle.css">*@
+
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
     <style>
         .nav-sidebar {
             width: 100%;
+            min-height:70vh;
             padding: 8px 0;
             border-right: 1px solid #ddd;
         }
@@ -43,33 +50,20 @@
 </head>
 <body>
 
+    <nav class="nav-sidebar">
+        <ul class="nav">
+            @if (HttpContext.Current.Session["User"] != null)
+            {
+                <li><a>@HttpContext.Current.Session["User"] </a> </li>
+                <li>@Html.ActionLink("Log Out", "LogOut", "User")</li>
+            }
 
-    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
-    <div class="container">
-
-        <div class="row">
-            <div class="col-sm-2">
-                <nav class="nav-sidebar">
-                    <ul class="nav">
-                        @if (HttpContext.Current.Session["User"] != null)
-                        {
-                            <li><a>@HttpContext.Current.Session["User"] </a> </li>
-                            <li>@Html.ActionLink("Log Out","LogOut","User")</li>
-                        }
-
-                        <li>@Html.ActionLink("Bus Operator", "Index", "BusOperator")</li>
-                        <li>@Html.ActionLink("Route", "Index", "Route")</li>
-                        <li>@Html.ActionLink("Trip", "Index", "TripBase")</li>
-                        <li>@Html.ActionLink("Datewise Trip", "Index", "DateWiseTrip")</li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
-
+            <li>@Html.ActionLink("Bus Operator", "Index", "BusOperator")</li>
+            <li>@Html.ActionLink("Route", "Index", "Route")</li>
+            <li>@Html.ActionLink("Trip", "Index", "TripBase")</li>
+            <li>@Html.ActionLink("Datewise Trip", "Index", "DateWiseTrip")</li>
+        </ul>
+    </nav>
 </body>
 </html>
 

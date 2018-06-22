@@ -338,6 +338,8 @@
     <Content Include="Views\Shared\NavBarForUserEnd.cshtml" />
     <Content Include="Views\Ticket\CancelTicketView.cshtml" />
     <Content Include="Views\Ticket\CancelTicketConfirm.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\UserList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

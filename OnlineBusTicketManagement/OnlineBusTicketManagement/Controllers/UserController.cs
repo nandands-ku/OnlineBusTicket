@@ -24,7 +24,22 @@ namespace OnlineBusTicketManagement.Controllers
             return View("DashBoard");
         }
 
+        public ActionResult ViewUsers()
+        {
+            return View("UserList", userService.GetAll());
+        }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(User user)
+        {
+            userService.Save(user);
+            return RedirectToAction("ViewUsers");
+        }
 
         public ActionResult LogIn(UserView user)
         {
@@ -42,6 +57,11 @@ namespace OnlineBusTicketManagement.Controllers
                
         }
 
+        public ActionResult Delete(int id)
+        {
+            userService.Delete(id);
+            return RedirectToAction("ViewUsers");
+        }
 
         public ActionResult LogOut()
         {
