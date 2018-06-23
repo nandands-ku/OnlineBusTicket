@@ -66,10 +66,11 @@ namespace OnlineBusTicketManagement.Controllers
             orm.DeleteSingleRouteForBus(id);
             return RedirectToAction("Index");
         }
-        //public ActionResult Edit()
-        //{
+        public ActionResult Edit()
+        {
 
-        //}
+            return View();
+        }
         public ActionResult CreateRoute()
         {
             ViewBag.BusOperatorList = new SelectList(context.BusOperators, "Id", "Name");

@@ -57,158 +57,131 @@
 
     };
     </script>*@
-
-<h4 style="text-align:center">Search Result</h4>
-
-@*@using (Html.BeginForm("ModifySearch", "BusSearch", FormMethod.Post))
-    {
-                <div class="row">
-
-                <div class="form-horizontal col-md-3">
-                    <div class="form-group">
-                        @Html.DropDownListFor(m => m.BusOperatorId, (SelectList)ViewBag.BusOperatorList, "Select Bus", new { @class = "form-control", value = "0" })
-                    </div>
-                </div>
-
-                <div class="form-horizontal col-md-3">
-                    <div class="form-group">
-                        @Html.EnumDropDownListFor(m => m.GetTripBase.BusType, "Select a Bus Type", new {@class = "form-control", value = "0" })
-                    </div>
-                </div>
-
-                <div class="form-group col-md-3">
-                    <div class="form-inline ">
-                        <button class="btn btn-default btn-primary" id="btnFilter" type="submit">Filter Search</button>
-                    </div>
-                </div>
-
-            </div>
-    }*@
-@using (Html.BeginForm("ModifySearch", "BusSearch", FormMethod.Post))
-{
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <hr height="200px" />
-
-    <div class="container form-horizontal">
-        <div class="form-group row">
-            <div class="row">
-                @Html.Label("Modify Search :", htmlAttributes: new { @class = "control-Label col-md-2 " })
-            </div>
-            
-            
-
-            <div class="form-group col-md-3">
-                @Html.LabelFor(model => model.From, htmlAttributes: new { @class = "control-Label col-md-1 " })
-                @Html.DropDownListFor(m => m.From, (SelectList)ViewBag.LocationList, new { @class = "form-control", @id = "from" })
-                @*@Html.ValidationMessageFor(m => m.FromLocation, "", new { @class = "text-danger" })*@
-            </div>
-           
-            <div class="form-group col-md-3">
-                @Html.LabelFor(model => model.To, htmlAttributes: new { @class = "control-Label col-md-1 " })
-                @Html.DropDownListFor(m => m.To, (SelectList)ViewBag.LocationList, new { @class = "form-control", @id = "to" })
-                @*@Html.ValidationMessageFor(m => m.ToLocation, "", new { @class = "text-danger" })*@
-            </div>
-            
-            <div class="form-group col-md-3">
-                @Html.Label("Date:", htmlAttributes: new { @class = "control-Label col-md-1 " })
-                @Html.EditorFor(model => model.DepartureDate, new { htmlAttributes = new { @class = "form-control", @id = "date" } })
-                @*@Html.ValidationMessageFor(model => model.DepartureDate, "", new { @class = "text-danger" })*@
-            </div>
-            <br />
-            <div class="col-md-2">
-                <input type="submit" value="Search" class="btn btn-default" />
-            </div>
-
+<br />
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <div class="row">
+            @Html.Label("Modify Search :", htmlAttributes: new { @class = "control-Label col-md-2 " })
         </div>
-        <hr height="200px" />
-        @*<div class="form-group row">
-                @Html.Label("Filter By :", htmlAttributes: new { @class = "control-Label col-md-2 " })
-                <div class="form-group col-md-2">
-                    <select class="form-group" id="busOperatorFilter">
-                        <option selected title="Select Bus Operator">Select Bus Operator</option>
-                        @foreach (var item in ViewBag.BusOperatorList)
-                        {
-                            <option id="busOperator" value="@item.Id">@item.Name</option>
-
-                        }
-                    </select>
-                </div>
-                <div class="form-group col-md-2">
-                    <select class="form-group" id="busTypeFilter">
-                        <option selected title="">Select Bus Type</option>
-                        <option id="busType" value="AC">Ac</option>
-                        <option id="busType" value="NonAC">Non-Ac</option>
-                    </select>
-                </div>
-            </div>*@
-
-
 
     </div>
-
-}
-
-    <div class="form-group row">
-        <div class="col-md-2">
-            <input type="text" class="form-control" id="myInput" placeholder="Enter a bus">
-        </div>
-    </div>
-
-
-
-<div class="form-group row">
-    <table class="table" id="myTable">
-        <tr>
-            <th>
-                Bus Operator Name
-            </th>
-            <th>
-                DepartureTime
-            </th>
-            <th>
-                Route
-            </th>
-            <th>
-                Bus Type
-            </th>
-            <th>
-                Available Seat Number
-            </th>
-            <th>
-                Fare
-            </th>
-            <th>
-
-            </th>
-        </tr>
-        
-        @foreach (var DS in Model.GetDateWiseTrip.Zip(Model.noOfAvailableSeat,Tuple.Create))
+    <div class="panel-body">
+        @using (Html.BeginForm("ModifySearch", "BusSearch", FormMethod.Post))
         {
-            <tr>
-                <td id="bus">
-                    @DS.Item1.TripBase.BusOperator.Name
-                </td>
-                <td>
-                    @DS.Item1.TripBase.DepartureTime.TimeOfDay
-                </td>
-                <td>
-                    @DS.Item1.TripBase.Route.RouteName
-                </td>
-                <td>
-                    @DS.Item1.TripBase.BusType
-                </td>
-                <td>
-                    @DS.Item2
-                </td>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @*<hr height="200px" />*@
 
-                <td>
-                    @DS.Item1.Fare
-                </td>
-                <td>
-                    @Html.ActionLink("Continue Purchase", "ViewSeat", new { dateWiseTripId = DS.Item1.Id })
+            <div class="form-horizontal">
+                <div class="form-group row">
 
-                </td>
-            </tr>
+
+                    <div class="col-sm-1"></div>
+                    <div class="form-group col-md-2">
+                        @Html.LabelFor(model => model.From, htmlAttributes: new { @class = "control-Label col-md-1 " })
+                        @Html.DropDownListFor(m => m.From, (SelectList)ViewBag.LocationList, new { @class = "form-control", @id = "from" })
+                        @*@Html.ValidationMessageFor(m => m.FromLocation, "", new { @class = "text-danger" })*@
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        @Html.LabelFor(model => model.To, htmlAttributes: new { @class = "control-Label col-md-1 " })
+                        @Html.DropDownListFor(m => m.To, (SelectList)ViewBag.LocationList, new { @class = "form-control", @id = "to" })
+                        @*@Html.ValidationMessageFor(m => m.ToLocation, "", new { @class = "text-danger" })*@
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        @Html.Label("Date:", htmlAttributes: new { @class = "control-Label col-md-1 " })
+                        @Html.EditorFor(model => model.DepartureDate, new { htmlAttributes = new { @class = "form-control", @id = "date" } })
+                        @*@Html.ValidationMessageFor(model => model.DepartureDate, "", new { @class = "text-danger" })*@
+                    </div>
+                    <br />
+                    <div class="col-md-2">
+                        <input type="submit" value="Search" class="btn btn-info" />
+                    </div>
+
+                </div>
+                @*<hr height="200px" />*@
+
+            </div>
+
         }
-    </table>
+    </div>
 </div>
+
+
+<div class="panel panel-info">
+    <div class="panel-heading"><h4 style="padding:0px">Available Trips</h4></div>
+    <div class="panel-body">
+        <div class="form-group row">
+            <div class="col-md-2">
+                <input type="text" class="form-control" id="myInput" placeholder="Enter a bus">
+            </div>
+        </div>
+
+
+
+        <div class="form-group row">
+            <table class="table" id="myTable">
+                <thead>
+                    <tr class="bg-warning">
+                        <th>
+                            Bus Operator Name
+                        </th>
+                        <th>
+                            DepartureTime
+                        </th>
+                        <th>
+                            Route
+                        </th>
+                        <th>
+                            Bus Type
+                        </th>
+                        <th>
+                            Available Seat Number
+                        </th>
+                        <th>
+                            Fare
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var DS in Model.GetDateWiseTrip.Zip(Model.noOfAvailableSeat, Tuple.Create))
+                    {
+                        <tr>
+                            <td id="bus">
+                                @DS.Item1.TripBase.BusOperator.Name
+                            </td>
+                            <td>
+                                @DS.Item1.TripBase.DepartureTime.TimeOfDay
+                            </td>
+                            <td>
+                                @DS.Item1.TripBase.Route.RouteName
+                            </td>
+                            <td>
+                                @DS.Item1.TripBase.BusType
+                            </td>
+                            <td>
+                                @DS.Item2
+                            </td>
+
+                            <td>
+                                @DS.Item1.Fare
+                            </td>
+                            <td>
+                                @Html.ActionLink("Continue Purchase", "ViewSeat", new { dateWiseTripId = DS.Item1.Id })
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+
+            </table>
+        </div>
+        
+    </div>
+</div>
+
+

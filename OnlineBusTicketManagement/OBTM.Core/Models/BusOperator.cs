@@ -18,11 +18,14 @@ namespace OBTM.Core.Models
 
         public int Id { get; set; }
 
-        [Required]
+        
         [StringLength(50)]
-        public string Name { get; set; }
-
         [Required]
+        public string Name { get; set; } 
+        
+        [Display(Name = "Email Address")]
+        [Required(ErrorMessage = "Email is required.")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address.")]
         [StringLength(50)]
         public string Email { get; set; }
 
