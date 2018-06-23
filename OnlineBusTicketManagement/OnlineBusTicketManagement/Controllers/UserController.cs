@@ -11,16 +11,17 @@ using System.Web.Mvc;
 
 namespace OnlineBusTicketManagement.Controllers
 {
+    [AuthorizeWithSession]
     public class UserController : Controller
     {
         UserService userService = new UserService();
         // GET: User
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View("LogIn");
         }
 
-        [AuthorizeWithSession]
         public ActionResult ViewDashBoard()
         {
             return View("DashBoard");
@@ -28,7 +29,7 @@ namespace OnlineBusTicketManagement.Controllers
 
         public ActionResult ViewUsers()
         {
-            return View("UserList", userService.GetAll());
+            return View("UserList", userService.GetAll().Where(m=>m.IsDeleted!=true));
         }
 
         public ActionResult Create()

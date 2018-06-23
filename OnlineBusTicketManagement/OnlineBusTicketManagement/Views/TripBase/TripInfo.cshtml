@@ -4,7 +4,80 @@
     ViewBag.Title = "TripInfo";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script>
+
+
+<div class="row">
+    <div class="col-lg-4">
+        @Html.Partial("NavbarPartial")
+
+    </div>
+    <div class="col-lg-8">
+        <h2>TripInfo</h2>
+
+        <div>
+            @using (Html.BeginForm("Create", "TripBase", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <h4>TripBase</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
+                    @Html.HiddenFor(model => model.CreatedBy)
+                    @Html.HiddenFor(model => model.CreatedOn)
+                    @Html.HiddenFor(model => model.UpdatedBy)
+                    @Html.HiddenFor(model => model.UpdatedOn)
+
+
+                    <div class="form-group">
+                        @Html.Label("Bus Operator", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.BusOperatorId, (SelectList)ViewBag.BusOperatorList, new { @class = "form-control", @id = "busOparetorDrpDown" })
+                            @Html.ValidationMessageFor(model => model.BusOperatorId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Route</label>
+                        <div class="col-md-10">
+                            <select class="selectpicker form-control" name="RouteId" id="routeDropDown"></select>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DepartureTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @*<input name="DepartureTime" type="datetime" class="form-control"/>*@
+                            @Html.TextBoxFor(m => m.DepartureTime, "{0:HH:mm}", new { @class = "form-control", type = "time" })
+                            @*@Html.EditorFor(model => model.DepartureTime, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.ValidationMessageFor(model => model.DepartureTime, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BusType, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @*@Html.EditorFor(model=>model.BusType, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.EnumDropDownListFor(model => model.BusType, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.BusType, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div>
+                @Html.ActionLink("Back to List", "Index", Model)
+            </div>
+
+            @section Scripts {
+                <script>
     $(document).ready(function () {
         $("#busOparetorDrpDown").change(function () {
             var id = $("#busOparetorDrpDown option:selected").val();
@@ -37,81 +110,7 @@
     });
 
 
-</script>
-
-<div class="row">
-    <div class="col-lg-4">
-        @Html.Partial("NavbarPartial")
-
-    </div>
-    <div class="col-lg-8">
-        <h2>TripInfo</h2>
-
-        <div>
-            @using (Html.BeginForm("Create", "TripBase", FormMethod.Post))
-            {
-                @Html.AntiForgeryToken()
-
-                <div class="form-horizontal">
-                    <h4>TripBase</h4>
-                    <hr />
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.HiddenFor(model => model.Id)
-                    @Html.HiddenFor(model=>model.CreatedBy)
-                    @Html.HiddenFor(model=>model.CreatedOn)
-                    @Html.HiddenFor(model=>model.UpdatedBy)
-                    @Html.HiddenFor(model=>model.UpdatedOn)
-                    
-
-                    <div class="form-group">
-                        @Html.Label("Bus Operator", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.DropDownListFor(model => model.BusOperatorId, (SelectList)ViewBag.BusOperatorList, new { @class = "form-control", @id = "busOparetorDrpDown" })
-                            @Html.ValidationMessageFor(model => model.BusOperatorId, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-2">Route</label>
-                        <div class="col-md-10">
-                            <select class="selectpicker form-control" name="RouteId" id="routeDropDown"></select>
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.DepartureTime, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @*<input name="DepartureTime" type="datetime" class="form-control"/>*@
-                            @Html.TextBoxFor(m => m.DepartureTime, "{0:HH:mm}", new { @class = "form-control" ,type="time"})
-                            @*@Html.EditorFor(model => model.DepartureTime, new { htmlAttributes = new { @class = "form-control" } })*@
-                            @Html.ValidationMessageFor(model => model.DepartureTime, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.BusType, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @*@Html.EditorFor(model=>model.BusType, new { htmlAttributes = new { @class = "form-control" } })*@
-                            @Html.EnumDropDownListFor(model => model.BusType, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.BusType, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Save" class="btn btn-default" />
-                        </div>
-                    </div>
-                </div>
-            }
-
-            <div>
-                @Html.ActionLink("Back to List", "Index", Model)
-            </div>
-
-            @section Scripts {
-
-                @Scripts.Render("~/bundles/jqueryval")
+                </script>
             }
 
         </div>
