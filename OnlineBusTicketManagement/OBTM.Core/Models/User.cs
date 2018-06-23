@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.Spatial;
+using System.Web.Mvc;
 
 namespace OBTM.Core.Models
 {
@@ -15,11 +15,13 @@ namespace OBTM.Core.Models
         [Required]
         [StringLength(50)]
         [Display(Name ="User Name")]
+        [Remote("IsUserNameExist", "User",HttpMethod ="POST",ErrorMessage ="User Name already Exist")]
         public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
         [StringLength(50)]
+        [Remote("IsEmailExist", "User", HttpMethod = "POST", ErrorMessage = "Email already registered")]
         public string Email { get; set; }
 
         [Required]

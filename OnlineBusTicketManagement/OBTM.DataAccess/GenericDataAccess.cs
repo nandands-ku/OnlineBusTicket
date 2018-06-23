@@ -31,7 +31,18 @@ namespace OBTM.DataAccess
 
         public List<TEntity> GetAll()
         {
-            return OBTMDbSet.ToList();
+
+            var list = OBTMDbSet.ToList();
+            //foreach (var item in list)
+            //{
+            //    PropertyInfo property = item.GetType().GetProperty("IsDeleted");
+            //    var value=property.GetValue(item);
+            //    if((bool)value)
+            //    {
+            //        list.Remove(item);
+            //    }
+            //}
+            return list;
         }
 
         public TEntity GetById(object id)
@@ -41,12 +52,20 @@ namespace OBTM.DataAccess
 
         public int Save(TEntity entity)
         {
+            PropertyInfo property =  entity.GetType().GetProperty("CreatedBy");
+            property.SetValue(entity,HttpContext.Current.Session["User"], null);
+            property = entity.GetType().GetProperty("CreatedOn");
+            property.SetValue(entity,DateTime.Now, null);
             OBTMDbSet.Add(entity);
             return OBTMDbContext.SaveChanges();
         }
 
         public int Update(TEntity entity)
         {
+            PropertyInfo property = entity.GetType().GetProperty("UpdatedBy");
+            property.SetValue(entity, HttpContext.Current.Session["User"], null);
+            property = entity.GetType().GetProperty("UpdatedOn");
+            property.SetValue(entity, DateTime.Now, null);
             OBTMDbContext.Entry(entity).State = EntityState.Modified;
             return OBTMDbContext.SaveChanges();
         }
@@ -56,7 +75,7 @@ namespace OBTM.DataAccess
             var obj = OBTMDbSet.Find(id);
             //Type type = obj.GetType();
             PropertyInfo property = obj.GetType().GetProperty("IsDeleted");
-            property.SetValue(obj, Convert.ChangeType(1, property.PropertyType), null);
+            property.SetValue(obj,true, null);
             return OBTMDbContext.SaveChanges();
         }
     }

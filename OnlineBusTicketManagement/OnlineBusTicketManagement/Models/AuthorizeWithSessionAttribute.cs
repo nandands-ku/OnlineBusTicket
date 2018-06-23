@@ -20,7 +20,7 @@ namespace OnlineBusTicketManagement.Models
 
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
-            filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary { {"action","LogIn" }, {"controller","User" } });
+            filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary { {"action","Index" }, {"controller","User" } });
         }
     }
 }

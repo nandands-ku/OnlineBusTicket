@@ -9,6 +9,6 @@ namespace OBTM.Core.Interfaces
 {
     public interface IUserRepository:IGenericRepository<User>
     {
-
+        bool IsExist(String userName);
     }
 }

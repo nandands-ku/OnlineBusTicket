@@ -18,6 +18,7 @@ namespace OBTM.Core.Models
         public int Id { get; set; }
 
         [StringLength(50)]
+        [Display(Name ="Route")]
         public string RouteName { get; set; }
 
         public int? ReverseId { get; set; }

@@ -21,8 +21,9 @@ namespace OBTM.Core.Models
         
         [StringLength(50)]
         [Required]
-        public string Name { get; set; } 
-        
+        [Display(Name="Bus Operator")]
+        public string Name { get; set; }
+
         [Display(Name = "Email Address")]
         [Required(ErrorMessage = "Email is required.")]
         [EmailAddress(ErrorMessage = "Invalid Email Address.")]
