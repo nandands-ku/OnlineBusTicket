@@ -4,10 +4,11 @@
     ViewBag.Title = "TicketDetails_";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
+<h3 style="padding-left:450px">Your ticket is confirmed</h3>
+<div class="col-sm-offset-3 col-sm-8">
 
-<h3>Your ticket is confirmed</h3>
-@using (Html.BeginForm("SearchBus", "BusSearch"))
-{    <div>
+    @using (Html.BeginForm("SearchBus", "BusSearch"))
+    {
         <hr />
         <dl class="dl-horizontal">
             @*@Html.HiddenFor(model => model.Id)*@
@@ -60,8 +61,10 @@
             </dd>
 
         </dl>
-    </div>
-<p>
-    <input type="button" class="btn btn-info" value="Okay" />
-</p>
-}
+        <p>
+            <input type="button" class="btn btn-info" value="Okay" />
+        </p>
+    }
+</div>
+
+
