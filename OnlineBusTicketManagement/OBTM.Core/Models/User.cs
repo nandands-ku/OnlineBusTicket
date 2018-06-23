@@ -24,7 +24,7 @@ namespace OBTM.Core.Models
 
         [Required]
         [DataType(DataType.Password)]
-        [StringLength(100)]
+        [StringLength(128)]
         public string Password { get; set; }
 
         public bool? IsActive { get; set; }

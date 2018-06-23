@@ -94,6 +94,7 @@
     <Compile Include="Interfaces\ITicketRepository.cs" />
     <Compile Include="Models\BookingTicket.cs" />
     <Compile Include="Models\BusOperator.cs" />
+    <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\DateWiseTrip.cs" />
     <Compile Include="Models\DateWiseTripEditView.cs" />
     <Compile Include="Models\DateWiseTripView.cs" />

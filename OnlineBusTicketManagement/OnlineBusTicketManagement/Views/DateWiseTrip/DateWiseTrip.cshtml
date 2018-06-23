@@ -117,7 +117,7 @@
             <div class="form-horizontal col-md-3">
                 <div class="form-group">
                     @Html.Label("Select Bus")
-                    @Html.DropDownListFor(model => model.BusOperator.Id, (SelectList)ViewBag.BusOperator, "Select Bus", new { @class = "form-control", required = "required", value = "0" })
+                    @Html.DropDownListFor(model => model.BusOperator.Id, (SelectList)ViewBag.BusOperator, new { @class = "form-control", required = "required", value = "0" })
                 </div>
             </div>
 
