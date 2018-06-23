@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace OBTM.Core.Models
 {
-    public class ChangePasswordViewModel
+    public class ChangePasswordView
     {
+        public int UserId { get; set; }
+
+        public string SubmissionMessage { get; set; }
+
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Current password")]

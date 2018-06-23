@@ -392,7 +392,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\User\ChangePassword.cshtml" />
+    <Content Include="Views\User\ChangePassWord.cshtml" />
     <Content Include="Views\Shared\UserLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>

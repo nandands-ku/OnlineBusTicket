@@ -49,8 +49,7 @@ namespace OnlineBusTicketManagement.Controllers
 
             else
             {
-                byte[] hashedPassword = GetHashedPassword(user.Password + user.UserName);
-                user.Password = GetStringFromHash(hashedPassword);
+                user.Password = GetHashedPassword(user.Password + user.UserName);
                 userService.Save(user);
                 return RedirectToAction("ViewUsers");
             }
@@ -59,17 +58,23 @@ namespace OnlineBusTicketManagement.Controllers
 
         public ActionResult LogIn(UserView user)
         {
-            byte[] hashedPassword = GetHashedPassword(user.Password + user.UserName);
-            user.Password = GetStringFromHash(hashedPassword);
-            var validUser = userService.GetAll().Where(m => m.UserName == user.UserName && m.Password == user.Password).ToList();
-            if(validUser.Count>0)
+            if (ModelState.IsValid)
             {
-                HttpContext.Session["User"] = user.UserName;
-                return RedirectToAction("ViewDashBoard");
+                user.Password = GetHashedPassword(user.Password + user.UserName);
+                var validUser = userService.GetAll().Where(m => m.UserName == user.UserName && m.Password == user.Password).ToList();
+                if (validUser.Count > 0)
+                {
+                    HttpContext.Session["User"] = user.UserName;
+                    return RedirectToAction("ViewDashBoard");
+                }
+                else
+                {
+                    HttpContext.Session["User"] = null;
+                    return RedirectToAction("Index");
+                }
             }
             else
             {
-                HttpContext.Session["User"] = null;
                 return RedirectToAction("Index");
             }
                
@@ -87,9 +92,44 @@ namespace OnlineBusTicketManagement.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult ChangePassWord()
+        public ActionResult ChangePassWord(int id)
         {
-            return View();
+            ChangePasswordView changePasswordViewModel = new ChangePasswordView
+            {
+                UserId = id
+            };
+            return View(changePasswordViewModel);
+        }
+
+        public ActionResult ChangePasswordConfirmed(ChangePasswordView changePasswordViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = new User();
+
+                user = userService.GetById(changePasswordViewModel.UserId);
+
+                string oldPassword = changePasswordViewModel.OldPassword;
+                string oldPasswordHash = GetHashedPassword(oldPassword + user.UserName);
+
+                if (oldPasswordHash == user.Password)
+                {
+                    user.Password = GetHashedPassword(userPassword: changePasswordViewModel.ConfirmPassword + user.UserName);
+                    userService.Update(user);
+                    return RedirectToAction("ViewUsers");
+                }
+                else
+                {
+                    changePasswordViewModel.SubmissionMessage = "Password wrong! Enter Correct password";
+                    return View("ChangePassWord", changePasswordViewModel);
+                }
+            }
+            else
+            {
+                return View("ChangePassWord", changePasswordViewModel);
+            }
+
+            
         }
 
         private static string GetStringFromHash(byte[] hash)
@@ -102,15 +142,17 @@ namespace OnlineBusTicketManagement.Controllers
             return result.ToString();
         }
 
-        private static byte[] GetHashedPassword(string userPassword)
+        private string  GetHashedPassword(string userPassword)
         {
-            byte[] hashedPassword;
+            byte[] hashedPasswordBytes;
             byte[] passwordByteStream;
 
             SHA512 sHA512 = new SHA512Managed();
 
             passwordByteStream = Encoding.UTF8.GetBytes(userPassword);
-            hashedPassword = sHA512.ComputeHash(passwordByteStream);
+            hashedPasswordBytes = sHA512.ComputeHash(passwordByteStream);
+
+            string hashedPassword = GetStringFromHash(hashedPasswordBytes);
 
             return hashedPassword;
         }

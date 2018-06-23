@@ -71,5 +71,6 @@ namespace OBTM.Core.Models
                .WithRequired(e => e.BusOperator)
                .WillCascadeOnDelete(false);
         }
+
     }
 }
