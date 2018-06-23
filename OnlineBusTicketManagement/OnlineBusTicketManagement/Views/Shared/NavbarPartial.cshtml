@@ -56,15 +56,16 @@
     <nav class="nav-sidebar">
         <ul class="nav">
             @if (HttpContext.Current.Session["User"] != null)
-            {
-                <li><a>@HttpContext.Current.Session["User"] </a> </li>
-                <li>@Html.ActionLink("Log Out", "LogOut", "User")</li>
-            }
+    {
+        <li><a>@HttpContext.Current.Session["User"] </a> </li>
+        <li>@Html.ActionLink("Log Out", "LogOut", "User")</li>
+}
 
             <li>@Html.ActionLink("Bus Operator", "Index", "BusOperator")</li>
             <li>@Html.ActionLink("Route", "Index", "Route")</li>
             <li>@Html.ActionLink("Trip", "Index", "TripBase")</li>
             <li>@Html.ActionLink("Datewise Trip", "Index", "DateWiseTrip")</li>
+            <li>@Html.ActionLink("Admin", "ViewUsers", "User")</li>
         </ul>
 
     </nav>

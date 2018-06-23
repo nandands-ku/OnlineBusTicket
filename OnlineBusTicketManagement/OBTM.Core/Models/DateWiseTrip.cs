@@ -19,13 +19,10 @@ namespace OBTM.Core.Models
 
         public int TripBaseId { get; set; }
         //public virtual TripBase GetTripBase { get; set; }
-        [Range(1, 40,
-        ErrorMessage = "Value for {0} must be between {1} and {2}.")]
+
         [Display(Name ="Number Of Seat")]
         public int NoOfSeat { get; set; }
 
-        [Range(0, maximum:Int32.MaxValue,
-        ErrorMessage = "Value for {0} must be between {1} and {2}.")]
         public int Fare { get; set; }
 
         public bool? IsActive { get; set; }

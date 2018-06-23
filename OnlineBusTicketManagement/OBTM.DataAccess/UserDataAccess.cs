@@ -17,7 +17,7 @@ namespace OBTM.DataAccess
 
         public bool IsExist(string key)
         {
-            return OBTMDbContext.Users.Any(m=>m.UserName== key) ||OBTMDbContext.Users.Any(m=>m.Email== key);
+            return OBTMDbContext.Users.Any(m=>m.IsDeleted!=true&&m.UserName== key) ||OBTMDbContext.Users.Any(m=> m.IsDeleted != true && m.Email== key);
         }
     }
 }

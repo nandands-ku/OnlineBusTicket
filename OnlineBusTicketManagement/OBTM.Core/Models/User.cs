@@ -26,6 +26,7 @@ namespace OBTM.Core.Models
 
         [Required]
         [DataType(DataType.Password)]
+        [MinLength(6)]
         [StringLength(128)]
         public string Password { get; set; }
 
