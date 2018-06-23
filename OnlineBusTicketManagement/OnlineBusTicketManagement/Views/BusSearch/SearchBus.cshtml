@@ -5,23 +5,14 @@
     /**/
 
     ViewBag.Title = "SearchBus";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 <div class="row">
-    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-        <div class="container-fluid navbar-right">
-
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("LogIn", "Index", "User")</li>
-                <li>@Html.ActionLink("Cancel Ticket", "CancelTicketView", "Ticket")</li>
-            </ul>
-        </div>
-        
-    </nav>
 
     @*<div style="padding-left:800px">
         </div>*@
-    <h2 style="padding-left:320px">Search Bus</h2>
-    <div class="col-sm-8" style="margin:auto; float:none">
+    <h2 style="padding-left:450px">Search Bus</h2>
+    <div class="col-sm-offset-3 col-sm-8" style="">
 
         @using (Html.BeginForm("SearchResult", "BusSearch", FormMethod.Post))
         {

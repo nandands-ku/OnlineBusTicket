@@ -260,6 +260,8 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\demo.css" />
+    <Content Include="Content\footer-distributed-with-address-and-phones.css" />
     <Content Include="Content\Picture\Green.png" />
     <Content Include="Content\Picture\images.png" />
     <Content Include="Content\Picture\Red.png" />
@@ -391,6 +393,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\User\ChangePassword.cshtml" />
+    <Content Include="Views\Shared\UserLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

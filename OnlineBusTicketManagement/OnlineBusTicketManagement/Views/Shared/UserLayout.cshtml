@@ -43,6 +43,18 @@
             <h3 style="color:white; text-align:center;">Online Bus Ticket</h3>
         </div>
     </div>
+    <div class="row rounded">
+        <nav class="navbar navbar-light" style="background-color: #2dcf74; width:1170px; margin:0;">
+            <div class="container-fluid navbar-right">
+
+                <ul class="nav navbar-nav">
+                    <li >@Html.ActionLink("LogIn", "Index", "User")</li>
+                    <li>@Html.ActionLink("Cancel Ticket", "CancelTicketView", "Ticket")</li>
+                </ul>
+            </div>
+
+        </nav>
+    </div>
 
     <div class="row" style="min-height:70vh;">
         @RenderBody()
@@ -79,7 +91,7 @@
             <div class="footer-right">
                 <p class="footer-company-about">
                     <span>About the company</span>
-
+                     
                 </p>
                 <div class="footer-icons">
                     <a href="#"><i class="fa fa-facebook"></i></a>
