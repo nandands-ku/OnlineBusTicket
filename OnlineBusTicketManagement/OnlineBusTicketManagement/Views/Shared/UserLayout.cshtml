@@ -11,8 +11,7 @@
     <title>@ViewBag.Title - OnlineBusTicket.com</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -48,7 +47,7 @@
             <div class="container-fluid navbar-right">
 
                 <ul class="nav navbar-nav">
-                    <li >@Html.ActionLink("LogIn", "Index", "User")</li>
+                    <li>@Html.ActionLink("LogIn", "Index", "User")</li>
                     <li>@Html.ActionLink("Cancel Ticket", "CancelTicketView", "Ticket")</li>
                 </ul>
             </div>
@@ -91,7 +90,7 @@
             <div class="footer-right">
                 <p class="footer-company-about">
                     <span>About the company</span>
-                     
+
                 </p>
                 <div class="footer-icons">
                     <a href="#"><i class="fa fa-facebook"></i></a>
@@ -102,6 +101,9 @@
             </div>
         </footer>
     </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)
 
 </body>
