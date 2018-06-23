@@ -6,61 +6,62 @@
 }
 
 <h3>Your ticket is confirmed</h3>
+@using (Html.BeginForm("SearchBus", "BusSearch"))
+{    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            @*@Html.HiddenFor(model => model.Id)*@
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
 
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        @*@Html.HiddenFor(model => model.Id)*@
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CellNo)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CellNo)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CellNo)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.CellNo)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.TotalFare)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TotalFare)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TotalFare)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.TotalFare)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Seats)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Seats)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Seats)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Seats)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.TicketPIN)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TicketPIN)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TicketPIN)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.TicketPIN)
-        </dd>
-
-    </dl>
-</div>
+        </dl>
+    </div>
 <p>
-    @Html.ActionLink("Okay", "SearchBus","BusSearch")
+    <input type="button" class="btn btn-info" value="Okay" />
 </p>
+}

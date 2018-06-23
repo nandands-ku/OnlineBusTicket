@@ -10,9 +10,18 @@
 
 
     <style>
+        .vl {
+            border-left: 1px solid #808080;
+            height: 500px;
+            position: absolute;
+            left: 60%;
+            margin-left: -3px;
+            top: 0;
+        }
+
         .nav-sidebar {
             width: 100%;
-            min-height:70vh;
+            min-height: 70vh;
             padding: 8px 0;
             border-right: 1px solid #ddd;
         }
@@ -63,7 +72,9 @@
             <li>@Html.ActionLink("Trip", "Index", "TripBase")</li>
             <li>@Html.ActionLink("Datewise Trip", "Index", "DateWiseTrip")</li>
         </ul>
+
     </nav>
+    @*<div class="vl"></div>*@
 </body>
 </html>
 
