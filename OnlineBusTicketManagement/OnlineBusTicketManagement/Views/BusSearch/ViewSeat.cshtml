@@ -6,7 +6,53 @@
 
 
 <link rel="stylesheet" href="~/Content/SeatPlan.css" />
-<script>
+
+<div id="ViewSeat">
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-lg-8 ">
+            <div class="col-lg-12 ">
+                <h2 style="text-align:center">Choose Seat</h2>
+                <div class="row" id="holder">
+                    <ul id="place"></ul>
+                </div>
+                <div id="seatColorInd" class="row">
+                    <ul id="seatDescription">
+                        <li>Available Seat</li>
+                        <li style="background-color: #696e72;">Reserved Seat</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6 col-lg-4" style="margin-top:63px">
+            <div class="row">
+                <lebel style="font-size:larger; font-weight:normal">Selected Seats:</lebel>
+                <label style="font-size:x-large" id="selectedSeats"></label>
+                <hr />
+            </div>
+            <div class="row">
+                <label style="font-size:larger; font-weight:normal">Fare per seat:</label>
+                <lebel style="font-size:x-large" id="perFare"></lebel>
+                <hr />
+            </div>
+            <div class="row">
+                <label style="font-size:larger;font-weight:normal">Total Fare:</label>
+                <label id="totalFare"></label>
+                <hr />
+            </div>
+            <div class="row">
+                <div class="col-xs-3 col-md-4 col-lg-5">
+                    <button class="btn btn-primary" type="submit" id="purchase">Continue Purchase</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script>
     $(document).ready(function () {
     var settings = {
         rows: 10,
@@ -47,11 +93,7 @@
     //case I: Show from starting
     //init();
     //Case II: If already booked
-
-
-
-        debugger;
-    // var bookedSeats = [5, 10, 25];
+        
         init(availableSeats);
     var noOfSelectedSeat = 0;
         var totalFare = 0;
@@ -81,7 +123,6 @@
     });
 
         $('#purchase').click(function () {
-            debugger;
             if (seatList.length==0) {
                 alert("No seat is selected");
                 return false;
@@ -94,87 +135,7 @@
 });
 
 
-</script>
-<div id="ViewSeat">
-    <div class="row">
-        <div class="col-xs-12 col-md-6 col-lg-8 ">
-            <div class="col-lg-12 ">
-                <h2 style="text-align:center">Choose Seat</h2>
-                <div class="row" id="holder">
-                    <ul id="place"></ul>
-                </div>
-                <div id="seatColorInd" class="row">
-                    <ul id="seatDescription">
-                        <li>Available Seat</li>
-                        <li style="background-color: #696e72;">Reserved Seat</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-6 col-lg-4" style="margin-top:63px">
-            <div class="row">
-                <lebel style="font-size:larger; font-weight:normal">Selected Seats:</lebel>
-                <label style="font-size:x-large" id="selectedSeats"></label>
-                <hr/>
-            </div>
-            <div class="row">
-                <label style="font-size:larger; font-weight:normal">Fare per seat:</label>
-                <lebel style="font-size:x-large" id="perFare"></lebel>
-                <hr/>
-            </div>
-            <div class="row">
-                <label style="font-size:larger;font-weight:normal">Total Fare:</label>
-                <label id="totalFare"></label>
-                <hr/>
-            </div>
-            <div class="row">
-                <div class="col-xs-3 col-md-4 col-lg-5">
-                    <button class="btn btn-primary" type="submit" id="purchase">Continue Purchase</button>
-                </div>
-               
-            </div>
-        </div>
-    </div>
-</div>
+    </script>
+}
 
-
-
-
-
-
-
-
-@*$('#btnShow').click(function () {
-
-        var str = [];
-        $.each($('#place li.' + settings.selectedSeatCss + ' a, #place li.' + settings.selectingSeatCss + ' a'), function (index, value) {
-            str.push($(this).attr('title'));
-        });
-        alert(str.join(','));
-    })
-
-
-    $('#btnShowNew').click(function () {
-        $.each($('#place li.' + settings.selectingSeatCss + ' a'), function (index, value) {
-            item = $(this).attr('title');
-            seatList.push(item);
-        });
-        alert(seatList.join(','));
-        })*@
-@*<h2> Choose seats by clicking the corresponding seat in the layout below:</h2>
-    <div>
-         @for (int i = 0; i < 10; i++)
-         {
-             for (int j = 0; j < 4; j++)
-             {
-                 {
-                     var seatNo = i * 4 + @j + 1;
-                     // var bookedSeats = ViewBag.SeatList;
-                     if ((ViewBag.SeatList).Contains(seatNo))
-                         <a class="">@seatNo</a>
-                     }
-                 }
-
-             }
-     </div>*@
 

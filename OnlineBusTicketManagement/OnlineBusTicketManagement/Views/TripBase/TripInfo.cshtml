@@ -12,15 +12,13 @@
 
     </div>
     <div class="col-md-8 col-lg-8">
-        <h2>TripInfo</h2>
-
         <div>
             @using (Html.BeginForm("Create", "TripBase", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
 
                 <div class="form-horizontal">
-                    <h4>TripBase</h4>
+                    <h2>Trip Details</h2>
                     <hr />
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.HiddenFor(model => model.Id)
@@ -71,7 +69,7 @@
             }
 
             <div>
-                @Html.ActionLink("Back to List", "Index", Model)
+                @Html.ActionLink("Back to List", "Index", new { operatorId = Model.BusOperatorId, routeId = Model.RouteId })
             </div>
 
             @section Scripts {
@@ -88,7 +86,7 @@
             $.ajax({
                 type: "GET",
                 url: "/TripBase/GetBusRoute",
-                data: { id: id },
+                data: { operatorId: id },
                 //cache: false,
 
                 success: function (data) {

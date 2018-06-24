@@ -22,16 +22,17 @@ namespace OnlineBusTicketManagement.Controllers
         OperatorRouteMapService operatorRouteMapService = new OperatorRouteMapService();
 
         // GET: TripBase
-        public ActionResult Index(TripBase trip)
+        public ActionResult Index(int operatorId=0, int routeId=0)
         {
-            ViewBag.BusOperatorList = new SelectList(busOperatorService.GetAll().Where(m=>m.IsDeleted!=true).ToList(), "Id", "Name");
+            TripBase trip = new TripBase() { BusOperatorId = operatorId , RouteId = routeId };
+            ViewBag.BusOperatorList = new SelectList(busOperatorService.GetAll().Where(m => m.IsDeleted != true).ToList(), "Id", "Name");
             return View(trip);
         }
 
         [HttpGet]
-        public JsonResult GetBusRoute(int id)
+        public JsonResult GetBusRoute(int operatorId)
         {
-            var routesIdList = operatorRouteMapService.GetAll().Where(m => m.IsDeleted != true&& m.BusOperatorId == id).Select(m => new { m.Route.Id, m.Route.RouteName }).ToList();
+            var routesIdList = operatorRouteMapService.GetAll().Where(m => m.IsDeleted != true && m.BusOperatorId == operatorId).Select(m => new { m.Route.Id, m.Route.RouteName }).ToList();
             return Json(routesIdList, JsonRequestBehavior.AllowGet);
         }
 
@@ -44,11 +45,11 @@ namespace OnlineBusTicketManagement.Controllers
             return PartialView("TripPartial", tripList);
         }
 
-        
+
         public ActionResult CreateTrip(int operatorId, int routeId)
         {
-            ViewBag.BusOperatorList = new SelectList(busOperatorService.GetAll().Where(m => m.IsDeleted != true).ToList(), "Id","Name");
-            TripBase temp = new TripBase() { BusOperatorId = operatorId, RouteId = routeId};
+            ViewBag.BusOperatorList = new SelectList(busOperatorService.GetAll().Where(m => m.IsDeleted != true).ToList(), "Id", "Name");
+            TripBase temp = new TripBase() { BusOperatorId = operatorId, RouteId = routeId };
             return View("TripInfo", temp);
         }
 
@@ -56,25 +57,25 @@ namespace OnlineBusTicketManagement.Controllers
         [HttpPost]
         public ActionResult Create(TripBase trip)
         {
-            if(trip.Id==0)
+            if (trip.Id == 0)
                 tripBaseService.Save(trip);
             else
                 tripBaseService.Update(trip);
-            return RedirectToAction("Index",trip);
-            
-        }
-      
-        public ActionResult Edit(int Id)
-        {
-            ViewBag.BusOperatorList = new SelectList(busOperatorService.GetAll().Where(m => m.IsDeleted != true).ToList(), "Id", "Name");
-            return View("TripInfo", tripBaseService.GetById(Id));
+            return RedirectToAction("Index",new { operatorId=trip.BusOperatorId, routeId=trip.RouteId });
+
         }
 
-        public ActionResult Delete(int Id)
+        public ActionResult Edit(int tripId)
         {
-            tripBaseService.Delete(Id);
-            TripBase temp = tripBaseService.GetById(Id);
-            return RedirectToAction("Index", temp);
+            ViewBag.BusOperatorList = new SelectList(busOperatorService.GetAll().Where(m => m.IsDeleted != true).ToList(), "Id", "Name");
+            return View("TripInfo", tripBaseService.GetById(tripId));
+        }
+
+        public ActionResult Delete(int tripId)
+        {
+            tripBaseService.Delete(tripId);
+            TripBase trip = tripBaseService.GetById(tripId);
+            return RedirectToAction("Index", new { operatorId = trip.BusOperatorId, routeId = trip.RouteId });
         }
 
     }

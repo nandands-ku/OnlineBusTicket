@@ -131,7 +131,5 @@ namespace OnlineBusTicketManagement.Controllers
         //    return Json(dateWiseTripFilter, JsonRequestBehavior.AllowGet);
         //}
 
-
-
     }
 }
