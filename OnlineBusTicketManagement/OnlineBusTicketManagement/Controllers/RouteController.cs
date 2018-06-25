@@ -103,12 +103,15 @@ namespace OnlineBusTicketManagement.Controllers
                 var FromLocation = ls.GetById(routeView.From);
                 Routes.Add(FromLocation.Location);
 
-
-                foreach (var item in routeView.Via)
+                if (routeView.Via!=null)
                 {
-                    var ViaLocation = ls.GetById(item);
-                    Routes.Add(ViaLocation.Location);
+                    foreach (var item in routeView.Via)
+                    {
+                        var ViaLocation = ls.GetById(item);
+                        Routes.Add(ViaLocation.Location);
+                    }
                 }
+
                 var ToLocation = ls.GetById(routeView.To);
                 Routes.Add(ToLocation.Location);
 
@@ -138,11 +141,15 @@ namespace OnlineBusTicketManagement.Controllers
                     orm.Save(opReverse);
                     int k = 1;
                     rps.Save(new RoutePoints() { RouteId = rr.Id, LocationId = routeView.To, SequenceId = k, IsFrom = true });
-                    foreach (var item in routeView.Via.Reverse<int>())
+                    if (routeView.Via != null)
                     {
-                        k++;
-                        rps.Save(new RoutePoints() { RouteId = rr.Id, LocationId = (int)item, SequenceId = k });
+                        foreach (var item in routeView.Via.Reverse<int>())
+                        {
+                            k++;
+                            rps.Save(new RoutePoints() { RouteId = rr.Id, LocationId = (int)item, SequenceId = k });
+                        }
                     }
+
                     rps.Save(new RoutePoints() { RouteId = rr.Id, LocationId = routeView.From, SequenceId = ++k, IsTo = true });
                 }
                 #endregion
@@ -155,10 +162,14 @@ namespace OnlineBusTicketManagement.Controllers
 
                 int j = 1;
                 rps.Save(new RoutePoints() { RouteId = r.Id, LocationId = routeView.From, SequenceId = j, IsFrom = true });
-                foreach (var item in routeView.Via)
+
+                if (routeView.Via != null)
                 {
-                    j++;
-                    rps.Save(new RoutePoints() { RouteId = r.Id, LocationId = (int)item, SequenceId = j });
+                    foreach (var item in routeView.Via)
+                    {
+                        j++;
+                        rps.Save(new RoutePoints() { RouteId = r.Id, LocationId = (int)item, SequenceId = j });
+                    }
                 }
 
                 rps.Save(new RoutePoints() { RouteId = r.Id, LocationId = routeView.To, SequenceId = ++j, IsTo = true });
