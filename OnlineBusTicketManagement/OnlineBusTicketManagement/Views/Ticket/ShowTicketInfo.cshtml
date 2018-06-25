@@ -4,11 +4,11 @@
     ViewBag.Title = "ShowTicketInfo";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
-<div>
+<div class="row" style="width:1170px; margin:auto">
 
-@using (Html.BeginForm("TicketDetails_", "Ticket"))
-{
-    @Html.AntiForgeryToken()
+    @using (Html.BeginForm("TicketDetails_", "Ticket"))
+    {
+        @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -18,32 +18,32 @@
             @Html.HiddenFor(model => Model.Bookings[i])
         }*@
 
-        <h3 style="text-align:left">Passenger info</h3>
+        <h3 style="padding-left:30px">Passenger Information</h3>
         <div class="form-group row">
-            @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="form-group col-md-4">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label col-xs-12 col-md-2" })
+            <div class="form-group col-xs-4 col-md-4">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Your Name" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group row">
-                @Html.LabelFor(m => m.CellNo, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="form-group col-md-4">
-                    @Html.EditorFor(model => model.CellNo, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.CellNo, "", new { @class = "text-danger" })
-                </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.CellNo, htmlAttributes: new { @class = "control-label col-xs-12 col-md-2" })
+            <div class="form-group col-xs-4 col-md-4">
+                @Html.EditorFor(model => model.CellNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Your Cell No" } })
+                @Html.ValidationMessageFor(model => model.CellNo, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group row">
-                @Html.LabelFor(m => m.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="form-group col-md-4">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger", type = "email" })
-                </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Email, htmlAttributes: new { @class = "control-label col-xs-12 col-md-2" })
+            <div class="form-group col-xs-4 col-md-4">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Your Email ID" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger", type = "email" })
             </div>
         </div>
 
         <hr height="200px" />
 
-        <h3 style="text-align:left">Ticket info</h3>
+        <h3 style="padding-left:30px">Ticket information</h3>
         <div class="form-group">
             <dl class="dl-horizontal form-group">
                 <dt>
@@ -73,14 +73,12 @@
         @Html.HiddenFor(m => m.TicketPIN)
         @Html.HiddenFor(m => m.Seats)
         @Html.HiddenFor(m => m.TotalFare)
-        @*@Html.HiddenFor(m => m.DateWiseTripID)*@
-
         <hr height="200px" />
-        <h3 style="text-align:left">Payment info</h3>
+        <h3 style="padding-left:30px">Payment information</h3>
         <div class="form-group">
-            <label class="control-label  col-md-2">Credit card no </label>
-            <div class="form-group col-md-4">
-                @Html.EditorFor(model => model.CreditCard, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.LabelFor(m => m.CreditCard, htmlAttributes: new { @class = "control-label col-xs-12 col-md-2" })
+            <div class="form-group  col-xs-4 col-md-4">
+                @Html.EditorFor(model => model.CreditCard, new { htmlAttributes = new { @class = "form-control", @placeholder = "Please Enter Credit Card No" } })
                 @Html.ValidationMessageFor(model => model.CreditCard, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -90,7 +88,7 @@
             </div>
         </div>
     </div>
-}
+    }
 </div>
 
 
