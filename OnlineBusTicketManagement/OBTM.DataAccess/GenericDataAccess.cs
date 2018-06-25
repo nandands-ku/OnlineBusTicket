@@ -57,6 +57,14 @@ namespace OBTM.DataAccess
             property = entity.GetType().GetProperty("CreatedOn");
             property.SetValue(entity,DateTime.Now, null);
             OBTMDbSet.Add(entity);
+            try
+            {
+                OBTMDbContext.SaveChanges();
+            }
+            catch (Exception exp)
+            {
+
+            }
             return OBTMDbContext.SaveChanges();
         }
 

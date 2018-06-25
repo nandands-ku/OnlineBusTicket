@@ -58,6 +58,6 @@ namespace OBTM.Core.Models
         public string UpdatedBy { get; set; }
 
         public DateTime? UpdatedOn { get; set; }
-        public int DateWiseTripID { get; set; }
+        //public int DateWiseTripID { get; set; }
     }
 }

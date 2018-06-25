@@ -18,6 +18,9 @@ namespace OBTM.Core.Models
 
         public int? TicketId { get; set; }
 
+        [StringLength(50)]
+        public string TicketPIN { get; set; }
+
         public bool? IsTempLocked { get; set; }
 
         public bool? IsBooked { get; set; }

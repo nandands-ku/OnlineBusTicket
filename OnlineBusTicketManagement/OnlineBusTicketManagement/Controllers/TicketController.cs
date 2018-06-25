@@ -38,11 +38,9 @@ namespace OnlineBusTicketManagement.Controllers
                 TotalFare = totalFare,
                 TicketPIN = ticketService.RandomNumber().ToString(),
                 //Bookings = bookingTickets,
-                DateWiseTripID=dateWiseTripId
-               
-
+                
             };
-
+            TempData["DateWise"] = dateWiseTripId;
             return View(ticket);
         }
         
@@ -51,7 +49,7 @@ namespace OnlineBusTicketManagement.Controllers
         {
             var id = ticket.Id;
             //var bookingTickets = ticket.Bookings;
-            var bookingTickets = bookingTicketService.GetAll().Where(m => m.DateWiseTripId == ticket.DateWiseTripID && ticket.Seats.Contains(m.SeatName)).ToList();
+            var bookingTickets = bookingTicketService.GetAll().Where(m => m.DateWiseTripId ==(int) TempData["DateWise"] && ticket.Seats.Contains(m.SeatName)).ToList();
 
 
 
@@ -65,16 +63,18 @@ namespace OnlineBusTicketManagement.Controllers
                 TicketPIN = ticket.TicketPIN,
                 CreditCard = ticket.CreditCard
             };
+           
+            
+            ticketService.Save(T);
             foreach (var item in bookingTickets)
             {
                 item.IsTempLocked = false;
                 item.IsBooked = true;
+                item.TicketId = T.Id;
+                item.TicketPIN = ticket.TicketPIN;
                 bookingTicketService.Update(item);
             }
-            
-            ticketService.Save(T);
 
-            
             return View(T);
         }
 
@@ -83,17 +83,27 @@ namespace OnlineBusTicketManagement.Controllers
             return View();
         }
 
+        [HttpPost]
         public ActionResult CancelTicketConfirm(Ticket ticket)
         {
-            var cancel = from objT in dbContext.Tickets where objT.TicketPIN == ticket.TicketPIN select objT;
-            Ticket T = cancel.First();
-            return View(T);
+            var cancel = new TicketService().GetAll().Where(i => i.TicketPIN == ticket.TicketPIN).FirstOrDefault();
+                //from objT in dbContext.Tickets where objT.TicketPIN == ticket.TicketPIN select objT;
+            //Ticket T = cancel.First();
+            return View(cancel);
         }
-        public ActionResult CancelTicketDone(Ticket ticket)
+        [HttpPost]
+        public ActionResult CancelTicketDone(int id)
         {
-            var cancelDone = from obj in dbContext.Tickets where obj.Id == ticket.Id select obj;
-            Ticket T = cancelDone.First();
-            ticketService.DeleteSoft(T.Id);
+           
+            ticketService.DeleteSoft(id);
+            var ticket = ticketService.GetById(id);
+            var bookingTickets = bookingTicketService.GetAll().Where(m => m.TicketPIN ==ticket.TicketPIN && ticket.Seats.Contains(m.SeatName)).ToList();
+            foreach (var item in bookingTickets)
+            {
+                item.IsBooked = false;
+                item.TicketPIN = null;
+                bookingTicketService.Update(item);
+            }
             return RedirectToAction("SearchBus","busSearch");
         }
     }
