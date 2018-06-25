@@ -37,10 +37,13 @@ namespace OBTM.Core.Models
         [StringLength(50)]
         [Display(Name ="Ticket Pin")]
         public string TicketPIN { get; set; }
-        
+
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "Credit Card")]
         public string CreditCard { get; set; }
         
-        public virtual List <BookingTicket> Bookings { get; set; }
+        //public virtual List <BookingTicket> Bookings { get; set; }
 
         public bool? IsActive { get; set; }
 

@@ -37,7 +37,7 @@ namespace OnlineBusTicketManagement.Controllers
                 Seats = seatList,
                 TotalFare = totalFare,
                 TicketPIN = ticketService.RandomNumber().ToString(),
-                Bookings = bookingTickets,
+                //Bookings = bookingTickets,
                 DateWiseTripID=dateWiseTripId
                
 

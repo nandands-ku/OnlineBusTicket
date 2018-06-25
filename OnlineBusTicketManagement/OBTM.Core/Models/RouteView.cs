@@ -8,7 +8,8 @@ namespace OBTM.Core.Models
 {
    public class RouteView
     {
-        public Route Routes { get; set; }
+        //public Route Routes { get; set; }
+        public int? RouteId { get; set; }
         public int BusOperatorId { get; set; }
         public int From { get; set; }
         public List<int> Via { get; set; }

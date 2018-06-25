@@ -85,12 +85,12 @@ namespace OnlineBusTicketManagement.Controllers
             ViewBag.LocationList = new SelectList(context.Locations, "Id", "Location");
             ViewBag.ExistingRouteList = new SelectList(context.Routes, "Id", "RouteName");
 
-            if (routeView.Routes.Id != 0)
+            if (routeView.RouteId.HasValue)
             {
                 #region for selected existing route
                 OperatorRouteMap op = new OperatorRouteMap
                 {
-                    RouteId = routeView.Routes.Id,
+                    RouteId = routeView.RouteId.Value,
                     BusOperatorId = routeView.BusOperatorId
                 };
                 orm.Save(op);
@@ -136,6 +136,14 @@ namespace OnlineBusTicketManagement.Controllers
                         BusOperatorId = routeView.BusOperatorId
                     };
                     orm.Save(opReverse);
+                    int k = 1;
+                    rps.Save(new RoutePoints() { RouteId = rr.Id, LocationId = routeView.To, SequenceId = k, IsFrom = true });
+                    foreach (var item in routeView.Via.Reverse<int>())
+                    {
+                        k++;
+                        rps.Save(new RoutePoints() { RouteId = rr.Id, LocationId = (int)item, SequenceId = k });
+                    }
+                    rps.Save(new RoutePoints() { RouteId = rr.Id, LocationId = routeView.From, SequenceId = ++k, IsTo = true });
                 }
                 #endregion
                 OperatorRouteMap op = new OperatorRouteMap
