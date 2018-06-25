@@ -5,13 +5,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ViewRoute</h2>
+
 
 <div class="row">
+    
     <div class="col-md-2">
         @Html.Partial("NavbarPartial")
     </div>
     <div class="col-md-10">
+        <h3>View Routes</h3>
         <input type="button" class="btn btn-success" value="Create New" onclick="location.href='@Url.Action("CreateRoute", "Route")'" />
         <table class="table">
             <tr>
@@ -26,36 +28,36 @@
             </tr>
 
             @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
 
-                    <td>
-                        @foreach (var itm in item.OperatorRouteMaps)
-                        {
-                            <table>
-                                @if (itm.IsDeleted == null || itm.IsDeleted == false)
-                                {
-                                    <tr>
-                                        <td>@itm.Route.RouteName</td>
-                                        <td>                                           
-                                            @Html.ActionLink("Delete", "Delete", new { id = itm.Id })
-                                        </td>
-                                    </tr>
+                <td>
+                    @foreach (var itm in item.OperatorRouteMaps)
+                {
+                    <table>
+                        @if (itm.IsDeleted == null || itm.IsDeleted == false)
+                    {
+                        <tr>
+                            <td>@itm.Route.RouteName</td>
+                            <td>
+                                @Html.ActionLink("Delete", "Delete", new { id = itm.Id })
+                            </td>
+                        </tr>
 
-                                }
-                            </table>
-                        }
-
-
-                    </td>
-                </tr>
+                }
+                    </table>
             }
+
+
+                </td>
+            </tr>
+    }
 
         </table>
 

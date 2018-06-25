@@ -52,19 +52,12 @@ namespace OBTM.DataAccess
 
         public int Save(TEntity entity)
         {
-            PropertyInfo property =  entity.GetType().GetProperty("CreatedBy");
-            property.SetValue(entity,HttpContext.Current.Session["User"], null);
+            PropertyInfo property = entity.GetType().GetProperty("CreatedBy");
+            property.SetValue(entity, HttpContext.Current.Session["User"], null);
             property = entity.GetType().GetProperty("CreatedOn");
-            property.SetValue(entity,DateTime.Now, null);
+            property.SetValue(entity, DateTime.Now, null);
             OBTMDbSet.Add(entity);
-            try
-            {
-                OBTMDbContext.SaveChanges();
-            }
-            catch (Exception exp)
-            {
-
-            }
+            OBTMDbContext.SaveChanges();
             return OBTMDbContext.SaveChanges();
         }
 
@@ -83,7 +76,7 @@ namespace OBTM.DataAccess
             var obj = OBTMDbSet.Find(id);
             //Type type = obj.GetType();
             PropertyInfo property = obj.GetType().GetProperty("IsDeleted");
-            property.SetValue(obj,true, null);
+            property.SetValue(obj, true, null);
             return OBTMDbContext.SaveChanges();
         }
     }
