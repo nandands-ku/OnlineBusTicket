@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace OnlineBusTicketManagement.Controllers
 {
@@ -100,6 +101,7 @@ namespace OnlineBusTicketManagement.Controllers
         {
             return RedirectToAction("SearchResult", modifySearch);
         }
+        
 
         //[HttpPost]
         //public JsonResult FilterSearchByBus(int busID, int fromLoc, int toLoc, DateTime date)

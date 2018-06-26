@@ -16,12 +16,15 @@ namespace OBTM.Core.Models
         [Display(Name ="Passenger's Name")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Mobile Number is required.")]
         [StringLength(11)]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^([0-9]{11})$", ErrorMessage = "Invalid Mobile Number.")]
         [Display(Name ="Cell No")]
         public string CellNo { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please provide a valid Email Id")]
+        [DataType(DataType.EmailAddress)]
         [StringLength(50)]
         public string Email { get; set; }
 
@@ -40,6 +43,7 @@ namespace OBTM.Core.Models
 
         [Required]
         [StringLength(50)]
+        [RegularExpression(@"^([0-9]{11})$", ErrorMessage = "Invalid Credit Card no.")]
         [Display(Name = "Credit Card")]
         public string CreditCard { get; set; }
         

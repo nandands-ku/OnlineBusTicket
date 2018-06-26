@@ -17,6 +17,7 @@ namespace OBTM.Core.Models
 
         [Required(ErrorMessage ="Enter Password")]
         [StringLength(100)]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
     }

@@ -28,6 +28,7 @@ namespace OBTM.Core.Models
         [Required(ErrorMessage = "Email is required.")]
         [EmailAddress(ErrorMessage = "Invalid Email Address.")]
         [StringLength(50)]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         public bool? IsActive { get; set; }
