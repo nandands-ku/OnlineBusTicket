@@ -9,13 +9,13 @@ namespace OBTM.Core.Models
 {
     public class UserView
     {
-        [Required]
+        [Required(ErrorMessage ="Enter UserName")]
         [StringLength(50)]
         [Display(Name = "User Name")]
         public string UserName { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage ="Enter Password")]
         [StringLength(100)]
         public string Password { get; set; }
 
