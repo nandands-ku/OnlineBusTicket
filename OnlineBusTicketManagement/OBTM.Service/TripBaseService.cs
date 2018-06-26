@@ -25,7 +25,7 @@ namespace OBTM.Service
         public IEnumerable<TripBase> GetRefinedTrips(int routeId, int busOperatorId)
         {
             var tripRepository = GetInstance<ITripBaseRepository>();
-            var result = SafeExecute(() => tripRepository.GetRefinedTrips(routeId, busOperatorId));
+            var result = SafeExecute(() => tripRepository.GetRefinedTrips(routeId, busOperatorId).Where(m=>m.IsDeleted!=true).OrderBy(m=>m.DepartureTime));
             return result.Data;
         }
         public Response<int> Delete(int id)

@@ -74,7 +74,7 @@ namespace OnlineBusTicketManagement.Controllers
                 item.TicketPIN = ticket.TicketPIN;
                 bookingTicketService.Update(item);
             }
-
+            ticketService.SendEmail(ticket);
             return View(T);
         }
 

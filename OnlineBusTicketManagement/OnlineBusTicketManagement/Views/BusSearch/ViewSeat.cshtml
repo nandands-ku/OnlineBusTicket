@@ -93,29 +93,35 @@
     //case I: Show from starting
     //init();
     //Case II: If already booked
-        
+
         init(availableSeats);
     var noOfSelectedSeat = 0;
         var totalFare = 0;
         var seatList = [], item;
-    $('.' + settings.seatCss).click(function () {
+        $('.' + settings.seatCss).click(function () {
+
 
         var str = [];
+
         if ($(this).hasClass(settings.selectedSeatCss)) {
             alert('This seat is already reserved');
         }
         else {
-            $(this).toggleClass(settings.selectingSeatCss);
-
+            $(this).toggleClass(settings.selectingSeatCss);    
         }
-
+            
         noOfSelectedSeat = $('#place li.' + settings.selectingSeatCss + ' a').length;
 
         $.each($('#place li.' + settings.selectingSeatCss + ' a'), function (index, value) {
             item = $(this).attr('title');
             str.push(item);
 
-        });
+            });
+            if (str.length > 4) {
+                alert("cannot purchase more than 4 ticket");
+                $(this).toggleClass(settings.selectingSeatCss);
+            }
+            
         totalFare = noOfSelectedSeat * perSeatFare;
         $("#totalFare").text(totalFare);
         $("#selectedSeats").text(str.join(','));

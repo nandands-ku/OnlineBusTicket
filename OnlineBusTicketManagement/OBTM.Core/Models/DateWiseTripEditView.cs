@@ -30,9 +30,9 @@ namespace OBTM.Core.Models
         ErrorMessage = "Value for {0} must be between {1} and {2}.")]
         public int Fare { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
 
-        public bool? IsDeleted { get; set; }
+        public bool IsDeleted { get; set; }
 
         [StringLength(50)]
         public string CreatedBy { get; set; }
