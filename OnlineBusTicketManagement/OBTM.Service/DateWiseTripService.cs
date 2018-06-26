@@ -28,6 +28,20 @@ namespace OBTM.Service
             var result = SafeExecute(() => dateWiseTripRepository.SoftDelete(id));
             return result;
         }
+
+        public bool IsSeatsReducible(int NoOfSeats, int DateWiseTripId)
+        {
+            var dateWiseTripRepository = GetInstance<IDateWiseTripRepository>();
+            var result = SafeExecute(() => dateWiseTripRepository.IsSeatsReducible(NoOfSeats, DateWiseTripId));
+            return result.Data;
+        }
+
+        public int GetNumOfNotBookedSeats(int DateWiseTripId)
+        {
+            var dateWiseTripRepository = GetInstance<IDateWiseTripRepository>();
+            var result = SafeExecute(() => dateWiseTripRepository.GetNumOfNotBookedSeats(DateWiseTripId));
+            return result.Data;
+        }
     }
 
 }

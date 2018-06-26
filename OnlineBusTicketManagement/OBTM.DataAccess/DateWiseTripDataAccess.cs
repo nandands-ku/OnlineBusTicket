@@ -23,6 +23,25 @@ namespace OBTM.DataAccess
             return dateWiseTripList;
         }
 
+        public int GetNumOfNotBookedSeats(int DateWiseTripId)
+        {
+            int bookedSeatCount = OBTMDbContext.BookingTickets.Where(bt => bt.DateWiseTripId == DateWiseTripId && bt.IsBooked == false).Count();
+            return bookedSeatCount;
+        }
+
+        public bool IsSeatsReducible(int NoOfSeats, int DateWiseTripId)
+        {
+            bool status = false;
+
+            int bookedSeatCount = OBTMDbContext.BookingTickets.Where(bt => bt.DateWiseTripId == DateWiseTripId && bt.IsBooked == true).Count();
+            if (bookedSeatCount >= NoOfSeats)
+                status = false;
+            else
+                status = true;
+
+            return status;
+        }
+
         public int SoftDelete(int id)
         {
             DateWiseTrip dateWiseTrip = OBTMDbContext.DateWiseTrips.Find(id);

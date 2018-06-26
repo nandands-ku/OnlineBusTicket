@@ -22,11 +22,13 @@ namespace OnlineBusTicketManagement.Controllers
         public ActionResult Index()
         {
             IEnumerable<DateWiseTrip> dateWiseTripList = new List<DateWiseTrip>();
-            DateWiseTripView dateWiseTripView = new DateWiseTripView();
-            dateWiseTripView.DateWiseTripList = dateWiseTripList;
-            dateWiseTripView.BusOperator = new BusOperator();
-            dateWiseTripView.Route = new Route();
-            dateWiseTripView.TripBase = new TripBase();
+            DateWiseTripView dateWiseTripView = new DateWiseTripView
+            {
+                DateWiseTripList = dateWiseTripList,
+                BusOperator = new BusOperator(),
+                Route = new Route(),
+                TripBase = new TripBase()
+            };
             ViewBag.BusOperator = new SelectList(busOperatorService.GetAll(), "Id", "Name");
             return View("DateWiseTrip", dateWiseTripView);
         }
@@ -55,7 +57,6 @@ namespace OnlineBusTicketManagement.Controllers
                  dateWiseTrip.TripBaseId = tripID;
                  dateWiseTrip.IsDeleted = false;
                  dateWiseTrip.IsActive = true;
-                 dateWiseTrip.CreatedOn = DateTime.Now;
                  dateWiseTripService.Save(dateWiseTrip);
                  bookingTicketService.CreateBookingTickets(dateWiseTrip.NoOfSeat, dateWiseTrip.Id);           
             }
@@ -64,10 +65,38 @@ namespace OnlineBusTicketManagement.Controllers
 
         public ActionResult SaveEdited(DateWiseTripEditView dateWiseTripEditView)
         {
-            dateWiseTripEditView.DateWiseTrip.UpdatedOn = DateTime.Now;
-            dateWiseTripService.Update(dateWiseTripEditView.DateWiseTrip);
+            DateWiseTrip dateWiseTrip = new DateWiseTrip
+            {
+                Id = dateWiseTripEditView.DateWiseTripId,
+                Date = dateWiseTripEditView.Date,
+                Fare = dateWiseTripEditView.Fare,
+                NoOfSeat = dateWiseTripEditView.NoOfSeat,
+                TripBaseId = dateWiseTripEditView.TripId,
+                CreatedBy = dateWiseTripEditView.CreatedBy,
+                CreatedOn = dateWiseTripEditView.CreatedOn,
+                IsActive = dateWiseTripEditView.IsActive,
+                IsDeleted = dateWiseTripEditView.IsDeleted
+            };
 
-            IEnumerable<DateWiseTrip> dateWiseTripList = dateWiseTripService.GetDateWiseTrip(dateWiseTripEditView.DateWiseTrip.TripBaseId);
+            DateWiseTrip tempDateWiseTrip = dateWiseTripService.GetById(dateWiseTripEditView.DateWiseTripId);
+
+            if (tempDateWiseTrip.NoOfSeat<dateWiseTripEditView.NoOfSeat)
+            {
+                bookingTicketService.ExtendBookingTickets(tempDateWiseTrip.NoOfSeat + 1, (dateWiseTripEditView.NoOfSeat - tempDateWiseTrip.NoOfSeat), dateWiseTripEditView.DateWiseTripId);
+                dateWiseTripService.Update(dateWiseTrip);
+            }
+            else if (tempDateWiseTrip.NoOfSeat > dateWiseTripEditView.NoOfSeat)
+            {
+                bookingTicketService.ReduceBookingTickets((tempDateWiseTrip.NoOfSeat-dateWiseTripEditView.NoOfSeat), dateWiseTripEditView.DateWiseTripId);
+                dateWiseTripService.Update(dateWiseTrip);
+            }
+            else
+            {
+                dateWiseTripService.Update(dateWiseTrip);
+            }
+            
+
+            IEnumerable<DateWiseTrip> dateWiseTripList = dateWiseTripService.GetDateWiseTrip(dateWiseTripEditView.TripId);
             ViewBag.BusOperator = new SelectList(busOperatorService.GetAll(), "Id", "Name");
             DateWiseTripView _dateWiseTripView = new DateWiseTripView
             {
@@ -95,6 +124,21 @@ namespace OnlineBusTicketManagement.Controllers
             return Json(tripList, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult CanReduceSeatAvailability(int NoOfSeat, int DateWiseTripId)
+        {
+
+            if (dateWiseTripService.IsSeatsReducible(NoOfSeat, DateWiseTripId))
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }    
+            else
+            {
+                string suggestion = String.Format($"You can reduce available seat upto {dateWiseTripService.GetNumOfNotBookedSeats(DateWiseTripId)}.");
+                return Json(suggestion, JsonRequestBehavior.AllowGet);
+            } 
+            
+        }
+
         public ActionResult Create()
         {
             DateWiseTrip dateWiseTrip = new DateWiseTrip();
@@ -107,7 +151,16 @@ namespace OnlineBusTicketManagement.Controllers
             DateWiseTrip dateWiseTrip = dateWiseTripService.GetById(id);
             DateWiseTripEditView dateWiseTripEditView = new DateWiseTripEditView
             {
-                DateWiseTrip = dateWiseTrip,
+                DateWiseTripId = dateWiseTrip.Id,
+                Date = dateWiseTrip.Date,
+                NoOfSeat = dateWiseTrip.NoOfSeat,
+                Fare = dateWiseTrip.Fare,
+                IsActive = dateWiseTrip.IsActive,
+                IsDeleted = dateWiseTrip.IsDeleted,
+                CreatedBy = dateWiseTrip.CreatedBy,
+                CreatedOn = dateWiseTrip.CreatedOn,
+                UpdatedBy = dateWiseTrip.UpdatedBy,
+                UpdatedOn = dateWiseTrip.UpdatedOn,
                 BusOperatorId = busOperatorId,
                 RouteId = routeId,
                 TripId = tripId
@@ -131,5 +184,7 @@ namespace OnlineBusTicketManagement.Controllers
 
             return View("DateWiseTrip", _dateWiseTripView);
         }
+
+
     }
 }

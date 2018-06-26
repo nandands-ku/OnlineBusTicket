@@ -18,39 +18,38 @@
 
             <div class="form-horizontal">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.DateWiseTrip.Id)
-                @Html.HiddenFor(model => model.DateWiseTrip.TripBaseId)
-                @Html.HiddenFor(model => model.DateWiseTrip.IsActive)
-                @Html.HiddenFor(model => model.DateWiseTrip.CreatedBy)
-                @Html.HiddenFor(model => model.DateWiseTrip.CreatedOn)
-                @Html.HiddenFor(model => model.DateWiseTrip.UpdatedBy)
-                @Html.HiddenFor(model => model.DateWiseTrip.UpdatedOn)
-                @Html.HiddenFor(model => model.DateWiseTrip.IsDeleted)
+                @Html.HiddenFor(model => model.DateWiseTripId)
+                @Html.HiddenFor(model => model.IsActive)
+                @Html.HiddenFor(model => model.CreatedBy)
+                @Html.HiddenFor(model => model.CreatedOn)
+                @Html.HiddenFor(model => model.UpdatedBy)
+                @Html.HiddenFor(model => model.UpdatedOn)
+                @Html.HiddenFor(model => model.IsDeleted)
                 @Html.HiddenFor(model => model.BusOperatorId)
                 @Html.HiddenFor(model => model.TripId)
                 @Html.HiddenFor(model => model.RouteId)
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.DateWiseTrip.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-3">
-                        @Html.EditorFor(model => model.DateWiseTrip.Date, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class ="form-control"} })
-                        @Html.ValidationMessageFor(model => model.DateWiseTrip.Date, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Date, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class ="form-control"} })
+                        @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.DateWiseTrip.NoOfSeat, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.NoOfSeat, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-3">
-                        @Html.EditorFor(model => model.DateWiseTrip.NoOfSeat, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.DateWiseTrip.NoOfSeat, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.NoOfSeat, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NoOfSeat, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.DateWiseTrip.Fare, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.Fare, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-3">
-                        @Html.EditorFor(model => model.DateWiseTrip.Fare, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.DateWiseTrip.Fare, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Fare, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Fare, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
