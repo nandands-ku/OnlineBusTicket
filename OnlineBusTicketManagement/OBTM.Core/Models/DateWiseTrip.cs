@@ -25,9 +25,9 @@ namespace OBTM.Core.Models
 
         public int Fare { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; }
 
-        public bool IsDeleted { get; set; }
+        public bool? IsDeleted { get; set; }
 
         [StringLength(50)]
         public string CreatedBy { get; set; }
