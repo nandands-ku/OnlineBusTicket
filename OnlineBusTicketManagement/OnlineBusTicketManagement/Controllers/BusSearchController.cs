@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
+
 
 namespace OnlineBusTicketManagement.Controllers
 {
@@ -21,6 +21,8 @@ namespace OnlineBusTicketManagement.Controllers
 
         public List<TripBase> tripBases = new List<TripBase>();
         public List<DateWiseTrip> dateWiseTrips = new List<DateWiseTrip>();
+        public List<DateWiseTrip> orderedDateWise = new List<DateWiseTrip>();
+        public List<DateWiseTrip> NewDateWise = new List<DateWiseTrip>();
         public List<TripBase> tripBaseFilter = new List<TripBase>();
         public List<DateWiseTrip> dateWiseTripFilter = new List<DateWiseTrip>();
         // GET: BusSearch
@@ -45,7 +47,7 @@ namespace OnlineBusTicketManagement.Controllers
         {
             //var temp = new List<int>() { 5, 10, 25 };
             ViewBag.Fare = dateWiseTripService.GetById(dateWiseTripId).Fare;
-             var BookingTickets= bookingTicketService.GetAll().Where(m =>m.DateWiseTripId==dateWiseTripId&&m.IsDeleted!=true&& m.IsBooked != true && m.IsTempLocked != true).Select(m=>m.SeatName).ToList();
+             var BookingTickets= bookingTicketService.GetAll().Where(m =>m.DateWiseTripId==dateWiseTripId&& m.IsBooked != true && m.IsTempLocked != true && m.IsDeleted==false).Select(m=>m.SeatName).ToList();
             ViewBag.SeatNoList = seatBaseService.GetAll().Where(m => BookingTickets.Contains(m.SeatName)).Select(m => m.Id).ToList();
             ViewBag.SeatNameList = seatBaseService.GetAll().Select(m => m.SeatName).ToList();
             ViewBag.DateWiseTripId = dateWiseTripId;
@@ -71,6 +73,7 @@ namespace OnlineBusTicketManagement.Controllers
              
                 
             }
+            //var orderedTripbase = tripBases.OrderBy(a => a.DepartureTime);
             foreach (var item in tripBases)
             {
                 if (dws.GetDateWiseByTrip(item.Id, searchBus.DepartureDate) != null)
@@ -80,15 +83,33 @@ namespace OnlineBusTicketManagement.Controllers
                 }
                     
             }
-
             foreach (var item in dateWiseTrips)
+            {
+                if (item.Date==DateTime.Now.Date)
+                {
+                    if (item.TripBase.DepartureTime.TimeOfDay > DateTime.Now.AddHours(2).TimeOfDay)
+                    {
+                        NewDateWise.Add(item);
+                    }
+                }
+                else
+                {
+                    NewDateWise.Add(item);
+                }
+
+                
+            }
+            orderedDateWise = NewDateWise.OrderBy(a => a.TripBase.DepartureTime.TimeOfDay).ToList();
+
+            foreach (var item in orderedDateWise)
             {
                 availableSeat.Add(bts.GetAvailableSeatByDateWise(item.Id));
             }
 
+            
             SearchBus s = new SearchBus
             {
-                GetDateWiseTrip = dateWiseTrips,
+                GetDateWiseTrip = orderedDateWise,
                 FromLocation=from.Location,
                 ToLocation=to.Location,
                 noOfAvailableSeat=availableSeat            
@@ -101,7 +122,6 @@ namespace OnlineBusTicketManagement.Controllers
         {
             return RedirectToAction("SearchResult", modifySearch);
         }
-        
 
         //[HttpPost]
         //public JsonResult FilterSearchByBus(int busID, int fromLoc, int toLoc, DateTime date)

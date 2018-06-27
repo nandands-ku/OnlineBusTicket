@@ -32,6 +32,9 @@ namespace OnlineBusTicketManagement
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                   "~/Content/bootstrap-datepicker3.css"));
+            bundles.Add(new ScriptBundle("~/bundles/paginationScript.js").Include(
+                        "~/Scripts/paginationScript.js"));
+
         }
     }
 }

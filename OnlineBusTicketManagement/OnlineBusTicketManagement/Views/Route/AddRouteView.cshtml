@@ -62,7 +62,7 @@
                         @Html.Label("Via Locations:", htmlAttributes: new { @class = "control-Label col-md-2 " })
                         @*<label for="LocationId">Via</label>*@
                         <div class="col-md-3">
-                            @Html.ListBoxFor(m => m.Via, (SelectList)ViewBag.LocationList, new { @id = "drpdwn" , @class = "ui fluid dropdown"  })
+                            @Html.ListBoxFor(m => m.Via, (SelectList)ViewBag.LocationList, new { @class = "ui fluid dropdown"  })
                             @*@Html.ValidationMessageFor(model => model.Via, "", new { @class = "text-danger" })*@
                         </div>
                     </div>
@@ -125,10 +125,6 @@
                 $("#welll").show();
                 //$("#abc").hide();
 
-            });
-
-            $("#drpdwn").change(function () {
-                $("#welll").hide();
             });
         });
 

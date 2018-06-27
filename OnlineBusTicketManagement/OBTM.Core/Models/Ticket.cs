@@ -25,6 +25,7 @@ namespace OBTM.Core.Models
 
         [Required(ErrorMessage = "Please provide a valid Email Id")]
         [DataType(DataType.EmailAddress)]
+        
         [StringLength(50)]
         public string Email { get; set; }
 

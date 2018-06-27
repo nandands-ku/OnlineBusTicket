@@ -69,7 +69,7 @@
             <div class="footer-left">
                 <h4>Company<span>logo</span></h4>
                 <p class="footer-links">
-                    @Html.ActionLink("Home","SearchBus","BusSearch")
+                    @Html.ActionLink("Home", "SearchBus", "BusSearch")
                     ·
                     <a target="_blank" href="http://www.datagridbd.com">About</a>
                     ·
@@ -110,7 +110,9 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Scripts/paginationScript.js")
     @RenderSection("scripts", required: false)
+
 
 </body>
 </html>
