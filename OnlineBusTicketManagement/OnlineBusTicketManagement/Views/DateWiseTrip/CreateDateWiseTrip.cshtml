@@ -1,16 +1,9 @@
-﻿@model OBTM.Core.Models.DateWiseTrip
+﻿@model OBTM.Core.Models.DateWiseTripCreateView
 
 @{
     ViewBag.Title = "CreateDateWiseTrip";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@*@section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }*@
-
-
-
 
 
 <div class="row">
@@ -26,26 +19,26 @@
 
                 <div class="form-horizontal col-md-3">
                     <div class="form-group">
-                        @Html.DropDownList("BusOperatorId", (SelectList)ViewBag.BusOperator, "Select Bus", new { @class = "form-control", required = "required" })
+                        @Html.DropDownListFor(model => model.BusOperatorId, (SelectList)ViewBag.BusOperator, "Select Bus", new { @class = "form-control", required = "required" })
                     </div>
                 </div>
 
                 <div class="form-horizontal col-md-3">
                     <div class="form-group">
-                        @Html.DropDownList("RouteId", new SelectList(Enumerable.Empty<SelectListItem>()), "Select Route", new { @class = "form-control", required = "required" })
+                        @Html.DropDownListFor(model => model.RouteId, new SelectList(Enumerable.Empty<SelectListItem>()), "Select Route", new { @class = "form-control", required = "required" })
                     </div>
                 </div>
 
                 <div class="form-horizontal col-md-3">
                     <div class="form-group">
-                        @Html.DropDownList("TripId", new SelectList(Enumerable.Empty<SelectListItem>()), "Select Trip Time", new { @class = "form-control", required = "required" })
+                        @Html.DropDownListFor(model => model.TripId, new SelectList(Enumerable.Empty<SelectListItem>()), "Select Trip Time", new { @class = "form-control", required = "required" })
                     </div>
                 </div>
             </div>
             <div class="form-horizontal">
                 <br />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.DateWiseTripId)
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -54,6 +47,7 @@
                         @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
                     </div>
                 </div>
+                <label class="required col-sm-1"></label>
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.NoOfSeat, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -62,6 +56,7 @@
                         @Html.ValidationMessageFor(model => model.NoOfSeat, "", new { @class = "text-danger" })
                     </div>
                 </div>
+                <label class="required col-sm-1"></label>
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.Fare, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -70,6 +65,7 @@
                         @Html.ValidationMessageFor(model => model.Fare, "", new { @class = "text-danger" })
                     </div>
                 </div>
+                <label class="required col-sm-1"></label>
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
@@ -85,80 +81,102 @@
     </div>
 </div>
 
+
 @section scripts{
     <script type="text/javascript">
-        $(document).ready(function () {
-            $("#BusOperatorId").change(function () {
-                var busOperatorID = $("#BusOperatorId").val();
-                RouteOptionData(busOperatorID);
-            });
+    $(document).ready(function () {
 
-            $("#RouteId").change(function () {
-                var routeID = $("#RouteId").val();
-                var busOperatorID = $("#BusOperatorId").val();
-                TripOptionData(routeID, busOperatorID);
-            });
+        $("#BusOperatorId").val("@Html.Raw(Model.BusOperatorId != 0 ? Model.BusOperatorId : 0)");
+
+        $("#Date").val(Date.now);
+        $("#NoOfSeat").val(0);
+        $("#Fare").val(0);
+
+        $("#BusOperatorId").change(function () {
+            var busOperatorID = $("#BusOperatorId").val();
+            if (!busOperatorID) {
+                $("#RouteId").empty();
+                $("#TripId").empty();
+            }
+            else {
+                RouteOptionData(busOperatorID);
+            }
         });
 
-        function RouteOptionData(busOperatorId) {
-            $.ajax(
-                {
-                    type: "GET",
-                    url: "/DateWiseTrip/GetRoutes",
-                    data: { busOperatorID: busOperatorId },
-                    cache: false,
-                    success: function (data) {
-                        RouteOptionBind(data);
-                    }
-                }
-            );
-        };
-        function RouteOptionBind(data) {
-            var i = 0;
-            var routeList = data;
-            var routes = $("#RouteId");
-            routes.empty();
-            if (routeList != null) {
-                routes.append('<option value="0">Select Route</option>');
-                for (i = 0; i < routeList.length; i++) {
-                    routes.append('<option value="' + routeList[i].Id + '" >' + routeList[i].RouteName + '</option>');
-                }
+        $("#BusOperatorId").trigger("change");
+
+        $("#RouteId").change(function () {
+            var routeID = $("#RouteId").val();
+            var busOperatorID = $("#BusOperatorId").val();
+            if (!routeID || !busOperatorID) {
+                $("#TripId").empty();
             }
             else {
-                routes.append('<option value="0">Select Route</option>');
+                TripOptionData(routeID, busOperatorID);
             }
 
-        };
-
-
-        function TripOptionData(routeId, busOperatorId) {
-            $.ajax(
-                {
-                    type: "GET",
-                    url: "/DateWiseTrip/GetTrips",
-                    data: { routeID: routeId, busOperatorID: busOperatorId },
-                    cache: false,
-                    success: function (data) {
-                        TripOptionBind(data);
-                    }
-                }
-            );
-        };
-        function TripOptionBind(data) {
-            var i = 0;
-            var tripList = data;
-            var trips = $("#TripId");
-            trips.empty();
-            if (tripList != null) {
-                trips.append('<option value="0">Select Trip Time</option>');
-                for (i = 0; i < tripList.length; i++) {
-                    trips.append('<option value="' + tripList[i].Id + '">' + tripList[i].TimeOfDay.Hours + ":" + tripList[i].TimeOfDay.Minutes + '</option>');
+        });
+    });
+    function RouteOptionData(busOperatorId) {
+        $.ajax(
+            {
+                type: "GET",
+                url: "/DateWiseTrip/GetRoutes",
+                data: { busOperatorID: busOperatorId },
+                cache: false,
+                success: function (data) {
+                    RouteOptionBind(data);
                 }
             }
-            else {
-                trips.append('<option value="0">Select Trip</option>');
+        );
+    };
+    function RouteOptionBind(data) {
+        var i = 0;
+        var routeList = data;
+        var routes = $("#RouteId");
+        routes.empty();
+        if (routeList != null) {
+            routes.append('<option value="0">Select Route</option>');
+            for (i = 0; i < routeList.length; i++) {
+                routes.append('<option value="' + routeList[i].Id + '" >' + routeList[i].RouteName + '</option>');
             }
-        };
+            routes.val("@Html.Raw(Model.RouteId != 0? Model.RouteId : 0)");
+            routes.trigger("change");
+        }
+        else {
+            routes.append('<option value="0">Select Route</option>');
+        }
+
+    };
+    function TripOptionData(routeId, busOperatorId) {
+        $.ajax(
+            {
+                type: "GET",
+                url: "/DateWiseTrip/GetTrips",
+                data: { routeID: routeId, busOperatorID: busOperatorId },
+                cache: false,
+                success: function (data) {
+                    TripOptionBind(data);
+                }
+            }
+        );
+    };
+    function TripOptionBind(data) {
+        var i = 0;
+        var tripList = data;
+        var trips = $("#TripId");
+        trips.empty();
+        if (tripList != null) {
+            trips.append('<option value="0">Select Trip Time</option>');
+            for (i = 0; i < tripList.length; i++) {
+                trips.append('<option value="' + tripList[i].Id + '">' + tripList[i].TimeOfDay.Hours + ":" + tripList[i].TimeOfDay.Minutes + '</option>');
+            }
+            trips.val("@Html.Raw(Model.TripId != 0 ? Model.TripId : 0)");
+        }
+        else {
+            trips.append('<option value="0">Select Trip</option>');
+        }
+    };
     </script>
 }
 

@@ -4,11 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Mvc;
 
 namespace OBTM.Core.Models
 {
-    public class DateWiseTripEditView
+    public class DateWiseTripCreateView
     {
         public int BusOperatorId { get; set; }
         public int RouteId { get; set; }
@@ -23,7 +22,6 @@ namespace OBTM.Core.Models
         [Range(0, 40,
         ErrorMessage = "Value for {0} must be between {1} and {2}.")]
         [Display(Name = "Number Of Seat")]
-        [Remote("CanReduceSeatAvailability", "DateWiseTrip",AdditionalFields = "DateWiseTripId", HttpMethod = "POST", ErrorMessage = "You cannot reduce availability less than booked seats")]
         public int NoOfSeat { get; set; }
 
         [Range(0, maximum: Int32.MaxValue,
@@ -43,6 +41,5 @@ namespace OBTM.Core.Models
 
         [StringLength(50)]
         public string UpdatedBy { get; set; }
-
     }
 }

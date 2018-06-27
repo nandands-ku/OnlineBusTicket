@@ -50,7 +50,7 @@
 
         <br />
         <p>
-            @Html.ActionLink("Create New", "Create")
+            @Html.ActionLink("Create New", "Create", new { busOperatorId = Model.BusOperator.Id, routeId = Model.Route.Id, tripId = Model.TripBase.Id })
         </p>
         <table class="table">
             <tr>
@@ -95,8 +95,6 @@
     $(document).ready(function () {
 
         $("#BusOperator_Id").val("@Html.Raw(Model.BusOperator != null ? Model.BusOperator.Id : 0)");
-
-        debugger;
 
         $("#BusOperator_Id").change(function () {
 

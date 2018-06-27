@@ -18,6 +18,7 @@ namespace OnlineBusTicketManagement.Controllers
         RouteService routeService = new RouteService();
         TripBaseService tripBaseService = new TripBaseService();
         BookingTicketService bookingTicketService = new BookingTicketService();
+        BaseService baseService = new BaseService();
 
         public ActionResult Index()
         {
@@ -49,18 +50,33 @@ namespace OnlineBusTicketManagement.Controllers
             return View("DateWiseTrip", _dateWiseTripView);
         }
 
-        public ActionResult SaveNew(DateWiseTrip dateWiseTrip, string tripId)
+        public ActionResult SaveNew(DateWiseTripCreateView dateWiseTripCreateView, string tripId)
         {
             int tripID = Convert.ToInt32(tripId);
+
             if (ModelState.IsValid)
-            {  
-                 dateWiseTrip.TripBaseId = tripID;
-                 dateWiseTrip.IsDeleted = false;
-                 dateWiseTrip.IsActive = true;
-                 dateWiseTripService.Save(dateWiseTrip);
-                 bookingTicketService.CreateBookingTickets(dateWiseTrip.NoOfSeat, dateWiseTrip.Id);           
+            {
+                DateWiseTrip dateWiseTrip = new DateWiseTrip
+                {
+                    Date = dateWiseTripCreateView.Date,
+                    Fare = dateWiseTripCreateView.Fare,
+                    NoOfSeat = dateWiseTripCreateView.NoOfSeat,
+                    TripBaseId = tripID,
+                    IsDeleted = false,
+                    IsActive = true
+                };
+                dateWiseTripService.Save(dateWiseTrip);
+                bookingTicketService.CreateBookingTickets(dateWiseTrip.NoOfSeat, dateWiseTrip.Id);           
             }
-            return RedirectToAction("Create");
+            DateWiseTripCreateView _dateWiseTripCreateView = new DateWiseTripCreateView
+            {
+                TripId = dateWiseTripCreateView.TripId,
+                BusOperatorId = dateWiseTripCreateView.BusOperatorId,
+                RouteId = dateWiseTripCreateView.RouteId
+            };
+
+            ViewBag.BusOperator = new SelectList(busOperatorService.GetAll(), "Id", "Name");
+            return View("CreateDateWiseTrip", _dateWiseTripCreateView);
         }
 
         public ActionResult SaveEdited(DateWiseTripEditView dateWiseTripEditView)
@@ -139,11 +155,16 @@ namespace OnlineBusTicketManagement.Controllers
             
         }
 
-        public ActionResult Create()
+        public ActionResult Create(int busOperatorId, int routeId, int tripId)
         {
-            DateWiseTrip dateWiseTrip = new DateWiseTrip();
+            DateWiseTripCreateView dateWiseTripEditView = new DateWiseTripCreateView
+            {
+                BusOperatorId = busOperatorId,
+                RouteId = routeId,
+                TripId = tripId
+            };
             ViewBag.BusOperator = new SelectList(busOperatorService.GetAll(), "Id", "Name");
-            return View("CreateDateWiseTrip", dateWiseTrip);
+            return View("CreateDateWiseTrip", dateWiseTripEditView);
         }
 
         public ActionResult Edit(int id, int busOperatorId, int routeId, int tripId)
