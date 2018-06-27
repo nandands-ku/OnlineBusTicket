@@ -45,9 +45,18 @@ namespace OBTM.DataAccess
         public int SoftDelete(int id)
         {
             DateWiseTrip dateWiseTrip = OBTMDbContext.DateWiseTrips.Find(id);
-            dateWiseTrip.IsDeleted = true;
-            OBTMDbContext.Entry(dateWiseTrip).State = EntityState.Modified;
-            return OBTMDbContext.SaveChanges();
+            bool isAnySeatPurchased = OBTMDbContext.BookingTickets.Where(bt => bt.DateWiseTripId == dateWiseTrip.Id && bt.IsBooked == true).Any();
+            if (isAnySeatPurchased)
+            {
+                return -1;
+            }
+            else
+            {
+                dateWiseTrip.IsDeleted = true;
+                OBTMDbContext.Entry(dateWiseTrip).State = EntityState.Modified;
+                return OBTMDbContext.SaveChanges();
+            }
+            
         }
     }
 }

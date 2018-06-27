@@ -13,10 +13,20 @@
         <h3>Create a datewise trip</h3>
         @if (ViewBag.Message != null)
          {
-            <div class="alert alert-success alert-dismissible">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>@ViewBag.Message</strong>
-            </div>
+            if(ViewBag.Success)
+            {
+                <div class="alert alert-success alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>@ViewBag.Message</strong>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>@ViewBag.Message</strong>
+                </div>
+            }
          }
         <hr />
         @using (Html.BeginForm("SaveNew", "DateWiseTrip", FormMethod.Post))
@@ -26,18 +36,21 @@
 
             <div class="form-horizontal col-md-3">
                 <div class="form-group">
+                    @Html.Label("Select Bus:")
                     @Html.DropDownListFor(model => model.BusOperatorId, (SelectList)ViewBag.BusOperator, "Select Bus", new { @class = "form-control", required = "required" })
                 </div>
             </div>
 
             <div class="form-horizontal col-md-3">
                 <div class="form-group">
+                    @Html.Label("Select Route:")
                     @Html.DropDownListFor(model => model.RouteId, new SelectList(Enumerable.Empty<SelectListItem>()), "Select Route", new { @class = "form-control", required = "required" })
                 </div>
             </div>
 
             <div class="form-horizontal col-md-3">
                 <div class="form-group">
+                    @Html.Label("Select Trip:")
                     @Html.DropDownListFor(model => model.TripId, new SelectList(Enumerable.Empty<SelectListItem>()), "Select Trip Time", new { @class = "form-control", required = "required" })
                 </div>
             </div>

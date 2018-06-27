@@ -20,8 +20,13 @@ namespace OnlineBusTicketManagement.Controllers
         BookingTicketService bookingTicketService = new BookingTicketService();
         BaseService baseService = new BaseService();
         Response<int> response;
+
+
         string successMessage= "Saved successfully!";
         string failureMessage = "Error occurred! Please Try again.";
+        string deletionSuccessMessage = "Deleted successfully!";
+        string deletionFailureMessage = "Can't delete! Ticket(s) already purchased on this trip";
+
 
         public ActionResult Index()
         {
@@ -73,10 +78,14 @@ namespace OnlineBusTicketManagement.Controllers
 
                 switch (response.Success)
                 {
-                    case true: ViewBag.Message = successMessage;
+                    case true:
+                        ViewBag.Message = successMessage;
+                        ViewBag.Success = true;
                         break;
 
-                    case false: ViewBag.Message = failureMessage;
+                    case false:
+                        ViewBag.Message = failureMessage;
+                        ViewBag.Success = false;
                         break;
                 }
             }
@@ -116,10 +125,12 @@ namespace OnlineBusTicketManagement.Controllers
                 {
                     case true:
                         ViewBag.Message = successMessage;
+                        ViewBag.Success = true;
                         break;
 
                     case false:
                         ViewBag.Message = failureMessage;
+                        ViewBag.Success = false;
                         break;
                 }
             }
@@ -131,10 +142,12 @@ namespace OnlineBusTicketManagement.Controllers
                 {
                     case true:
                         ViewBag.Message = successMessage;
+                        ViewBag.Success = true;
                         break;
 
                     case false:
                         ViewBag.Message = failureMessage;
+                        ViewBag.Success = false;
                         break;
                 }
             }
@@ -145,10 +158,12 @@ namespace OnlineBusTicketManagement.Controllers
                 {
                     case true:
                         ViewBag.Message = successMessage;
+                        ViewBag.Success = true;
                         break;
 
                     case false:
                         ViewBag.Message = failureMessage;
+                        ViewBag.Success = false;
                         break;
                 }
             }
@@ -238,11 +253,21 @@ namespace OnlineBusTicketManagement.Controllers
             switch (response.Success)
             {
                 case true:
-                    ViewBag.Message = successMessage;
+                    if (response.Data < 1)
+                    {
+                        ViewBag.Message = deletionFailureMessage;
+                        ViewBag.Success = false;
+                    }
+                    else
+                    {
+                        ViewBag.Message = deletionSuccessMessage;
+                        ViewBag.Success = true;
+                    }
                     break;
 
                 case false:
                     ViewBag.Message = failureMessage;
+                    ViewBag.Success = false;
                     break;
             }
             IEnumerable<DateWiseTrip> dateWiseTripList = dateWiseTripService.GetDateWiseTrip(tripId);
