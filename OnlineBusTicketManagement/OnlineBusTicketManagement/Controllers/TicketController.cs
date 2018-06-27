@@ -13,7 +13,6 @@ namespace OnlineBusTicketManagement.Controllers
     {
         BookingTicketService bookingTicketService = new BookingTicketService();
         TicketService ticketService = new TicketService();
-        OBTMDbContext dbContext = new OBTMDbContext();
 
         // GET: Ticket
         public ActionResult Index()

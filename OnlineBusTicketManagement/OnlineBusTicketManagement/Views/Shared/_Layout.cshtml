@@ -34,7 +34,7 @@
 
     <div class="row rounded" style="background-color:#088b42">
         <div class="col-md-2">
-            <img src="~/Content/Picture/images.png" class="img-circle" alt="Cinque Terre" width="100" height="100">
+            <a href="@Url.Action("SearchBus","BusSearch")"><img src="~/Content/Picture/images.png" class="img-circle" alt="Cinque Terre" width="100" height="100"></a>
         </div>
         <div class="col-md-10" style="padding:30px 100px 0px 0px">
             <h3 style="color:white; text-align:center;">Online Bus Ticket</h3>
@@ -49,13 +49,13 @@
             <div class="footer-left">
                 <h4>Company<span>logo</span></h4>
                 <p class="footer-links">
-                    <a href="#">Home</a>
+                    @Html.ActionLink("Home", "SearchBus", "BusSearch")
                     ·
-                    <a href="#">About</a>
+                    <a target="_blank" href="http://www.datagridbd.com">About</a>
                     ·
-                    <a href="#">FAQ</a>
+                    <a target="_blank" href="http://www.datagridbd.com/faqs/">FAQ</a>
                     ·
-                    <a href="#">Contact</a>
+                    <a target="_blank" href="http://www.datagridbd.com/contact-us/">Contact Us</a>
                 </p>
                 <p class="footer-company-name">Datagrid Ltd. &copy; 2015</p>
             </div>
@@ -66,23 +66,22 @@
                 </div>
                 <div>
                     <i class="fa fa-phone"></i>
-                    <p>+880</p>
+                    <p>+88 02 58950905</p>
                 </div>
                 <div>
                     <i class="fa fa-envelope"></i>
-                    <p><a href="mailto:support@company.com">support@company.com</a></p>
+                    <p>Email: info@datagridbd.com</p>
                 </div>
             </div>
             <div class="footer-right">
                 <p class="footer-company-about">
-                    <span>About the company</span>
-
+                    <h3>Follow Us</h3>
                 </p>
                 <div class="footer-icons">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-linkedin"></i></a>
-                    <a href="#"><i class="fa fa-github"></i></a>
+                    <a target="_blank" href="https://www.facebook.com/Data-Grid-Limited-111397755610200/"><i class="fa fa-facebook"></i></a>
+                    <a target="_blank" href="https://twitter.com/datagridlimited"><i class="fa fa-twitter"></i></a>
+                    <a target="_blank" href="https://www.linkedin.com/company/data-grid-limited/"><i class="fa fa-linkedin"></i></a>
+                    @*<a href="#"><i class="fa fa-github"></i></a>*@
                 </div>
             </div>
         </footer>
