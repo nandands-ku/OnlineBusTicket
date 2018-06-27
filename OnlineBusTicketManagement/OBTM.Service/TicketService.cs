@@ -33,22 +33,29 @@ namespace OBTM.Service
 
         public void SendEmail( Ticket ticket)
         {
-            SmtpClient smtpClient = new SmtpClient("smtp.sendgrid.net", 25);
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
             smtpClient.UseDefaultCredentials = false;
-            smtpClient.Credentials = new System.Net.NetworkCredential("Debashish110215", "deba110215");
+            smtpClient.Credentials = new System.Net.NetworkCredential("onlinebusticketdatagrid@gmail.com", "onlinebus545655");
             smtpClient.EnableSsl = true;
             smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
             MailMessage mail = new MailMessage();
-            mail.From = new MailAddress("onlinebusticket@gmail.com");
+            mail.From = new MailAddress("onlinebusticketdatagrid@gmail.com", "Onlinebusticket.com");
             mail.To.Add(new MailAddress(ticket.Email));
             mail.Subject = "Confirmation for Ticket Purchase";
             mail.Body = "<p>Dear "+ticket.Name+",<br/><br/>"+ "Congratulation." + "Your ticket is confirmed.Your ticket PIN is:"+ticket.TicketPIN+ ".Use this PIN to cancel your ticket. Your can cancel ticket anytime before 1 hour from departure time.<br/><h4>Best Regards,</h4><br/><h4>OnlineBusTicket.com</h4></p>";
+            //mail.Body = "Hello";
             mail.IsBodyHtml = true;
             mail.BodyEncoding = UTF8Encoding.UTF8;
             mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
-            smtpClient.Send(mail);
+            smtpClient.ServicePoint.MaxIdleTime = 1;
+            try
+            {
+                smtpClient.Send(mail);
+            }
+            catch (Exception ex)
+            {
 
+            }
         }
-        
     }
 }
