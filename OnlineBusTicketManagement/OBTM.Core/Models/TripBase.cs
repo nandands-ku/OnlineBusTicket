@@ -23,6 +23,7 @@ namespace OBTM.Core.Models
 
         public int Id { get; set; }
 
+        [Required]
         public int BusOperatorId { get; set; }
 
         [Required]
@@ -36,6 +37,7 @@ namespace OBTM.Core.Models
         [Display(Name="Bus Type")]
         public String ShowBusType { get { return Enum.GetName(typeof(BusType), this.BusType); } }
 
+        [Required]
         public int RouteId { get; set; }
 
         public bool IsActive { get; set; }

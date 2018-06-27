@@ -12,6 +12,9 @@
         <div class="col-xs-12 col-md-6 col-lg-8 ">
             <div class="col-lg-12 ">
                 <h2 style="text-align:center">Choose Seat</h2>
+                <div id="alertdiv">
+
+                </div>
                 <div class="row" id="holder">
                     <ul id="place"></ul>
                 </div>
@@ -100,16 +103,16 @@
         var seatList = [], item;
         $('.' + settings.seatCss).click(function () {
 
-
+            $("#alertdiv").hide();    
         var str = [];
 
         if ($(this).hasClass(settings.selectedSeatCss)) {
             alert('This seat is already reserved');
         }
         else {
-            $(this).toggleClass(settings.selectingSeatCss);    
+            $(this).toggleClass(settings.selectingSeatCss);
         }
-            
+
         noOfSelectedSeat = $('#place li.' + settings.selectingSeatCss + ' a').length;
 
         $.each($('#place li.' + settings.selectingSeatCss + ' a'), function (index, value) {
@@ -118,10 +121,11 @@
 
             });
             if (str.length > 4) {
-                alert("cannot purchase more than 4 ticket");
+                $("#alertdiv").show()
+                ShowAlert("cannot purchase more than 4 ticket")
                 $(this).toggleClass(settings.selectingSeatCss);
+                return false; 
             }
-            
         totalFare = noOfSelectedSeat * perSeatFare;
         $("#totalFare").text(totalFare);
         $("#selectedSeats").text(str.join(','));
@@ -139,7 +143,13 @@
 
 
 });
-
+        function ShowAlert(key) {
+            var alertHtml = '<div class="alert alert-danger alert-dismissible">' +
+                '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
+                '<strong>' + key + '</strong>' +
+                '</div > ';
+            $("#alertdiv").html(alertHtml);
+        };
 
     </script>
 }

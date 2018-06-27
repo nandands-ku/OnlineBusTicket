@@ -22,11 +22,12 @@ namespace OnlineBusTicketManagement.Controllers
         OperatorRouteMapService operatorRouteMapService = new OperatorRouteMapService();
 
         // GET: TripBase
-        public ActionResult Index(int operatorId=0, int routeId=0,bool result = false)
+        public ActionResult Index(int operatorId=0, int routeId=0)
         {
             TripBase trip = new TripBase() { BusOperatorId = operatorId , RouteId = routeId };
             ViewBag.BusOperatorList = new SelectList(busOperatorService.GetAll().Where(m => m.IsDeleted != true).ToList(), "Id", "Name");
-            ViewBag.actionStatus = result;
+            ViewBag.ActionStatus = TempData["Status"];
+            ViewBag.Massage = TempData["Massage"];
             return View(trip);
         }
 
@@ -47,7 +48,7 @@ namespace OnlineBusTicketManagement.Controllers
         }
 
 
-        public ActionResult CreateTrip(int operatorId, int routeId)
+        public ActionResult CreateTrip(int operatorId=0, int routeId=0)
         {
             ViewBag.BusOperatorList = new SelectList(busOperatorService.GetAll().Where(m => m.IsDeleted != true).ToList(), "Id", "Name");
             TripBase temp = new TripBase() { BusOperatorId = operatorId, RouteId = routeId };
@@ -59,13 +60,35 @@ namespace OnlineBusTicketManagement.Controllers
         public ActionResult Create(TripBase trip)
         {
             bool actionStatus = false;
-            if (trip.Id == 0)
-                actionStatus = tripBaseService.Save(trip).Success;
-              
-            else
-                actionStatus = tripBaseService.Update(trip).Success;   
-            return RedirectToAction("Index",new { operatorId=trip.BusOperatorId, routeId=trip.RouteId, result = actionStatus });
+            if (ModelState.IsValid)
+            {
+                if (trip.Id == 0)
+                {
+                    actionStatus = tripBaseService.Save(trip).Success;
+                    TempData["Status"] = actionStatus;
+                    if (actionStatus == true)
+                        TempData["Massage"] = "Successfully Created";
+                    else
+                        TempData["Massage"] = "Not Created";
+                }
 
+                else
+                {
+                    actionStatus = tripBaseService.Update(trip).Success;
+                    TempData["Status"] = actionStatus;
+                    if (actionStatus == true)
+                        TempData["Massage"] = "Successfully Upadated";
+                    else
+                        TempData["Massage"] = "Not Updated";
+                }
+            }
+            else
+            {
+                TempData["Status"] = actionStatus;
+                TempData["Massage"] = "Wrong Input";
+
+            }
+            return RedirectToAction("Index",new { operatorId=trip.BusOperatorId, routeId=trip.RouteId});
         }
 
         public ActionResult Edit(int tripId)
@@ -76,9 +99,14 @@ namespace OnlineBusTicketManagement.Controllers
 
         public ActionResult Delete(int tripId)
         {
-            var actionStatus=tripBaseService.Delete(tripId).Success;
+            var actionStatus = tripBaseService.Delete(tripId).Success;
+            TempData["Status"] = actionStatus;
+            if (actionStatus == true)
+                TempData["Massage"] = "Successfully Deleted";
+            else
+                TempData["Massage"] = "Not Deleted";
             TripBase trip = tripBaseService.GetById(tripId);
-            return RedirectToAction("Index", new { operatorId = trip.BusOperatorId, routeId = trip.RouteId,action= actionStatus });
+            return RedirectToAction("Index", new { operatorId = trip.BusOperatorId, routeId = trip.RouteId});
         }
 
     }

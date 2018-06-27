@@ -10,13 +10,27 @@
     <div class="col-xs-10">
         <h3>Manage Trips</h3>
         <hr />
-        @if (ViewBag.actionStatus != false)
-        {
-            <div class="alert alert-success alert-dismissible">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>Submit Successfull</strong>
-            </div>
-        }
+        <div id="alertdiv">
+            @if (ViewBag.Massage != null)
+            {
+                if (ViewBag.ActionStatus == true)
+                {
+                    <div class="alert alert-success alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>@ViewBag.Massage</strong>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-danger alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>@ViewBag.Massage</strong>
+                    </div>
+                }
+
+            }
+        </div>
+
         <div class="row">
             <div class="form-group col-xs-12 col-sm-5 col-lg-5">
                 @Html.Label("Bus Operator", htmlAttributes: new { @class = "control-label col-xs-4" })
@@ -60,21 +74,22 @@
         $("#btnSubmit").trigger("click");
 
         $("#btnSubmit").click(function () {
-            $(".alert").hide();
+            $("#alert").hide();
             var operatorId = $(busOparetorDrpDown).val();
             var routeId = $(routeDropDown).val();
             if (operatorId == "") {
-                alert("Select Bus Operator");
+                ShowAlert("Select Bus Operator");
                 return false;
             }
             if (routeId == null) {
-                alert("Select Route");
+                ShowAlert("Select Route");
                 return false;
             }
-
+            $("#alertdiv").hide();
             GetBusTrips(operatorId,routeId);
         });
 
+        
 
         function GetBusRoute(id) {
             $.ajax({
@@ -104,11 +119,18 @@
                 //cache: false,
 
                 success: function (data) {
-                    debugger;
                     $("#tripList").html(data);
 
                 }
             });
+        };
+        function ShowAlert(key) {
+            debugger;
+            var alertHtml = '<div class="alert alert-danger alert-dismissible">'+ 
+                '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+ 
+                '<strong>' + key + '</strong>'+ 
+            '</div > ';
+            $("#alertdiv").html(alertHtml);
         };
 
     });
