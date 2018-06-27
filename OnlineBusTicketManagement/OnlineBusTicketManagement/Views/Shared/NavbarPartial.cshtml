@@ -56,19 +56,24 @@
     <nav class="nav-sidebar">
         <ul class="nav">
             @if (HttpContext.Current.Session["User"] != null)
-    {
-        <li><a>Logged In as (@HttpContext.Current.Session["User"]) </a> </li>
-        <li id="toggle">@Html.ActionLink("Log Out", "LogOut", "User")</li>
-}
+            {
+               <li>
+                    <a href="#" id="btn-1" data-toggle="collapse" data-target="#submenu1" aria-expanded="false">Logged In as (@HttpContext.Current.Session["User"])</a>
+                    <ul class="nav collapse" id="submenu1" role="menu" aria-labelledby="btn-1">
+                        <li id="toggle">@Html.ActionLink("Log Out", "LogOut", "User")</li>
+
+                    </ul>
+                </li>
+            }
 
             <li>@Html.ActionLink("Bus Operator", "Index", "BusOperator")</li>
             <li>@Html.ActionLink("Route", "Index", "Route")</li>
             <li>
-                <a href="#" id="btn-1" data-toggle="collapse" data-target="#submenu1" aria-expanded="false">Trip</a>
-                <ul class="nav collapse" id="submenu1" role="menu" aria-labelledby="btn-1">
+                <a href="#" id="btn-2" data-toggle="collapse" data-target="#submenu2" aria-expanded="false">Trip</a>
+                <ul class="nav collapse" id="submenu2" role="menu" aria-labelledby="btn-2">
                     <li>@Html.ActionLink("Search Trip", "Index", "TripBase")</li>
                     <li>@Html.ActionLink("Create Trip", "CreateTrip", "TripBase")</li>
-                    
+
                 </ul>
             </li>
             <li>@Html.ActionLink("Datewise Trip", "Index", "DateWiseTrip")</li>

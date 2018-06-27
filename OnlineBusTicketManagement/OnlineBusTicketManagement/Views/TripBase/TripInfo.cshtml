@@ -88,21 +88,29 @@
                 <script>
     $(document).ready(function () {
         $("#busOparetorDrpDown").change(function () {
-            var id = $("#busOparetorDrpDown").val() == "" ? 0 : $("#busOparetorDrpDown").val();
+            var id = $("#busOparetorDrpDown").val();
+            $("#alertdiv").hide();
             GetBusRoute(id);
 
         });
 
+        $("#routeDropDown").change(function () {
+            debugger;
+            $("#alertdiv").hide();
+        });
+        
         $(".btn").click(function () {
             debugger;
-            $("#alert").hide();
+            $("#alertdiv").hide();
             var operatorId = $(busOparetorDrpDown).val();
             var routeId = $(routeDropDown).val();
             if (operatorId == "") {
+                $("#alertdiv").show();
                 ShowAlert("Select Bus Operator");
                 return false;
             }
             if (routeId == null) {
+                $("#alertdiv").show();
                 ShowAlert("Select Route");
                 return false;
             }
@@ -122,10 +130,8 @@
                     for (var i = 0; i < data.length; i++) {
                         options += '<option  value="' + data[i].Id + '">' + data[i].RouteName + '</option>';
                     }
-
                     $("#routeDropDown").html(options);
-                    $("#routeDropDown").val("@Html.Raw(Model != null ? Model.RouteId: 0)");
-
+                    $("#routeDropDown").val(0);
                 }
             });
         };

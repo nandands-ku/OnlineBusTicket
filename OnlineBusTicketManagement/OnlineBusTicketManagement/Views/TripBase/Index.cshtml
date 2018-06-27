@@ -68,20 +68,26 @@
 
         $("#busOparetorDrpDown").change(function () {
             var id = $("#busOparetorDrpDown").val() == "" ? 0 : $("#busOparetorDrpDown").val();
+            $("#alertdiv").hide();
             GetBusRoute(id);
+        });
+        $("#routeDropDown").change(function () {
+            $("#alertdiv").hide();
         });
         $("#busOparetorDrpDown").trigger("change");
         $("#btnSubmit").trigger("click");
 
         $("#btnSubmit").click(function () {
-            $("#alert").hide();
+            $("#alertdiv").hide();
             var operatorId = $(busOparetorDrpDown).val();
             var routeId = $(routeDropDown).val();
             if (operatorId == "") {
+                $("#alertdiv").show();
                 ShowAlert("Select Bus Operator");
                 return false;
             }
             if (routeId == null) {
+                $("#alertdiv").show();
                 ShowAlert("Select Route");
                 return false;
             }
