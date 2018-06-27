@@ -19,6 +19,9 @@ namespace OnlineBusTicketManagement.Controllers
         TripBaseService tripBaseService = new TripBaseService();
         BookingTicketService bookingTicketService = new BookingTicketService();
         BaseService baseService = new BaseService();
+        Response<int> response;
+        string successMessage= "Saved successfully!";
+        string failureMessage = "Error occurred! Please Try again.";
 
         public ActionResult Index()
         {
@@ -65,8 +68,17 @@ namespace OnlineBusTicketManagement.Controllers
                     IsDeleted = false,
                     IsActive = true
                 };
-                dateWiseTripService.Save(dateWiseTrip);
-                bookingTicketService.CreateBookingTickets(dateWiseTrip.NoOfSeat, dateWiseTrip.Id);           
+                response = dateWiseTripService.Save(dateWiseTrip);
+                bookingTicketService.CreateBookingTickets(dateWiseTrip.NoOfSeat, dateWiseTrip.Id);
+
+                switch (response.Success)
+                {
+                    case true: ViewBag.Message = successMessage;
+                        break;
+
+                    case false: ViewBag.Message = failureMessage;
+                        break;
+                }
             }
             DateWiseTripCreateView _dateWiseTripCreateView = new DateWiseTripCreateView
             {
@@ -99,16 +111,46 @@ namespace OnlineBusTicketManagement.Controllers
             if (tempDateWiseTrip.NoOfSeat<dateWiseTripEditView.NoOfSeat)
             {
                 bookingTicketService.ExtendBookingTickets(tempDateWiseTrip.NoOfSeat + 1, (dateWiseTripEditView.NoOfSeat - tempDateWiseTrip.NoOfSeat), dateWiseTripEditView.DateWiseTripId);
-                dateWiseTripService.Update(dateWiseTrip);
+                response = dateWiseTripService.Update(dateWiseTrip);
+                switch (response.Success)
+                {
+                    case true:
+                        ViewBag.Message = successMessage;
+                        break;
+
+                    case false:
+                        ViewBag.Message = failureMessage;
+                        break;
+                }
             }
             else if (tempDateWiseTrip.NoOfSeat > dateWiseTripEditView.NoOfSeat)
             {
                 bookingTicketService.ReduceBookingTickets((tempDateWiseTrip.NoOfSeat-dateWiseTripEditView.NoOfSeat), dateWiseTripEditView.DateWiseTripId);
-                dateWiseTripService.Update(dateWiseTrip);
+                response = dateWiseTripService.Update(dateWiseTrip);
+                switch (response.Success)
+                {
+                    case true:
+                        ViewBag.Message = successMessage;
+                        break;
+
+                    case false:
+                        ViewBag.Message = failureMessage;
+                        break;
+                }
             }
             else
             {
-                dateWiseTripService.Update(dateWiseTrip);
+                response = dateWiseTripService.Update(dateWiseTrip);
+                switch (response.Success)
+                {
+                    case true:
+                        ViewBag.Message = successMessage;
+                        break;
+
+                    case false:
+                        ViewBag.Message = failureMessage;
+                        break;
+                }
             }
             
 
@@ -191,7 +233,18 @@ namespace OnlineBusTicketManagement.Controllers
 
         public ActionResult Delete(int id, int busOperatorId, int routeId, int tripId)
         {
-            dateWiseTripService.SoftDelete(id);
+
+            response = dateWiseTripService.SoftDelete(id);
+            switch (response.Success)
+            {
+                case true:
+                    ViewBag.Message = successMessage;
+                    break;
+
+                case false:
+                    ViewBag.Message = failureMessage;
+                    break;
+            }
             IEnumerable<DateWiseTrip> dateWiseTripList = dateWiseTripService.GetDateWiseTrip(tripId);
             ViewBag.BusOperator = new SelectList(busOperatorService.GetAll(), "Id", "Name");
 

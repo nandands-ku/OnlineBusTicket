@@ -10,6 +10,13 @@
     <div class="col-md-2">@Html.Partial("NavbarPartial")</div>
     <div class="col-md-10">
         <h3>Datewise Trip Home</h3>
+        @if (ViewBag.Message!=null)
+        {
+            <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                 <strong>@ViewBag.Message</strong>
+            </div>
+        }
         <hr />
         @using (Html.BeginForm("GetDateWiseTripList", "DateWiseTrip", FormMethod.Post))
 
@@ -91,13 +98,12 @@
 </div>
 
 @section scripts{
-    <script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
-
+        
         $("#BusOperator_Id").val("@Html.Raw(Model.BusOperator != null ? Model.BusOperator.Id : 0)");
-
         $("#BusOperator_Id").change(function () {
-
+            debugger;
             var busOperatorID = $("#BusOperator_Id").val();
             if (!busOperatorID) {
                 $("#Route_Id").empty();
@@ -185,5 +191,5 @@
             trips.append('<option value="0">Select Trip</option>');
         }
     };
-    </script>
+</script>
 }
