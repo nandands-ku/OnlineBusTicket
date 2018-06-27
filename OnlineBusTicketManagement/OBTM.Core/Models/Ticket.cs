@@ -43,7 +43,7 @@ namespace OBTM.Core.Models
 
         [Required]
         [StringLength(50)]
-        [RegularExpression(@"^([0-9]{11})$", ErrorMessage = "Invalid Credit Card no.")]
+        [RegularExpression(@"^([0-9]{9})$", ErrorMessage = "Invalid Credit Card no.")]
         [Display(Name = "Credit Card")]
         public string CreditCard { get; set; }
         
