@@ -9,7 +9,14 @@
     <div class="col-xs-2">@Html.Partial("NavbarPartial")</div>
     <div class="col-xs-10">
         <h3>Manage Trips</h3>
-        <hr/>
+        <hr />
+        @if (ViewBag.actionStatus != false)
+        {
+            <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Submit Successfull</strong>
+            </div>
+        }
         <div class="row">
             <div class="form-group col-xs-12 col-sm-5 col-lg-5">
                 @Html.Label("Bus Operator", htmlAttributes: new { @class = "control-label col-xs-4" })
@@ -30,23 +37,21 @@
             <div class="form-group col-sm-2 ">
 
                 <div class="row">
-                    <button class="btn btn-success" type="button" id="btnSubmit">Submit</button>
+                    <button class="btn btn-info" type="button" id="btnSubmit">Search</button>
                 </div>
             </div>
 
         </div>
-        <div class="row">
-            <div style="margin:0px" id="tripList">
-            </div>
+        <div style="margin:0px" id="tripList">
         </div>
     </div>
 </div>
 
 @section scripts{
-<script>
+
+    <script>
     $(document).ready(function () {
 
-     
         $("#busOparetorDrpDown").change(function () {
             var id = $("#busOparetorDrpDown").val() == "" ? 0 : $("#busOparetorDrpDown").val();
             GetBusRoute(id);
@@ -55,7 +60,7 @@
         $("#btnSubmit").trigger("click");
 
         $("#btnSubmit").click(function () {
-
+            $(".alert").hide();
             var operatorId = $(busOparetorDrpDown).val();
             var routeId = $(routeDropDown).val();
             if (operatorId == "") {
@@ -99,7 +104,7 @@
                 //cache: false,
 
                 success: function (data) {
-
+                    debugger;
                     $("#tripList").html(data);
 
                 }

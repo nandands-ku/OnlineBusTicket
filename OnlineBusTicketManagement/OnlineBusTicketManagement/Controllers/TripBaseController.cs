@@ -22,10 +22,11 @@ namespace OnlineBusTicketManagement.Controllers
         OperatorRouteMapService operatorRouteMapService = new OperatorRouteMapService();
 
         // GET: TripBase
-        public ActionResult Index(int operatorId=0, int routeId=0)
+        public ActionResult Index(int operatorId=0, int routeId=0,bool result = false)
         {
             TripBase trip = new TripBase() { BusOperatorId = operatorId , RouteId = routeId };
             ViewBag.BusOperatorList = new SelectList(busOperatorService.GetAll().Where(m => m.IsDeleted != true).ToList(), "Id", "Name");
+            ViewBag.actionStatus = result;
             return View(trip);
         }
 
@@ -57,11 +58,13 @@ namespace OnlineBusTicketManagement.Controllers
         [HttpPost]
         public ActionResult Create(TripBase trip)
         {
+            bool actionStatus = false;
             if (trip.Id == 0)
-                tripBaseService.Save(trip);
+                actionStatus = tripBaseService.Save(trip).Success;
+              
             else
-                tripBaseService.Update(trip);
-            return RedirectToAction("Index",new { operatorId=trip.BusOperatorId, routeId=trip.RouteId });
+                actionStatus = tripBaseService.Update(trip).Success;   
+            return RedirectToAction("Index",new { operatorId=trip.BusOperatorId, routeId=trip.RouteId, result = actionStatus });
 
         }
 
@@ -73,9 +76,9 @@ namespace OnlineBusTicketManagement.Controllers
 
         public ActionResult Delete(int tripId)
         {
-            tripBaseService.Delete(tripId);
+            var actionStatus=tripBaseService.Delete(tripId).Success;
             TripBase trip = tripBaseService.GetById(tripId);
-            return RedirectToAction("Index", new { operatorId = trip.BusOperatorId, routeId = trip.RouteId });
+            return RedirectToAction("Index", new { operatorId = trip.BusOperatorId, routeId = trip.RouteId,action= actionStatus });
         }
 
     }

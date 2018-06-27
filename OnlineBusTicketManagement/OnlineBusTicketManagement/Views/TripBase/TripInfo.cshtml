@@ -70,17 +70,18 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-2">
-                            <input type="submit" value="Save" class="btn btn-success" />
+                            <input type="submit" value="Save" class="btn btn-primary" />
                         </div>
                     </div>
                 </div>
             }
 
             <div>
-                @Html.ActionLink("Back to List", "Index", new { operatorId = Model.BusOperatorId, routeId = Model.RouteId })
+                @Html.ActionLink("Back to List", "Index", new { operatorId = Model.BusOperatorId, routeId = Model.RouteId }, new { @class = "btn btn-default" })
             </div>
 
             @section Scripts {
+                <script src="~/Scripts/paginationScript.js"></script>
                 <script>
     $(document).ready(function () {
         $("#busOparetorDrpDown").change(function () {
