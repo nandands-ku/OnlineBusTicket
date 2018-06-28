@@ -85,17 +85,21 @@ namespace OnlineBusTicketManagement.Controllers
             }
             foreach (var item in dateWiseTrips)
             {
-                if (item.Date==DateTime.Now.Date)
+                if (item.Date >= DateTime.Now.Date)
                 {
-                    if (item.TripBase.DepartureTime.TimeOfDay > DateTime.Now.AddHours(2).TimeOfDay)
+                    if (item.Date == DateTime.Now.Date)
+                    {
+                        if (item.TripBase.DepartureTime.TimeOfDay > DateTime.Now.AddHours(2).TimeOfDay)
+                        {
+                            NewDateWise.Add(item);
+                        }
+                    }
+                    else
                     {
                         NewDateWise.Add(item);
                     }
                 }
-                else
-                {
-                    NewDateWise.Add(item);
-                }
+                
 
                 
             }

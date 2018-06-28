@@ -36,7 +36,7 @@
                     @*@Html.LabelFor(model => model.To, htmlAttributes: new { @class = "control-label col-md-2" })*@
                     @Html.Label("To :", htmlAttributes: new { @class = "control-Label col-xs-12 col-md-2 " })
                     <div class="form-group col-xs-8 col-md-4">
-                        @Html.DropDownListFor(m => m.To, (SelectList)ViewBag.LocationList, "--Select City--", new { @class = "form-control required " })
+                        @Html.DropDownListFor(m => m.To, (SelectList)ViewBag.LocationList, "--Select City--", new { @class = "form-control " })
                         @Html.ValidationMessageFor(model => model.To, "", new { @class = "text-danger" })
                     </div>
                     <label class="required col-sm-1"></label>
@@ -45,7 +45,7 @@
                     @*@Html.LabelFor(model => model.DepartureDate, htmlAttributes: new { @class = "control-label col-md-2" })*@
                     @Html.Label("Journey Date :", htmlAttributes: new { @class = "control-Label col-xs-12 col-md-2" })
                     <div class="form-group col-xs-8 col-md-4">
-                        @Html.EditorFor(model => model.DepartureDate, new { htmlAttributes = new { @class = "form-control required" } })
+                        @Html.EditorFor(model => model.DepartureDate, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.DepartureDate, "", new { @class = "text-danger" })
                     </div>
                     <label class="required col-sm-1"></label>

@@ -16,81 +16,88 @@
         {
             @Html.AntiForgeryToken()
 
-            <div class="form-horizontal">
-                <h4>Route Add</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-horizontal">
+            <h3>Route Add</h3>
+            <hr />
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-success alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>@ViewBag.Message</strong>
+                </div>
+            }
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+            <div class="form-group">
+
+                @Html.Label("Bus Name:", htmlAttributes: new { @class = "control-Label col-md-2 " })
+                <div class="col-md-3">
+                    @Html.DropDownListFor(m => m.BusOperatorId, (SelectList)ViewBag.BusOperatorList, "--Select a bus operator--", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.BusOperatorId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @*<div class="form-group">
+            @Html.Label("Existing Route:", htmlAttributes: new { @class = "control-Label col-md-2" })
+
+            <div class="col-md-3">
+                @Html.DropDownListFor(m => m.Routes.Id, (SelectList)ViewBag.ExistingRouteList, "--Select a Location--", new { @class = "form-control", value = "0" })
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-info active" id="btnAdd">Add</button>
+            </div>
+        </div>*@
+            <div class="form-group">
+                @Html.Label("Existing Route:", htmlAttributes: new { @class = "control-Label col-md-2" })
+                @*<label for="ExistingRoutes">Existing Routes</label>*@
+                <div class="col-md-3">
+                    @Html.DropDownListFor(m => m.RouteId, (SelectList)ViewBag.ExistingRouteList, "--Select a Location--", new { @class = "form-control" })
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-primary active" id="btnAdd">Add</button>
+                </div>
+            </div>
+            <div class="well" id="welll">
                 <div class="form-group">
-
-                    @Html.Label("Bus Name:", htmlAttributes: new { @class = "control-Label col-md-2 " })
+                    @Html.Label("From Location:", htmlAttributes: new { @class = "control-Label col-md-2 " })
+                    @*<label for="LocationId">From</label>*@
                     <div class="col-md-3">
-                        @Html.DropDownListFor(m => m.BusOperatorId, (SelectList)ViewBag.BusOperatorList, "--Select a bus operator--", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.BusOperatorId, "", new { @class = "text-danger" })
+                        @Html.DropDownListFor(m => m.From, (SelectList)ViewBag.LocationList, "--Select a Location--", new { @class = "form-control" })
+                        @*@Html.ValidationMessageFor(model => model.From, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
-                @*<div class="form-group">
-                        @Html.Label("Existing Route:", htmlAttributes: new { @class = "control-Label col-md-2" })
-
-                        <div class="col-md-3">
-                            @Html.DropDownListFor(m => m.Routes.Id, (SelectList)ViewBag.ExistingRouteList, "--Select a Location--", new { @class = "form-control", value = "0" })
-                        </div>
-                        <div class="col-md-2">
-                            <button type="button" class="btn btn-info active" id="btnAdd">Add</button>
-                        </div>
-                    </div>*@
                 <div class="form-group">
-                    @Html.Label("Existing Route:", htmlAttributes: new { @class = "control-Label col-md-2" })
-                    @*<label for="ExistingRoutes">Existing Routes</label>*@
+                    @Html.Label("Via Locations:", htmlAttributes: new { @class = "control-Label col-md-2 " })
+                    @*<label for="LocationId">Via</label>*@
                     <div class="col-md-3">
-                        @Html.DropDownListFor(m => m.RouteId, (SelectList)ViewBag.ExistingRouteList, "--Select a Location--", new { @class = "form-control" })
-                    </div>
-                    <div class="col-md-2">
-                        <button type="button" class="btn btn-info active" id="btnAdd">Add</button>
+                        @Html.ListBoxFor(m => m.Via, (SelectList)ViewBag.LocationList, new { @class = "ui fluid dropdown" })
+                        @*@Html.ValidationMessageFor(model => model.Via, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
-                <div class="well" id="welll">
-                    <div class="form-group">
-                        @Html.Label("From Location:", htmlAttributes: new { @class = "control-Label col-md-2 " })
-                        @*<label for="LocationId">From</label>*@
-                        <div class="col-md-3">
-                            @Html.DropDownListFor(m => m.From, (SelectList)ViewBag.LocationList, "--Select a Location--", new { @class = "form-control" })
-                            @*@Html.ValidationMessageFor(model => model.From, "", new { @class = "text-danger" })*@
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.Label("Via Locations:", htmlAttributes: new { @class = "control-Label col-md-2 " })
-                        @*<label for="LocationId">Via</label>*@
-                        <div class="col-md-3">
-                            @Html.ListBoxFor(m => m.Via, (SelectList)ViewBag.LocationList, new { @class = "ui fluid dropdown"  })
-                            @*@Html.ValidationMessageFor(model => model.Via, "", new { @class = "text-danger" })*@
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.Label("To Location:", htmlAttributes: new { @class = "control-Label col-md-2 " })
-                        @*<label for="LocationId">To</label>*@
-                        <div class="col-md-3">
-                            @Html.DropDownListFor(m => m.To, (SelectList)ViewBag.LocationList, "--Select a Location--", new { @class = "form-control" })
-                            @*@Html.ValidationMessageFor(model => model.To, "", new { @class = "text-danger" })*@
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.Label("Is this route reversed?", htmlAttributes: new { @class = "control-Label col-md-2 " })
-                        @*<label for="LocationId">To</label>*@
-                        <div class="col-md-3">
-                            @Html.CheckBoxFor(m => m.IsReverse)
-
-                        </div>
+                <div class="form-group">
+                    @Html.Label("To Location:", htmlAttributes: new { @class = "control-Label col-md-2 " })
+                    @*<label for="LocationId">To</label>*@
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(m => m.To, (SelectList)ViewBag.LocationList, "--Select a Location--", new { @class = "form-control" })
+                        @*@Html.ValidationMessageFor(model => model.To, "", new { @class = "text-danger" })*@
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" id="abc" class="btn btn-success" />
+                    @Html.Label("Is this route reversed?", htmlAttributes: new { @class = "control-Label col-md-2 " })
+                    @*<label for="LocationId">To</label>*@
+                    <div class="col-md-3">
+                        @Html.CheckBoxFor(m => m.IsReverse)
+
                     </div>
                 </div>
             </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" id="abc" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
         }
 
 

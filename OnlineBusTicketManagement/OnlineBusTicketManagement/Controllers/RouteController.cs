@@ -21,6 +21,10 @@ namespace OnlineBusTicketManagement.Controllers
 
         // GET: Route
         OBTMDbContext context = new OBTMDbContext();
+
+        string successMessage = "Saved successfully!";
+        string failureMessage = "Error occurred! Please Try again.";
+        Response<int> response;
         public ActionResult Index()
         {
 
@@ -93,7 +97,7 @@ namespace OnlineBusTicketManagement.Controllers
                     RouteId = routeView.RouteId.Value,
                     BusOperatorId = routeView.BusOperatorId
                 };
-                orm.Save(op);
+                response= orm.Save(op);
                 #endregion
             }
             else
@@ -158,7 +162,7 @@ namespace OnlineBusTicketManagement.Controllers
                     RouteId = r.Id,
                     BusOperatorId = routeView.BusOperatorId
                 };
-                orm.Save(op);
+                response= orm.Save(op);
 
                 int j = 1;
                 rps.Save(new RoutePoints() { RouteId = r.Id, LocationId = routeView.From, SequenceId = j, IsFrom = true });
@@ -175,7 +179,17 @@ namespace OnlineBusTicketManagement.Controllers
                 rps.Save(new RoutePoints() { RouteId = r.Id, LocationId = routeView.To, SequenceId = ++j, IsTo = true });
                 #endregion
             }
+            
+            switch (response.Success)
+            {
+                case true:
+                    ViewBag.Message = successMessage;
+                    break;
 
+                case false:
+                    ViewBag.Message = failureMessage;
+                    break;
+            }
 
             return View();
         }

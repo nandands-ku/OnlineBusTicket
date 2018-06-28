@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<OBTM.Core.Models.BusOperator>
 
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Index";
 }
     <div class="row">
@@ -9,9 +10,9 @@
         </div>
         <div class="col-md-10">
             <h3>Bus Operators</h3>
-            <input type="button" class="btn btn-success" value="Create New" onclick="location.href='@Url.Action("CreateBusOperator", "BusOperator")'" />
+            <input type="button" class="btn btn-primary" value="Create New" onclick="location.href='@Url.Action("CreateBusOperator", "BusOperator")'" />
             @*@Html.ActionLink("Create New", "CreateBusOperator")*@
-            <table class="table">
+            <table class="table" id="myTable">
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
@@ -32,6 +33,11 @@
                 }
 
             </table>
+            <div class="pagination-container" style="text-align:center">
+                <nav>
+                    <ul class="pagination"></ul>
+                </nav>
+            </div>
         </div>
     </div>
 

@@ -17,8 +17,6 @@ namespace OnlineBusTicketManagement.Controllers
         OperatorRouteMapService orms = new OperatorRouteMapService();
         public ActionResult Index()
         {
-            
-
             var preBusList = bo.GetAllBusOperators();
             List<BusOperator> postBusList = new List<BusOperator>();
             foreach (var item in preBusList)
@@ -64,6 +62,7 @@ namespace OnlineBusTicketManagement.Controllers
             b= bo.GetById(id);
             return View("CreateEditBus", b);
         }
+
         public ActionResult Delete(int id)
         {
             

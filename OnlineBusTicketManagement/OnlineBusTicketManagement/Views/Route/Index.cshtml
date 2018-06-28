@@ -8,59 +8,114 @@
 
 
 <div class="row">
-    
+
     <div class="col-md-2">
         @Html.Partial("NavbarPartial")
     </div>
     <div class="col-md-10">
         <h3>View Routes</h3>
-        <input type="button" class="btn btn-success" value="Create New" onclick="location.href='@Url.Action("CreateRoute", "Route")'" />
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
+        <input type="button" class="btn btn-primary" value="Create New" onclick="location.href='@Url.Action("CreateRoute", "Route")'" />
+        <table class="table" id="">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
 
-                <th></th>
-            </tr>
-
-            @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-
-                <td>
-                    @foreach (var itm in item.OperatorRouteMaps)
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
                 {
-                    <table>
-                        @if (itm.IsDeleted == null || itm.IsDeleted == false)
-                    {
-                        <tr>
-                            <td>@itm.Route.RouteName</td>
-                            <td>
-                                @Html.ActionLink("Delete", "Delete", new { id = itm.Id })
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
 
+                        <td>
+                            @foreach (var itm in item.OperatorRouteMaps)
+                            {
+                                <table>
+                                    @if (itm.IsDeleted == null || itm.IsDeleted == false)
+                                    {
+                                        <tr>
+                                            <td>@itm.Route.RouteName</td>
+                                            <td>
+                                                @Html.ActionLink("Delete", "Delete", new { id = itm.Id })
+                                            </td>
+                                        </tr>
+
+                                    }
+                                </table>
+                            }
+
+
+                        </td>
+                    </tr>
                 }
-                    </table>
-            }
+            </tbody>
 
 
-                </td>
-            </tr>
-    }
 
         </table>
+        <div class="pagination-container" style="text-align:center">
+            <nav>
+                <ul class="pagination"></ul>
+            </nav>
+        </div>
 
     </div>
 </div>
 
+
+@*@section scripts{
+    <script>
+
+        var table = '#OmyTable';
+
+        $('.pagination').html('');
+        var trnum = 0;
+        var maxRows = 5;
+        var totalRows = $(table + 'tbody tr').length;
+        $(table + ' tr:gt(0)').each(function () {
+            trnum++
+            if (trnum > maxRows) {
+                $(this).hide()
+            }
+            if (trnum <= maxRows) {
+                $(this).show()
+            }
+        });
+        if (totalRows > maxRows) {
+            var pagenum = Math.ceil(totalRows / maxRows)
+            for (var i = 1; i <= pagenum;) {
+                $('.pagination').append('<li data-page="' + i + '">\<span>' + i++ + '<span class="sr-only">(current)</span></span>\</li>').show()
+            }
+        }
+        $('.pagination li:first-child').addClass('active');
+        $('.pagination li').on('click', function () {
+            var pageNum = $(this).attr('data-page')
+            var trIndex = 0;
+            $('.pagination li').removeClass('active');
+            $(this).addClass('active')
+            $(table + ' tr:gt(0)').each(function () {
+                trIndex++
+                if (trIndex > (maxRows * pageNum) || trIndex <= ((maxRows * pageNum) - maxRows)) {
+                    $(this).hide()
+                } else {
+                    $(this).show()
+                }
+            });
+        });
+
+
+
+    </script>
+    }*@

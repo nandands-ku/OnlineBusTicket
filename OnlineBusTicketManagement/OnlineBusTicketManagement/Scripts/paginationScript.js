@@ -36,12 +36,5 @@ $('.pagination li').on('click', function () {
     });
 });
 
-$(function () {
-    $('table tr:eq(0)').prepend('<th>Trip</th>')
-    var id = 0;
-    $('table tr:gt(0)').each(function () {
-        id++
-        $(this).prepend('<td>' + id + '</td>')
-    });
-});
+
  
