@@ -4,7 +4,10 @@
     @*,new { operatorId=Model.First().BusOperatorId, routeId=Model.First().RouteId }*@
     @if (Model.Count() == 0)
     {
-    <div class="alert alert-danger alert-dismissible">
+        <script>
+            $("#alertdiv").hide();
+        </script>
+    <div id="alertPartial" class="alert alert-danger alert-dismissible">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>No Trip Found!</strong> 
     </div>
@@ -49,18 +52,13 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { tripId = item.Id }, new { @class = "btn btn-primary" })
-                    @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
+                    @Html.ActionLink("Edit", "Edit", new { tripId = item.Id }, new { @class = "btn btn-primary" })|
+                    
                     @Html.ActionLink("Delete", "Delete", new { tripId = item.Id }, new { @class = "btn btn-danger" })
-                    @*<button onclick="@Url.Action("Delete","TripBase",new { id=item.Id}))" class="btn btn-default btn-sm">
-                            <span class="glyphicon glyphicon-remove-sign"></span> Delete
-                        </button>*@
+
                 </td>
             </tr>
         }
-
-
-
     </table>
     <div class="pagination-container" style="text-align:center">
         <nav>

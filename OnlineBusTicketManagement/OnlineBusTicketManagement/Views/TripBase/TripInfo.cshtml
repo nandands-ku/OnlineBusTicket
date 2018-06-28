@@ -7,18 +7,18 @@
 
 
 <div class="row">
-    <div class="col-md-4 col-lg-4">
+    <div class="col-md-2 col-lg-2">
         @Html.Partial("NavbarPartial")
 
     </div>
-    <div class="col-md-8 col-lg-8">
+    <div class="col-md-10 col-lg-10">
         <div>
             @using (Html.BeginForm("Create", "TripBase", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
 
                 <div class="form-horizontal">
-                    <h2>Trip Details</h2>
+                    <h3>Trip Details</h3>
                     <hr />
                     <div id="alertdiv">
 
@@ -131,7 +131,7 @@
                         options += '<option  value="' + data[i].Id + '">' + data[i].RouteName + '</option>';
                     }
                     $("#routeDropDown").html(options);
-                    $("#routeDropDown").val(0);
+                    $("#routeDropDown").val("@Html.Raw(Model != null ? Model.RouteId : 0)");
                 }
             });
         };
