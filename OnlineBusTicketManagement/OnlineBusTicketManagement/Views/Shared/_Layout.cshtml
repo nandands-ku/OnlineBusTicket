@@ -26,6 +26,12 @@
             text-align: center;
             height: 80px
         }
+        .required:after {
+            content: "*";
+            font-weight: bold;
+            color: red;
+            font-size: large;
+        }
     </style>
 
 
@@ -37,7 +43,7 @@
             <a href="@Url.Action("SearchBus","BusSearch")"><img src="~/Content/Picture/images.png" class="img-circle" alt="Cinque Terre" width="100" height="100"></a>
         </div>
         <div class="col-md-10" style="padding:30px 100px 0px 0px">
-            <h3 style="color:white; text-align:center;">Online Bus Ticket</h3>
+            <h2 style="color:white; text-align:center;">Online Bus Ticket</h2>
         </div>
     </div>
 
