@@ -6,6 +6,9 @@
     {
         <script>
             $("#alertdiv").hide();
+            $(".alert").fadeTo(1000, 500).slideUp(500, function () {
+                $(".alert").alert('close');
+            });
         </script>
     <div id="alertPartial" class="alert alert-danger alert-dismissible">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

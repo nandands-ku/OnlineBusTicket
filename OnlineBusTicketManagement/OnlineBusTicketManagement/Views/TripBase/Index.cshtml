@@ -37,14 +37,14 @@
             {
                 if (ViewBag.ActionStatus == true)
                 {
-                    <div class="alert alert-success alert-dismissible">
+                    <div class="alert alert-success alert-dismissible" id="success-alert">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         <strong>@ViewBag.Massage</strong>
                     </div>
                 }
                 else
                 {
-                    <div class="alert alert-danger alert-dismissible">
+                    <div class="alert alert-danger alert-dismissible" id="success-alert">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         <strong>@ViewBag.Massage</strong>
                     </div>
@@ -62,6 +62,10 @@
 
     <script>
     $(document).ready(function () {
+
+        $(".alert").fadeTo(1000, 500).slideUp(500, function () {
+            $(".alert").alert('close');
+        });
 
         $("#busOparetorDrpDown").change(function () {
             var id = $("#busOparetorDrpDown").val() == "" ? 0 : $("#busOparetorDrpDown").val(); 
@@ -137,6 +141,9 @@
                 '<strong>' + key + '</strong>'+
             '</div > ';
             $("#alertdiv").html(alertHtml);
+            $(".alert").fadeTo(1000, 500).slideUp(500, function () {
+                $(".alert").alert('close');
+            });
         };
 
     });

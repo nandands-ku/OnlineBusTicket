@@ -149,6 +149,9 @@
                 '<strong>' + key + '</strong>' +
                 '</div > ';
             $("#alertdiv").html(alertHtml);
+            $(".alert").fadeTo(1000, 500).slideUp(500, function () {
+                $(".alert").alert('close');
+            });
         };
 
     </script>
