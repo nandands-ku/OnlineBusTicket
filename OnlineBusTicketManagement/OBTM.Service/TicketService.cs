@@ -11,14 +11,15 @@ using SendGrid.Helpers.Mail;
 
 namespace OBTM.Service
 {
-   public class TicketService : GenericService<Ticket>
+    public class TicketService : GenericService<Ticket>
     {
+
         public int RandomNumber()
         {
             Random random = new Random();
             return random.Next(1000, 9000);
         }
-        public Response<int>DeleteSoft(int id)
+        public Response<int> DeleteSoft(int id)
         {
             var repository = GetInstance<ITicketRepository>();
             var result = SafeExecute(() => repository.DeleteSoft(id));
@@ -30,6 +31,20 @@ namespace OBTM.Service
         //    var result = SafeExecute(() => repository.SaveEditedBus(bus));
         //    return result;
         //}
+        public void UpdateBooking(int id)
+        {
+            BookingTicketService bookingTicketService = new BookingTicketService();
+            TicketService ticketService = new TicketService();
+            var ticket = ticketService.GetById(id);
+            var bookingTickets = bookingTicketService.GetAll().Where(m => m.TicketPIN == ticket.TicketPIN && ticket.Seats.Contains(m.SeatName)).ToList();
+            foreach (var item in bookingTickets)
+            {
+                item.IsBooked = false;
+                item.TicketPIN = null;
+                bookingTicketService.Update(item);
+            }
+
+        }
 
         public Response<int> SendEmail(Ticket ticket)
         {

@@ -47,11 +47,7 @@ namespace OnlineBusTicketManagement.Controllers
         public ActionResult TicketDetails_(Ticket ticket)
         {
             var id = ticket.Id;
-            //var bookingTickets = ticket.Bookings;
             var bookingTickets = bookingTicketService.GetAll().Where(m => m.DateWiseTripId ==(int) TempData["DateWise"] && ticket.Seats.Contains(m.SeatName)).ToList();
-
-
-
             Ticket T = new Ticket()
             {
                 Name=ticket.Name,
@@ -61,10 +57,9 @@ namespace OnlineBusTicketManagement.Controllers
                 TotalFare = ticket.TotalFare,
                 TicketPIN = ticket.TicketPIN,
                 CreditCard = ticket.CreditCard
-            };
-           
-            
+            };  
             ticketService.Save(T);
+
             foreach (var item in bookingTickets)
             {
                 item.IsTempLocked = false;
@@ -85,24 +80,15 @@ namespace OnlineBusTicketManagement.Controllers
         [HttpPost]
         public ActionResult CancelTicketConfirm(Ticket ticket)
         {
-            var cancel = new TicketService().GetAll().Where(i => i.TicketPIN == ticket.TicketPIN).FirstOrDefault();
-                //from objT in dbContext.Tickets where objT.TicketPIN == ticket.TicketPIN select objT;
-            //Ticket T = cancel.First();
+            var cancel = bookingTicketService.GetAll().Where(i => i.TicketPIN == ticket.TicketPIN).FirstOrDefault();
             return View(cancel);
         }
         [HttpPost]
         public ActionResult CancelTicketDone(int id)
         {
-           
+
             ticketService.DeleteSoft(id);
-            var ticket = ticketService.GetById(id);
-            var bookingTickets = bookingTicketService.GetAll().Where(m => m.TicketPIN ==ticket.TicketPIN && ticket.Seats.Contains(m.SeatName)).ToList();
-            foreach (var item in bookingTickets)
-            {
-                item.IsBooked = false;
-                item.TicketPIN = null;
-                bookingTicketService.Update(item);
-            }
+            ticketService.UpdateBooking(id);
             return RedirectToAction("SearchBus","busSearch");
         }
     }
