@@ -42,7 +42,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-2">Route</label>
                             <div class="col-md-4">
-                                <select class="selectpicker form-control" name="RouteId" id="routeDropDown" required="required" ></select>
+                                <select class="selectpicker form-control" name="RouteId" id="routeDropDown" required="required"></select>
 
                             </div>
                         </div>
@@ -82,39 +82,36 @@
             <div>
                 @Html.ActionLink("Back to List", "Index", new { operatorId = Model.BusOperatorId, routeId = Model.RouteId }, new { @class = "btn btn-default" })
             </div>
+        </div>
+    </div>
+</div>
 
-            @section Scripts {
-                <script src="~/Scripts/paginationScript.js"></script>
-                <script>
-    $(document).ready(function () {
+@section Scripts {
+    <script src="~/Scripts/paginationScript.js"></script>
+    <script>
+        $(document).ready(function () {
+            
         $("#busOparetorDrpDown").change(function () {
             var id = $("#busOparetorDrpDown").val();
-            $("#alertdiv").hide();
             GetBusRoute(id);
 
         });
 
         $("#routeDropDown").change(function () {
-            debugger;
-            $("#alertdiv").hide();
+
         });
-        
+
         $(".btn").click(function () {
-            debugger;
-            $("#alertdiv").hide();
             var operatorId = $(busOparetorDrpDown).val();
             var routeId = $(routeDropDown).val();
             if (operatorId == "") {
-                $("#alertdiv").show();
                 ShowAlert("Select Bus Operator");
                 return false;
             }
             if (routeId == null) {
-                $("#alertdiv").show();
                 ShowAlert("Select Route");
                 return false;
             }
-            $("#alertdiv").hide();
         });
 
         $("#busOparetorDrpDown").trigger("change");
@@ -136,25 +133,19 @@
             });
         };
         function ShowAlert(key) {
-            debugger;
             var alertHtml = '<div class="alert alert-danger alert-dismissible">' +
                 '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
                 '<strong>' + key + '</strong>' +
                 '</div > ';
             $("#alertdiv").html(alertHtml);
+            $(".alert").fadeTo(1000, 500).slideUp(1000, function () {
+                $(".alert").alert('close');
+            }); 
         };
 
 
     });
 
 
-                </script>
-            }
-
-        </div>
-
-    </div>
-
-
-
-</div>
+    </script>
+}

@@ -10,5 +10,6 @@ namespace OBTM.Core.Interfaces
    public interface ITicketRepository : IGenericRepository<Ticket>
     {
         int DeleteSoft(object id);
+        int SendEmail(Ticket ticket);
     }
 }

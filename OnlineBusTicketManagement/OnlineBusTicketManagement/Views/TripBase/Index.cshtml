@@ -63,7 +63,7 @@
     <script>
     $(document).ready(function () {
 
-        $(".alert").fadeTo(1000, 500).slideUp(500, function () {
+        $(".alert").fadeTo(1000, 500).slideUp(1000, function () {
             $(".alert").alert('close');
         });
 
@@ -73,8 +73,6 @@
             GetBusRoute(id);
         });
         $("#routeDropDown").change(function () {
-            $("#alertdiv").hide();
-            $("#alertPartial").hide();
             ShowBusTrips();
         });
         $("#busOparetorDrpDown").trigger("change");
@@ -96,7 +94,6 @@
                     $("#routeDropDown").val(temp);
                     if (temp>0)
                         ShowBusTrips();
-
                 }
             });
         };
@@ -109,10 +106,8 @@
                 url: "/TripBase/GetBusTrips",
                 data: { operatorId: operatorId, routeId: routeId },
                 //cache: false,
-
                 success: function (data) {
                     $("#tripList").html(data);
-
                 }
             });
         };
@@ -122,7 +117,6 @@
             var operatorId = $(busOparetorDrpDown).val();
             var routeId = $(routeDropDown).val();
             if (operatorId == "") {
-                $("#alertdiv").show();
                 ShowAlert("Select Bus Operator");
                 return false;
             }
@@ -141,7 +135,7 @@
                 '<strong>' + key + '</strong>'+
             '</div > ';
             $("#alertdiv").html(alertHtml);
-            $(".alert").fadeTo(1000, 500).slideUp(500, function () {
+            $(".alert").fadeTo(1000, 500).slideUp(1000, function () {
                 $(".alert").alert('close');
             });
         };

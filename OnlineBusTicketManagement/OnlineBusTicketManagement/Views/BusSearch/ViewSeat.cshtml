@@ -98,12 +98,10 @@
     //Case II: If already booked
 
         init(availableSeats);
-    var noOfSelectedSeat = 0;
+        var noOfSelectedSeat = 0;
         var totalFare = 0;
         var seatList = [], item;
         $('.' + settings.seatCss).click(function () {
-
-            $("#alertdiv").hide();    
         var str = [];
 
         if ($(this).hasClass(settings.selectedSeatCss)) {
@@ -124,7 +122,7 @@
                 $("#alertdiv").show()
                 ShowAlert("cannot purchase more than 4 ticket")
                 $(this).toggleClass(settings.selectingSeatCss);
-                return false; 
+                return false;
             }
         totalFare = noOfSelectedSeat * perSeatFare;
         $("#totalFare").text(totalFare);
